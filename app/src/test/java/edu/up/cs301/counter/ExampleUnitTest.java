@@ -1,4 +1,4 @@
-package edu.up.cs301;
+package edu.up.cs301.counter;
 
 import org.junit.Test;
 

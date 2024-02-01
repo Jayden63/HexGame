@@ -1,7 +1,6 @@
 package edu.up.cs301.counter;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
-import edu.up.cs301.game.R;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import android.app.Activity;
 import android.os.Handler;

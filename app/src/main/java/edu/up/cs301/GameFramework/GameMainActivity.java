@@ -34,7 +34,7 @@ import edu.up.cs301.GameFramework.utilities.IPCoder;
 import edu.up.cs301.GameFramework.utilities.Logger;
 import edu.up.cs301.GameFramework.utilities.MessageBox;
 import edu.up.cs301.GameFramework.utilities.Saving;
-import edu.up.cs301.game.R;
+import edu.up.cs301.counter.R;
 
 /**
  * class GameMainActivity
@@ -521,31 +521,37 @@ public abstract class GameMainActivity extends Activity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_help:
-                Logger.log(TAG, "This is the help button!");
-                return true;
-            case R.id.save_game:
-                Logger.log(TAG, "This is the save button!");
-                if( this.game != null){
-                    Logger.log(TAG, "The Game Exists!");
-                    MessageBox.popUpSaveGame("Name your game:", this);
-                } else {
-                    Logger.log(TAG, "No Game Exists!");
-                    MessageBox.popUpMessage("You cannot save a game without first starting a game (Click Anywhere to dismiss).", this);
-                }
-                return true;
-            case R.id.load_game:
-                Logger.log(TAG, "This is the loading button!");
-                MessageBox.popUpLoadGame("Select Your Game: ", this);
-                return true;
-            case R.id.delete_game:
-                Logger.log(TAG, "This is the delete button!");
-                MessageBox.popUpDeleteGame("Select the Game to Delete: ", this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if (id == R.id.menu_help) {
+            Logger.log(TAG, "This is the help button!");
+            return true;
         }
+
+        if (id == R.id.save_game) {
+            Logger.log(TAG, "This is the save button!");
+            if (this.game != null) {
+                Logger.log(TAG, "The Game Exists!");
+                MessageBox.popUpSaveGame("Name your game:", this);
+            } else {
+                Logger.log(TAG, "No Game Exists!");
+                MessageBox.popUpMessage("You cannot save a game without first starting a game (Click Anywhere to dismiss).", this);
+            }
+            return true;
+        }
+
+        if (id == R.id.load_game) {
+            Logger.log(TAG, "This is the loading button!");
+            MessageBox.popUpLoadGame("Select Your Game: ", this);
+            return true;
+        }
+
+        if (id == R.id.delete_game) {
+            Logger.log(TAG, "This is the delete button!");
+            MessageBox.popUpDeleteGame("Select the Game to Delete: ", this);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**

@@ -4,7 +4,6 @@ import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
-import edu.up.cs301.game.R;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
