@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CounterGame"
+rootProject.name = "HexGame"
 include(":app")

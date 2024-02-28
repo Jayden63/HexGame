@@ -1,7 +1,9 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.hex;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
+import edu.up.cs301.hex.R;
+
 import android.app.Activity;
 import android.os.Handler;
 import android.util.Log;
@@ -22,14 +24,14 @@ import android.widget.TextView;
 * @author Andrew M. Nuxoll
 * @version September 2013
 */
-public class CounterComputerPlayer2 extends CounterComputerPlayer1 {
+public class HexComputerPlayer2 extends HexComputerPlayer1 {
 	
 	/*
 	 * instance variables
 	 */
 	
 	// the most recent game state, as given to us by the CounterLocalGame
-	private CounterState currentGameState = null;
+	private HexState currentGameState = null;
 	
 	// If this player is running the GUI, the activity (null if the player is
 	// not running a GUI).
@@ -49,7 +51,7 @@ public class CounterComputerPlayer2 extends CounterComputerPlayer1 {
 	 * @param name
 	 * 		the player's name
 	 */
-	public CounterComputerPlayer2(String name) {
+	public HexComputerPlayer2(String name) {
 		super(name);
 	}
 	
@@ -70,9 +72,9 @@ public class CounterComputerPlayer2 extends CounterComputerPlayer1 {
 		if (game == null) {
 			return;
 		}
-		else if (info instanceof CounterState) {
+		else if (info instanceof HexState) {
 			// if we indeed have a counter-state, update the GUI
-			currentGameState = (CounterState)info;
+			currentGameState = (HexState)info;
 			updateDisplay();
 		}
 	}

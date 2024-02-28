@@ -1,4 +1,4 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.hex;
 
 import org.junit.Test;
 

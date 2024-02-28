@@ -1,4 +1,4 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.hex;
 
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+import edu.up.cs301.hex.R;
 
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
@@ -22,7 +23,7 @@ import android.view.View.OnClickListener;
  * @author Andrew M. Nuxoll
  * @version July 2013
  */
-public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListener {
+public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 
 	/* instance variables */
 	
@@ -30,7 +31,7 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 	private TextView counterValueTextView;
 	
 	// the most recent game state, as given to us by the CounterLocalGame
-	private CounterState state;
+	private HexState state;
 	
 	// the android activity that we are running
 	private GameMainActivity myActivity;
@@ -40,7 +41,7 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 	 * @param name
 	 * 		the player's name
 	 */
-	public CounterHumanPlayer(String name) {
+	public HexHumanPlayer(String name) {
 		super(name);
 	}
 
@@ -77,11 +78,11 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 		GameAction action = null;
 		if (button.getId() == R.id.plusButton) {
 			// plus button: create "increment" action
-			action = new CounterMoveAction(this, true);
+			action = new HexMoveAction(this, true);
 		}
 		else if (button.getId() == R.id.minusButton) {
 			// minus button: create "decrement" action
-			action = new CounterMoveAction(this, false);
+			action = new HexMoveAction(this, false);
 		}
 		else {
 			// something else was pressed: ignore
@@ -100,10 +101,10 @@ public class CounterHumanPlayer extends GameHumanPlayer implements OnClickListen
 	@Override
 	public void receiveInfo(GameInfo info) {
 		// ignore the message if it's not a CounterState message
-		if (!(info instanceof CounterState)) return;
+		if (!(info instanceof HexState)) return;
 		
 		// update our state; then update the display
-		this.state = (CounterState)info;
+		this.state = (HexState)info;
 		updateDisplay();
 	}
 	
