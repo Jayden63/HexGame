@@ -4,28 +4,26 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
 
 
 /**
- * This contains the state for the Counter game. The state consist of simply
- * the value of the counter.
+ * This contains the state for our Hex game. The state consist of who won the game and whos turn it is
  * 
  * @author Steven R. Vegdahl
  * @version July 2013
  */
 public class HexState extends GameState {
-	
-	// to satisfy Serializable interface
-	private static final long serialVersionUID = 7737393762469851826L;
-	
-	// the value of the counter
-	private int counter;
+
+	// instance variables for our HexState
+	private int playerTurn = 0;
+	private boolean hasWon;
+
 	
 	/**
-	 * constructor, initializing the counter value from the parameter
+	 * constructor, initializing the boolean values from the objects in the parameter
 	 * 
-	 * @param counterVal
-	 * 		the value to which the counter's value should be initialized
+	 * @param initPlayerTurn, initHasWon
 	 */
-	public HexState(int counterVal) {
-		counter = counterVal;
+	public HexState(int initPlayerTurn, boolean initHasWon) {
+		this.playerTurn = initPlayerTurn;
+		this.hasWon = initHasWon;
 	}
 	
 	/**
@@ -36,7 +34,8 @@ public class HexState extends GameState {
 	 */
 	public HexState(HexState orig) {
 		// set the counter to that of the original
-		this.counter = orig.counter;
+		this.playerTurn = orig.playerTurn;
+		this.hasWon = orig.hasWon;
 	}
 
 	/**
@@ -45,9 +44,10 @@ public class HexState extends GameState {
 	 * @return
 	 * 		the value of the counter
 	 */
-	public int getCounter() {
+	/*public int getCounter() {
 		return counter;
-	}
+	}*/
+
 	
 	/**
 	 * setter method for the counter
@@ -55,7 +55,7 @@ public class HexState extends GameState {
 	 * @param counter
 	 * 		the value to which the counter should be set
 	 */
-	public void setCounter(int counter) {
+	/*public void setCounter(int counter) {
 		this.counter = counter;
-	}
+	}*/
 }
