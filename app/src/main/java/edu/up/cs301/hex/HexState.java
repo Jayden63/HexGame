@@ -14,6 +14,11 @@ public class HexState extends GameState {
 	// instance variables for our HexState
 	private int playerTurn = 0;
 	private boolean hasWon;
+	private HexBoard board;
+	private String playerWinner;
+
+	private Player player1;
+	private Player player2;
 
 	
 	/**
@@ -21,9 +26,13 @@ public class HexState extends GameState {
 	 * 
 	 * @param initPlayerTurn, initHasWon
 	 */
-	public HexState(int initPlayerTurn, boolean initHasWon) {
+	public HexState(int initPlayerTurn, boolean initHasWon,String initPlayerWinner, HexBoard initboard,Player initplayer1, Player initplayer2) {
 		this.playerTurn = initPlayerTurn;
 		this.hasWon = initHasWon;
+		this.playerWinner = initPlayerWinner;
+		this.board = initboard;
+		this.player1 = initplayer1;
+		this.player2 = initplayer2;
 	}
 	
 	/**
@@ -36,6 +45,11 @@ public class HexState extends GameState {
 		// set the counter to that of the original
 		this.playerTurn = orig.playerTurn;
 		this.hasWon = orig.hasWon;
+		this.playerWinner = orig.playerWinner;
+		this.board = orig.board;
+		this.player1 = orig.player1;
+		this.player2 = orig.player2;
+
 	}
 
 	/**
