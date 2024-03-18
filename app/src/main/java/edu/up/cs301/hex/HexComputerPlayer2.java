@@ -91,9 +91,9 @@ public class HexComputerPlayer2 extends HexComputerPlayer1 {
 			guiHandler.post(
 					new Runnable() {
 						public void run() {
-						if (counterValueTextView != null && currentGameState != null) {
-							counterValueTextView.setText("" + currentGameState.getCounter());
-						}
+						//if (counterValueTextView != null && currentGameState != null) {
+							//counterValueTextView.setText("" + currentGameState.getCounter());
+						//}
 					}});
 		}
 	}
