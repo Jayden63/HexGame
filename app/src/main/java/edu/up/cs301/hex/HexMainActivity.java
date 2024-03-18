@@ -83,7 +83,7 @@ public class HexMainActivity extends GameMainActivity {
 	 */
 	@Override
 	public LocalGame createLocalGame(GameState state) {
-		if (state == null) state = new HexState(0);
+		if (state == null) state = new HexState(); //hexstate parameters originally it was zero since it took in int as a param but now we removed it
 		return new HexLocalGame(state);
 	}
 

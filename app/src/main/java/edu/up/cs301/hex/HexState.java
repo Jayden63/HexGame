@@ -24,15 +24,17 @@ public class HexState extends GameState {
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 * 
-	 * @param initPlayerTurn, initHasWon
+	 * @param
 	 */
-	public HexState(int initPlayerTurn, boolean initHasWon,String initPlayerWinner, HexBoard initboard,Player initplayer1, Player initplayer2) {
-		this.playerTurn = initPlayerTurn;
-		this.hasWon = initHasWon;
-		this.playerWinner = initPlayerWinner;
-		this.board = initboard;
-		this.player1 = initplayer1;
-		this.player2 = initplayer2;
+	public HexState() {
+		this.playerTurn = 0;
+		this.hasWon = false;
+		this.board = new HexBoard(11);
+		this.player1 = new Player("player 1","red");
+		this.player2 = new Player("player2","red");
+		this.playerWinner = null;
+
+
 	}
 	
 	/**
@@ -46,30 +48,35 @@ public class HexState extends GameState {
 		this.playerTurn = orig.playerTurn;
 		this.hasWon = orig.hasWon;
 		this.playerWinner = orig.playerWinner;
-		this.board = orig.board;
-		this.player1 = orig.player1;
-		this.player2 = orig.player2;
+		this.board = new HexBoard(orig.board);
+		this.player1 = new Player(orig.player1);
+		this.player2 = new Player(orig.player2);
+		//this.board = orig.board;
+		//this.player1 = orig.player1;
+		//this.player2 = orig.player2;
 
 	}
+	//toString for HexState
+	@Override
+	public String toString() {
+		StringBuilder newString = new StringBuilder();
+		newString.append("Game State:\n");
+		newString.append("Player Turn: ").append(playerTurn == 0 ? "Player 1" : "Player 2").append("\n");
+		newString.append("Has Won: ").append(hasWon ? "Yes" : "No").append("\n");
+		if(hasWon) {
+			newString.append("Winner: ").append(playerWinner).append("\n");
+		} else {
+			newString.append("Winner: N/A\n");
+		}
 
-	/**
-	 * getter method for the counter
-	 * 
-	 * @return
-	 * 		the value of the counter
-	 */
-	/*public int getCounter() {
-		return counter;
-	}*/
+		// hexBoard and player classes have their toString methods
+		newString.append("Board State:\n").append(board.toString()).append("\n");
+		newString.append("Player 1: ").append(player1.toString()).append("\n");
+		newString.append("Player 2: ").append(player2.toString()).append("\n");
 
-	
-	/**
-	 * setter method for the counter
-	 * 
-	 * @param counter
-	 * 		the value to which the counter should be set
-	 */
-	/*public void setCounter(int counter) {
-		this.counter = counter;
-	}*/
+		return newString.toString();
+	}
+
+
+
 }
