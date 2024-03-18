@@ -5,7 +5,12 @@ public class HexBoard {
     private HexTile[][] grid;
     private int size;
     public HexBoard(HexBoard orig) {
-        this.grid = orig.grid;
+        this.grid = new HexTile[orig.grid.length][orig.grid[0].length];
+        for (int i = 0; i < orig.grid.length; i++) {
+            for (int j = 0; j < orig.grid[0].length; j++) {
+                this.grid[i][j] = new HexTile(orig.grid[i][j]);
+            }
+        }
         this.size = orig.size;//
     }
 
