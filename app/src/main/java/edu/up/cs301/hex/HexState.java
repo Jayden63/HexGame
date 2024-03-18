@@ -58,4 +58,17 @@ public class HexState extends GameState {
 	/*public void setCounter(int counter) {
 		this.counter = counter;
 	}*/
+
+	/**
+	 * toString method to describe the state of the game
+	 *
+	 * @return a string representation of the game state
+	 */
+	@Override
+	public String toString() {
+		return "HexState{" +
+				"playerTurn=" + playerTurn +
+				", hasWon=" + hasWon +
+				'}';
+	}
 }
