@@ -1,5 +1,6 @@
 package edu.up.cs301.hex;
 
+import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 
 
@@ -20,28 +21,27 @@ public class HexState extends GameState {
 	private Player player1;
 	private Player player2;
 
-	
+
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
-	 * 
+	 *
 	 * @param
 	 */
 	public HexState() {
 		this.playerTurn = 0;
 		this.hasWon = false;
 		this.board = new HexBoard(11);
-		this.player1 = new Player("player 1","red");
-		this.player2 = new Player("player2","red");
+		this.player1 = new Player("player 1", "red");
+		this.player2 = new Player("player2", "blue");
 		this.playerWinner = null;
 
 
 	}
-	
+
 	/**
 	 * copy constructor; makes a copy of the original object
-	 * 
-	 * @param orig
-	 * 		the object from which the copy should be made
+	 *
+	 * @param orig the object from which the copy should be made
 	 */
 	public HexState(HexState orig) {
 		// set the counter to that of the original
@@ -77,6 +77,27 @@ public class HexState extends GameState {
 		return newString.toString();
 	}
 
+	public boolean newGameMove(NewGameMove newGame) {
+		if (newGame instanceof GameAction) {
+			if (this.playerTurn == 1) {
+				this.playerTurn = 0; //resets to player 1 turn
+			}
 
 
+			if (this.hasWon) {
+				this.hasWon = false; //resets to no one has won
+			}
+
+
+			if ("red".equals(this.playerWinner) || "blue".equals(this.playerWinner)) {
+				this.playerWinner = null; //resets the winner to no one
+			}
+
+			this.board = new HexBoard(11); // don't know if this correct
+
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
