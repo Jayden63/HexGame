@@ -17,32 +17,29 @@ public class HexState extends GameState {
 	private boolean hasWon;
 	private HexBoard board;
 	private String playerWinner;
-
 	private Player player1;
 	private Player player2;
+	private PlaceTile hexPlaceTile;
 
-	
+
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
-	 * 
+	 *
 	 * @param
 	 */
 	public HexState() {
 		this.playerTurn = 0;
 		this.hasWon = false;
 		this.board = new HexBoard(11);
-		this.player1 = new Player("player 1","red");
-		this.player2 = new Player("player2","red");
+		this.player1 = new Player("player 1", "red");
+		this.player2 = new Player("player2", "red");
 		this.playerWinner = null;
-
-
 	}
-	
+
 	/**
 	 * copy constructor; makes a copy of the original object
-	 * 
-	 * @param orig
-	 * 		the object from which the copy should be made
+	 *
+	 * @param orig the object from which the copy should be made
 	 */
 	public HexState(HexState orig) {
 		// set the counter to that of the original
@@ -52,11 +49,8 @@ public class HexState extends GameState {
 		this.board = new HexBoard(orig.board);
 		this.player1 = new Player(orig.player1);
 		this.player2 = new Player(orig.player2);
-		//this.board = orig.board;
-		//this.player1 = orig.player1;
-		//this.player2 = orig.player2;
-
 	}
+
 	//toString for HexState
 	@Override
 	public String toString() {
@@ -64,7 +58,7 @@ public class HexState extends GameState {
 		newString.append("Game State:\n");
 		newString.append("Player Turn: ").append(playerTurn == 0 ? "Player 1" : "Player 2").append("\n");
 		newString.append("Has Won: ").append(hasWon ? "Yes" : "No").append("\n");
-		if(hasWon) {
+		if (hasWon) {
 			newString.append("Winner: ").append(playerWinner).append("\n");
 		} else {
 			newString.append("Winner: N/A\n");
@@ -80,34 +74,34 @@ public class HexState extends GameState {
 
 	/**
 	 * Checks if a player is allowed to place a tile in a given location
+	 *
 	 * @param place
 	 * @return
 	 */
 	public boolean placeTile(PlaceTile place) {
-		if (place instanceof GameAction) {
-			/*if (this.board[][] == null) {
-				return true;
-			}*/
+		// if the player's turn is correct, if the tile placement is valid, and if the space is empty,
+		// then update the state of the game
+		if (this.board.getGrid()[place.getX()][place.getY()] == null) {
+			return true;
 		}
 		return false;
 	}
 
 	/**
 	 * Checks if the player can undo a move
+	 *
 	 * @param undo
 	 * @return
 	 */
 	public boolean undoMove(UndoMove undo) {
-		if (undo instanceof GameAction) {
-			/*if (this.board[][] != null) {
-				return true;
-			}*/
+		// finds the place in the 2d array that was last placed, removes it, then makes the player turn to who undid it
+		if (this.placeTile(hexPlaceTile)) {
+			return true;
 		}
 		return false;
 	}
 
 	public boolean newGameMove(NewGameMove newGame) {
-		if (newGame instanceof GameAction) {
 			if (this.playerTurn == 1) {
 				this.playerTurn = 0; //resets to player 1 turn
 			}
@@ -125,8 +119,7 @@ public class HexState extends GameState {
 			this.board = new HexBoard(11); // don't know if this correct
 
 			return true;
-		} else {
-			return false;
 		}
-	}
 }
+
+

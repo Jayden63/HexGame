@@ -4,7 +4,21 @@ import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 
 public class PlaceTile extends GameAction {
-    public PlaceTile(GamePlayer player) {
+    private int x;
+    private int y;
+
+    public PlaceTile(GamePlayer player, int x, int y) {
         super(player);
+        this.x = x;
+        this.y = y;
+    }
+
+    // getter methods for x and y coordinates
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
     }
 }

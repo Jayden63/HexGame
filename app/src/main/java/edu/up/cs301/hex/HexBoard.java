@@ -40,7 +40,7 @@ public class HexBoard {
         }
     }
         public HexTile[][] getGrid(){
-        return grid;
+        return this.grid;
     }
     //to string for HexBoard
     @Override
@@ -58,7 +58,4 @@ public class HexBoard {
 
         return sb.toString();
     }
-
-
-
 }
