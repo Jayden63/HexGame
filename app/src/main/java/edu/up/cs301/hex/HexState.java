@@ -78,6 +78,34 @@ public class HexState extends GameState {
 		return newString.toString();
 	}
 
+	/**
+	 * Checks if a player is allowed to place a tile in a given location
+	 * @param place
+	 * @return
+	 */
+	public boolean placeTile(PlaceTile place) {
+		if (place instanceof GameAction) {
+			/*if (this.board[][] == null) {
+				return true;
+			}*/
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if the player can undo a move
+	 * @param undo
+	 * @return
+	 */
+	public boolean undoMove(UndoMove undo) {
+		if (undo instanceof GameAction) {
+			/*if (this.board[][] != null) {
+				return true;
+			}*/
+		}
+		return false;
+	}
+
 	public boolean newGameMove(NewGameMove newGame) {
 		if (newGame instanceof GameAction) {
 			if (this.playerTurn == 1) {
@@ -88,38 +116,11 @@ public class HexState extends GameState {
 			if (this.hasWon) {
 				this.hasWon = false; //resets to no one has won
 			}
-	/**
-	 * Checks if a player is allowed to place a tile in a given location
-	 * @param place
-	 * @return
-	 */
-	public boolean placeTile(PlaceTile place) {
-		if (place instanceof GameAction) {
-			if (this.board[][] == null) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 
 			if ("red".equals(this.playerWinner) || "blue".equals(this.playerWinner)) {
 				this.playerWinner = null; //resets the winner to no one
 			}
-	/**
-	 * Checks if the player can undo a move
-	 * @param undo
-	 * @return
-	 */
-	public boolean undoMove(UndoMove undo) {
-		if (undo instanceof GameAction) {
-			if (this.board[][] != null) {
-				return true;
-			}
-		}
-		return false;
-	}
-}
 
 			this.board = new HexBoard(11); // don't know if this correct
 
