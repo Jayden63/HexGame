@@ -17,6 +17,7 @@ public class HexState extends GameState {
 	private boolean hasWon;
 	private HexBoard board;
 	private String playerWinner;
+
 	private Player player1;
 	private Player player2;
 
@@ -30,9 +31,11 @@ public class HexState extends GameState {
 		this.playerTurn = 0;
 		this.hasWon = false;
 		this.board = new HexBoard(11);
-		this.player1 = new Player("player1", "red");
-		this.player2 = new Player("player2","blue");
+		this.player1 = new Player("player 1","red");
+		this.player2 = new Player("player2","red");
 		this.playerWinner = null;
+
+
 	}
 	
 	/**
@@ -49,6 +52,10 @@ public class HexState extends GameState {
 		this.board = new HexBoard(orig.board);
 		this.player1 = new Player(orig.player1);
 		this.player2 = new Player(orig.player2);
+		//this.board = orig.board;
+		//this.player1 = orig.player1;
+		//this.player2 = orig.player2;
+
 	}
 	//toString for HexState
 	@Override
@@ -71,6 +78,16 @@ public class HexState extends GameState {
 		return newString.toString();
 	}
 
+	public boolean newGameMove(NewGameMove newGame) {
+		if (newGame instanceof GameAction) {
+			if (this.playerTurn == 1) {
+				this.playerTurn = 0; //resets to player 1 turn
+			}
+
+
+			if (this.hasWon) {
+				this.hasWon = false; //resets to no one has won
+			}
 	/**
 	 * Checks if a player is allowed to place a tile in a given location
 	 * @param place
@@ -85,6 +102,10 @@ public class HexState extends GameState {
 		return false;
 	}
 
+
+			if ("red".equals(this.playerWinner) || "blue".equals(this.playerWinner)) {
+				this.playerWinner = null; //resets the winner to no one
+			}
 	/**
 	 * Checks if the player can undo a move
 	 * @param undo
@@ -97,5 +118,14 @@ public class HexState extends GameState {
 			}
 		}
 		return false;
+	}
+}
+
+			this.board = new HexBoard(11); // don't know if this correct
+
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
