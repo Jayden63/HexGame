@@ -25,10 +25,10 @@ public class HexState extends GameState {
 	private Player player1;
 	private Player player2;
 	private HexTile hexPlaceTile;
+	private PlaceTile lastPlaceTile;
 
-	private PlaceTile lastPlacedTile;
-
-
+	private int lastPlaceTileX;
+	private int lastPlaceTileY;
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
@@ -100,12 +100,31 @@ public class HexState extends GameState {
 		// if the player's turn is correct, if the tile placement is valid, and if the space is empty,
 		// then update the state of the game
 		if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()] == null))  {
+
+			//player0 places the tile in the empty tile
 			this.board.getGrid()[place.getX()][place.getY()] = hexPlaceTile;
+
+			//updates the location of latest placed tile
+			lastPlaceTileX = place.getX();
+			lastPlaceTileY = place.getY();
+
+			//player1's turn
 			this.playerTurn = 1;
+
+			return true;
 		}
 		else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()] == null)) {
+			//player1 places the tile in the empty tile
 			this.board.getGrid()[place.getX()][place.getY()] = hexPlaceTile;
+
+			//updates the location of latest placed tile
+			lastPlaceTileX = place.getX();
+			lastPlaceTileY = place.getY();
+
+			//player0's turn
 			this.playerTurn = 0;
+
+			return true;
 		}
 		return false;
 	}
@@ -118,7 +137,9 @@ public class HexState extends GameState {
 	 */
 	public boolean undoMove(UndoMove undo) {
 		// finds the place in the 2d array that was last placed, removes it, then makes the player turn to who undid it
-		if (this.placeTile(hexPlaceTile)) {
+		if (this.placeTile(lastPlaceTile)) {
+			//gets the location of the latest placed tile and sets it to empty
+			this.board.getGrid()[lastPlaceTileX][lastPlaceTileY] = null;
 			return true;
 		}
 		return false;
