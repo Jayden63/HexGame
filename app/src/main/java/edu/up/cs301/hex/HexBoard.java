@@ -1,5 +1,15 @@
 package edu.up.cs301.hex;
 
+/**
+ * This contains the Hex Board layout
+ *
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ *  @version March 2024
+ */
 public class HexBoard {
     //instance variables
     private HexTile[][] grid;

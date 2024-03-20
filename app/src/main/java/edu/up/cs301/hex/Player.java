@@ -1,5 +1,10 @@
 package edu.up.cs301.hex;
-
+/**
+ * @author Cody
+ * @author Jayden
+ * @author Chengen
+ * @author Eduardo
+ */
 public class Player {
     private String name;
     private String color;

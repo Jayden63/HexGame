@@ -13,17 +13,24 @@ import android.widget.TextView;
 
 
 /**
-* A computer-version of a counter-player.  Since this is such a simple game,
-* it just sends "+" and "-" commands with equal probability, at an average
-* rate of one per second. This computer player does, however, have an option to
-* display the game as it is progressing, so if there is no human player on the
-* device, this player will display a GUI that shows the value of the counter
-* as the game is being played.
-* 
-* @author Steven R. Vegdahl
-* @author Andrew M. Nuxoll
-* @version September 2013
-*/
+ * A computer-version of a counter-player.  Since this is such a simple game,
+ * it just sends "+" and "-" commands with equal probability, at an average
+ * rate of one per second. This computer player does, however, have an option to
+ * display the game as it is progressing, so if there is no human player on the
+ * device, this player will display a GUI that shows the value of the counter
+ * as the game is being played.
+ *
+ * @author Steven R. Vegdahl
+ * @author Andrew M. Nuxoll
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ * @version March 2024
+ */
+
+
 public class HexComputerPlayer2 extends HexComputerPlayer1 {
 	
 	/*
