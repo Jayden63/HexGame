@@ -8,7 +8,12 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
  * This contains the state for our Hex game. The state consist of who won the game and whos turn it is
  * 
  * @author Steven R. Vegdahl
- * @version July 2013
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ * @version March 2024
  */
 public class HexState extends GameState {
 
@@ -33,7 +38,9 @@ public class HexState extends GameState {
 		this.playerTurn = 0;
 		this.hasWon = false;
 		this.board = new HexBoard(11);
-		this.player1 = new Player("player1", "red");
+
+		// Two players, red & blue players
+		this.player1 = new Player("player 1", "red");
 		this.player2 = new Player("player2", "blue");
 		this.playerWinner = null;
 	}

@@ -9,7 +9,12 @@ import edu.up.cs301.GameFramework.actionMessage.GameAction;
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
- * @version September 2012
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ * @version March 2024
  */
 public class HexMoveAction extends GameAction {
 	

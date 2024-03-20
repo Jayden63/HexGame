@@ -11,8 +11,14 @@ import edu.up.cs301.GameFramework.utilities.Tickable;
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
- * @version September 2013
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ * @version March 2024
  */
+
 public class HexComputerPlayer1 extends GameComputerPlayer implements Tickable {
 	
     /**

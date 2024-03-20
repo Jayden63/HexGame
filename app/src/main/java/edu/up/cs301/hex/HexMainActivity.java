@@ -13,7 +13,12 @@ import edu.up.cs301.GameFramework.gameConfiguration.*;
  * 
  * @author Andrew M. Nuxoll
  * @author Steven R. Vegdahl
- * @version July 2013
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ * @version March 2024
  */
 public class HexMainActivity extends GameMainActivity {
 	
