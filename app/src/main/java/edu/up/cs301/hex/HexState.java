@@ -8,7 +8,12 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
  * This contains the state for our Hex game. The state consist of who won the game and whos turn it is
  * 
  * @author Steven R. Vegdahl
- * @version July 2013
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ * @version March 2024
  */
 public class HexState extends GameState {
 
@@ -33,18 +38,24 @@ public class HexState extends GameState {
 		this.playerTurn = 0;
 		this.hasWon = false;
 		this.board = new HexBoard(11);
+
+		// Two players, red & blue players
 		this.player1 = new Player("player 1", "red");
-		this.player2 = new Player("player2", "red");
+		this.player2 = new Player("player2", "blue");
 		this.playerWinner = null;
 	}
 
 	/**
 	 * copy constructor; makes a copy of the original object
 	 *
+	 * Implementing a copy constructor that makes a deep copy of HexState
+	 *
+	 *
 	 * @param orig the object from which the copy should be made
 	 */
 	public HexState(HexState orig) {
 		// set the counter to that of the original
+		// Deep copy
 		this.playerTurn = orig.playerTurn;
 		this.hasWon = orig.hasWon;
 		this.playerWinner = orig.playerWinner;
@@ -53,7 +64,12 @@ public class HexState extends GameState {
 		this.player2 = new Player(orig.player2);
 	}
 
-	//toString for HexState
+	/**
+	 * toString() method to the game state class that describes the state of the
+	 * game as a string. This method prints the values of key variables in the Hex State
+	 *
+	 *
+	 */
 	@Override
 	public String toString() {
 		StringBuilder newString = new StringBuilder();
@@ -111,6 +127,13 @@ public class HexState extends GameState {
 		return false;
 	}
 
+
+	/**
+	 * Checks if the player can create a new game
+	 *
+	 * @param newGame
+	 * @return
+	 */
 	public boolean newGameMove(NewGameMove newGame) {
 			if (this.playerTurn == 1) {
 				this.playerTurn = 0; //resets to player 1 turn

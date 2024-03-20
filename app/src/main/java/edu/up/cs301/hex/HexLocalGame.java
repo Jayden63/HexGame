@@ -13,7 +13,12 @@ import android.util.Log;
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
- * @version July 2013
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ * @version March 2024
  */
 public class HexLocalGame extends LocalGame {
 
