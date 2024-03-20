@@ -14,11 +14,13 @@ public class HexState extends GameState {
 
 	// instance variables for our HexState
 	private int playerTurn = 0;
+	private HexTile[][] placedLocation;
 	private boolean hasWon;
 	private HexBoard board;
 	private String playerWinner;
 	private Player player1;
 	private Player player2;
+
 	private PlaceTile hexPlaceTile;
 
 
@@ -82,6 +84,12 @@ public class HexState extends GameState {
 		// if the player's turn is correct, if the tile placement is valid, and if the space is empty,
 		// then update the state of the game
 		if (this.board.getGrid()[place.getX()][place.getY()] == null) {
+			//placedlocation keeps track of the current placed location x, y
+			for (int x = 0; x < placedLocation.length; x++) {
+				for (int y = 0; y < placedLocation[x].length; y++) {
+					placedLocation[x][y] = board.getGrid()[place.getX()][place.getY()];
+				}
+			}
 			return true;
 		}
 		return false;
@@ -96,6 +104,8 @@ public class HexState extends GameState {
 	public boolean undoMove(UndoMove undo) {
 		// finds the place in the 2d array that was last placed, removes it, then makes the player turn to who undid it
 		if (this.placeTile(hexPlaceTile)) {
+			//currently placed location set to empty
+			placedLocation[hexPlaceTile.getX()][hexPlaceTile.getY()] = null;
 			return true;
 		}
 		return false;

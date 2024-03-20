@@ -3,6 +3,7 @@ package edu.up.cs301.hex;
 public class HexBoard {
     //instance variables
     private HexTile[][] grid;
+
     private int size;
     public HexBoard(HexBoard orig) {
         this.grid = new HexTile[orig.grid.length][orig.grid[0].length];
