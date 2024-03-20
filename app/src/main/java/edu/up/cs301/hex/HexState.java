@@ -85,11 +85,11 @@ public class HexState extends GameState {
 		// then update the state of the game
 		if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()] == null))  {
 			this.board.getGrid()[place.getX()][place.getY()] == hexPlaceTile;
-			this.playerTurn == 1;
+			this.playerTurn = 1;
 		}
 		else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()] == null)) {
 			this.board.getGrid()[place.getX()][place.getY()] == hexPlaceTile;
-			this.playerTurn == 0;
+			this.playerTurn = 0;
 		}
 		return false;
 	}
