@@ -46,10 +46,14 @@ public class HexState extends GameState {
 	/**
 	 * copy constructor; makes a copy of the original object
 	 *
+	 * Implementing a copy constructor that makes a deep copy of HexState
+	 *
+	 *
 	 * @param orig the object from which the copy should be made
 	 */
 	public HexState(HexState orig) {
 		// set the counter to that of the original
+		// Deep copy
 		this.playerTurn = orig.playerTurn;
 		this.hasWon = orig.hasWon;
 		this.playerWinner = orig.playerWinner;
@@ -58,7 +62,12 @@ public class HexState extends GameState {
 		this.player2 = new Player(orig.player2);
 	}
 
-	//toString for HexState
+	/**
+	 * toString() method to the game state class that describes the state of the
+	 * game as a string. This method prints the values of key variables in the Hex State
+	 *
+	 *
+	 */
 	@Override
 	public String toString() {
 		StringBuilder newString = new StringBuilder();
@@ -108,6 +117,13 @@ public class HexState extends GameState {
 		return false;
 	}
 
+
+	/**
+	 * Checks if the player can create a new game
+	 *
+	 * @param newGame
+	 * @return
+	 */
 	public boolean newGameMove(NewGameMove newGame) {
 			if (this.playerTurn == 1) {
 				this.playerTurn = 0; //resets to player 1 turn
