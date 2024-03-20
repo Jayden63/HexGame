@@ -91,11 +91,11 @@ public class HexState extends GameState {
 		// if the player's turn is correct, if the tile placement is valid, and if the space is empty,
 		// then update the state of the game
 		if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()] == null))  {
-			this.board.getGrid()[place.getX()][place.getY()] == hexPlaceTile;
+			this.board.getGrid()[place.getX()][place.getY()] = hexPlaceTile;
 			this.playerTurn = 1;
 		}
 		else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()] == null)) {
-			this.board.getGrid()[place.getX()][place.getY()] == hexPlaceTile;
+			this.board.getGrid()[place.getX()][place.getY()] = hexPlaceTile;
 			this.playerTurn = 0;
 		}
 		return false;
