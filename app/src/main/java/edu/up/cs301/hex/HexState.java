@@ -13,13 +13,15 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
 public class HexState extends GameState {
 
 	// instance variables for our HexState
-	private int playerTurn = 0;
+	private int playerTurn;
 	private boolean hasWon;
 	private HexBoard board;
 	private String playerWinner;
 	private Player player1;
 	private Player player2;
-	private PlaceTile hexPlaceTile;
+	private HexTile hexPlaceTile;
+
+	private PlaceTile lastPlacedTile;
 
 
 	/**
@@ -31,8 +33,8 @@ public class HexState extends GameState {
 		this.playerTurn = 0;
 		this.hasWon = false;
 		this.board = new HexBoard(11);
-		this.player1 = new Player("player 1", "red");
-		this.player2 = new Player("player2", "red");
+		this.player1 = new Player("player1", "red");
+		this.player2 = new Player("player2", "blue");
 		this.playerWinner = null;
 	}
 
@@ -81,8 +83,13 @@ public class HexState extends GameState {
 	public boolean placeTile(PlaceTile place) {
 		// if the player's turn is correct, if the tile placement is valid, and if the space is empty,
 		// then update the state of the game
-		if (this.board.getGrid()[place.getX()][place.getY()] == null) {
-			return true;
+		if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()] == null))  {
+			this.board.getGrid()[place.getX()][place.getY()] == hexPlaceTile;
+			this.playerTurn == 1;
+		}
+		else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()] == null)) {
+			this.board.getGrid()[place.getX()][place.getY()] == hexPlaceTile;
+			this.playerTurn == 0;
 		}
 		return false;
 	}
