@@ -50,6 +50,9 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		super(name);
 	}
 
+
+	//Why doesn't his already exist??
+	public int getPlayerId() { return this.playerNum; }
 	/**
 	 * Returns the GUI's top view object
 	 * 
