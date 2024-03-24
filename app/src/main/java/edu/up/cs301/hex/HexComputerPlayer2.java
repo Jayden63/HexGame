@@ -135,8 +135,8 @@ public class HexComputerPlayer2 extends HexComputerPlayer1 {
 		activityForGui.setContentView(R.layout.counter_human_player);
 
 		// remember who our text view is, for updating the counter value
-		this.counterValueTextView =
-				(TextView) activityForGui.findViewById(R.id.counterValueTextView);
+		//this.counterValueTextView =
+				//(TextView) activityForGui.findViewById(R.id.counterValueTextView);
 		
 		// disable the buttons, since they will have no effect anyway
 		Button plusButton = (Button)activityForGui.findViewById(R.id.plusButton);
