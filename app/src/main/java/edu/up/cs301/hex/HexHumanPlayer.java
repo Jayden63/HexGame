@@ -120,8 +120,15 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		HexState secondCopy = new HexState(secondInstance);
 
 		//call toString() on firstCopy and second Copy
-		firstCopy.toString();
-		secondCopy.toString();
+		String firstCopyStr = firstCopy.toString();
+		String secondCopyStr = secondCopy.toString();
+		if(firstCopyStr.equals(secondCopyStr)){
+			testResultsTextView.append("The two game states are identical\n\n");
+		}else{
+			testResultsTextView.append("The two game states are not identical\n\n");
+		}
+		testResultsTextView.append("First copy state:\n"+firstCopyStr+"\n\n");
+		testResultsTextView.append("Second copy state:\n"+secondCopyStr+"\n\n");
 
 	}// onClick
 	
