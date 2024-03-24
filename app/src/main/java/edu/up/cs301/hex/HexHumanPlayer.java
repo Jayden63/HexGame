@@ -60,7 +60,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 	 * 		the top object in the GUI's view heirarchy
 	 */
 	public View getTopView() {
-		return myActivity.findViewById(R.id.top_gui_layout);
+		return myActivity.findViewById(R.id.top_layout);
 	}
 	
 	/**
