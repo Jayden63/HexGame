@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import edu.up.cs301.hex.R;
-
+import android.widget.EditText;
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
  * and allows the human player to press the '+' and '-' buttons in order to
@@ -108,29 +108,18 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 	 * 		the activity under which we are running
 	 */
 	public void setAsGui(GameMainActivity activity) {
-		
+
 		// remember the activity
 		this.myActivity = activity;
-		
-	    // Load the layout resource for our GUI
-		activity.setContentView(R.layout.counter_human_player);
-		
-		// make this object the listener for both the '+' and '-' 'buttons
-		Button plusButton = (Button) activity.findViewById(R.id.plusButton);
-		plusButton.setOnClickListener(this);
-		Button minusButton = (Button) activity.findViewById(R.id.minusButton);
-		minusButton.setOnClickListener(this);
 
-		// remember the field that we update to display the counter's value
-		this.testResultsTextView =
-				(TextView) activity.findViewById(R.id.testResultsTextView);
-		
-		// if we have a game state, "simulate" that we have just received
-		// the state from the game so that the GUI values are updated
-		if (state != null) {
-			receiveInfo(state);
+	    // loads the layout resource for our GUI
+		activity.setContentView(R.layout.test_screen);
+		// initializes the testResultsTextView variable with a reference to the multi-line edit text
+		this.testResultsTextView = (EditText) activity.findViewById(R.id.editTextMultiLine);
+
+		// registers the human player as a listener for the button
+		Button runTestButton = (Button) activity.findViewById(R.id.buttonRunTest);
+		runTestButton.setOnClickListener(this);
 		}
-	}
-
 }// class CounterHumanPlayer
 
