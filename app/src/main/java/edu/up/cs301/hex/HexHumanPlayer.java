@@ -33,7 +33,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 	/* instance variables */
 	
 	// The TextView the displays the current counter value
-	private TextView counterValueTextView;
+	private TextView testResultsTextView;
 	
 	// the most recent game state, as given to us by the CounterLocalGame
 	private HexState state;
@@ -82,22 +82,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		// if we are not yet connected to a game, ignore
 		if (game == null) return;
 
-		// Construct the action and send it to the game
-		GameAction action = null;
-		if (button.getId() == R.id.plusButton) {
-			// plus button: create "increment" action
-			action = new HexMoveAction(this, true);
-		}
-		else if (button.getId() == R.id.minusButton) {
-			// minus button: create "decrement" action
-			action = new HexMoveAction(this, false);
-		}
-		else {
-			// something else was pressed: ignore
-			return;
-		}
-		
-		game.sendAction(action); // send action to the game
 	}// onClick
 	
 	/**
@@ -138,8 +122,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		minusButton.setOnClickListener(this);
 
 		// remember the field that we update to display the counter's value
-		this.counterValueTextView =
-				(TextView) activity.findViewById(R.id.counterValueTextView);
+		this.testResultsTextView =
+				(TextView) activity.findViewById(R.id.testResultsTextView);
 		
 		// if we have a game state, "simulate" that we have just received
 		// the state from the game so that the GUI values are updated

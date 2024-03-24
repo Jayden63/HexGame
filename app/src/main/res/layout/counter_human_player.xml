@@ -42,7 +42,7 @@
             android:textSize="50sp" />
 
         <TextView
-            android:id="@+id/counterValueTextView"
+            android:id="@+id/testResultsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
