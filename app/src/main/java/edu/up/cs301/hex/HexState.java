@@ -188,6 +188,19 @@ public class HexState extends GameState {
 
 			return true;
 		}
+
+
+	public boolean isGameOver() {
+		return this.hasWon = true;
+	}
+
+	public int getLastPlaceTileX() {
+		return this.lastPlaceTileX;
+	}
+	public int getLastPlaceTileY() {
+		return this.lastPlaceTileY;
+	}
+
 }
 
 

@@ -80,7 +80,48 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 	 */
 	public void onClick(View button) {
 		// if we are not yet connected to a game, ignore
-		if (game == null) return;
+		//if (game == null) return;
+
+		//clears the EditText
+		testResultsTextView.setText("");
+
+		//new instance of game state is created using the default constructor
+		HexState firstInstance = new HexState();
+
+		//create the first copy
+		HexState firstCopy = new HexState(firstInstance);
+
+		//while the game is running
+		while (!firstInstance.isGameOver()) {
+
+			PlaceTile placeTile = new PlaceTile(this, firstInstance.getLastPlaceTileX(), firstInstance.getLastPlaceTileY());
+
+			UndoMove undo = new UndoMove(this);
+
+			//if a player places a tile it will show as a message
+			if (firstInstance.placeTile(placeTile)) {
+				int x = firstInstance.getLastPlaceTileX();
+				int y = firstInstance.getLastPlaceTileY();
+				testResultsTextView.append("Player " + getPlayerId() + "has placed a piece on " + "x: " + x +"y: "+ y);
+				//not sure if we need this return;
+				return;
+			//if the player undos their move
+			} else if (firstInstance.undoMove(undo)) {
+				testResultsTextView.append("Player " + getPlayerId() + "took back their move.");
+			}
+
+
+		}
+
+		//create 2nd new instance of hexState
+		HexState secondInstance = new HexState();
+
+		//create the 2nd copy
+		HexState secondCopy = new HexState(secondInstance);
+
+		//call toString() on firstCopy and second Copy
+		firstCopy.toString();
+		secondCopy.toString();
 
 	}// onClick
 	
