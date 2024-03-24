@@ -102,15 +102,18 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 			if (firstInstance.placeTile(placeTile)) {
 				int x = firstInstance.getLastPlaceTileX();
 				int y = firstInstance.getLastPlaceTileY();
-				testResultsTextView.append("Player " + getPlayerId() + "has placed a piece on " + "x: " + x +"y: "+ y);
+				testResultsTextView.append("Player " + getPlayerId() + "has placed a piece on " + "x: " + x +" y: "+ y);
 				//not sure if we need this return;
 				return;
 			//if the player undos their move
 			} else if (firstInstance.undoMove(undo)) {
-				testResultsTextView.append("Player " + getPlayerId() + "took back their move.");
+				testResultsTextView.append("Player " + getPlayerId() + " took back their move.");
 			}
 
-
+			//winner message
+			if (firstInstance.isGameOver()) {
+				testResultsTextView.append("Player " + getPlayerId() + " is the winner!");
+			}
 		}
 
 		//create 2nd new instance of hexState
