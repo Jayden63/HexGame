@@ -53,7 +53,7 @@ public class HexBoard {
             grid[x][y] = color;
         }
     }
-        public int[][] getGrid(){
+    public int[][] getGrid(){
         return this.grid;
     }
     //to string for HexBoard

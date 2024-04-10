@@ -98,6 +98,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 
 			UndoMove undo = new UndoMove(this);
 
+			NewGameMove newGameMove = new NewGameMove(this);
+
 			//if a player places a tile it will show as a message
 			if (firstInstance.placeTile(placeTile)) {
 				int x = firstInstance.getLastPlaceTileX();
@@ -108,11 +110,20 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 			//if the player undos their move
 			} else if (firstInstance.undoMove(undo)) {
 				testResultsTextView.append("Player " + getPlayerId() + " took back their move.");
+
+				return;
+			//if the player starts a new game
+			} else if (firstInstance.newGameMove(newGameMove)) {
+				testResultsTextView.append("Player " + getPlayerId() + "started a new game. ");
+
+				return;
 			}
 
 			//winner message
 			if (firstInstance.isGameOver()) {
 				testResultsTextView.append("Player " + getPlayerId() + " is the winner!");
+
+				return;
 			}
 		}
 

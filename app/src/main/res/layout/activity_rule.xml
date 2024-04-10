@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_rule"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:id="@+id/rule_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Rules of HEX" />
+
+    <TextView
+        android:id="@+id/rule_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="1. Turned based game \n 2. Red Player vs. Blue Player\n3. Red always has the first move\n4. Red must connect the top and bottom edges\n5. Blue must connect the left and right edges\n6. First player to connect their edges wins" />
+
+</LinearLayout>
