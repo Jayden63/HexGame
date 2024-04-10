@@ -169,7 +169,7 @@
             android:layout_weight="10"
             android:orientation="horizontal">
 
-            <com.example.gameinterface_hex.Hex_SurfaceView
+            <edu.up.cs301.hex.Hex_SurfaceView
                 android:id="@+id/hex_grid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
