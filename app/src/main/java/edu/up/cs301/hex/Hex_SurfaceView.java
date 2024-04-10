@@ -109,17 +109,21 @@ public class Hex_SurfaceView extends SurfaceView {
 
     private void calculatePath() {
 
-
+        // Iterates to make an 11x11 hex board
         for (float i = 0; i < 781; i = i + 73) {
             float xOffset = (width_SurfaceView / 2) - 590;
             float yOffset = 100;
             for (int j = 0; j < 990; j = j + 90) {
 
+                // triangleHeight variable is used for hex edges
                 float triangleHeight = (float) (Math.sqrt(3) * radius / 2);
+
+                // The starting point for the first hexagon
                 float centerX = (width / 2 + i);
                 float centerY = (height / 2 + j);
-                hexagonPath.moveTo(xOffset + centerX, yOffset + centerY + radius);
 
+                // Creates the hexagon grid
+                hexagonPath.moveTo(xOffset + centerX, yOffset + centerY + radius);
                 hexagonPath.lineTo(xOffset + centerX - triangleHeight, yOffset + centerY + radius / 2);
                 hexagonPath.lineTo(xOffset + centerX - triangleHeight, yOffset + centerY - radius / 2);
                 hexagonPath.lineTo(xOffset + centerX, yOffset + centerY - radius);
@@ -127,6 +131,7 @@ public class Hex_SurfaceView extends SurfaceView {
                 hexagonPath.lineTo(xOffset + centerX + triangleHeight, yOffset + centerY + radius / 2);
                 hexagonPath.moveTo(xOffset + centerX, yOffset + centerY + radius);
 
+                // Used for offsetting each drawn hexagon
                 xOffset += (70 / 2) + 2;
                 yOffset -= 25;
 
@@ -149,19 +154,27 @@ public class Hex_SurfaceView extends SurfaceView {
     // getting the view size and default radius
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        // This method gets the size of the surface view
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        // Variables will be used for correct position for portrait and landscape view
         width_SurfaceView = MeasureSpec.getSize(widthMeasureSpec);
         height_SurfaceView = MeasureSpec.getSize(heightMeasureSpec);
-        width = 85; //MeasureSpec.getSize(widthMeasureSpec);
+
+        // The values of an individual hexagon
+        width = 85; // MeasureSpec.getSize(widthMeasureSpec);
         height = 85; //MeasureSpec.getSize(heightMeasureSpec);
         radius = (height / 2);
+
+        // Save
         calculatePath();
     }
 
     //method for drawing the sides of the hex board
     private void drawTriangle(int x, int y, int width, int height, boolean inverted, Paint paint, Canvas canvas) {
 
-
+        //
         Point p1 = new Point(x, y);
         int pointX = x + width / 2;
         int pointY = inverted ? y + height : y - height;
