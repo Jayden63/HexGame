@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HexMainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="10sp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_PlayerNames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:orientation="vertical"
+                android:paddingLeft="15sp">
+
+                <TextView
+                    android:id="@+id/PLAYER1_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Player 1 "
+                    android:drawableEnd="@drawable/ic_red_hex"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/PLAYER2_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Player 2 "
+                    android:drawableEnd="@drawable/ic_blue_hex"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="5"
+                android:layout_marginRight="15sp"
+                android:layout_marginLeft="15sp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="HEX"
+                    android:textSize="65sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/ll_Music"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:paddingHorizontal="5sp"-->
+            <!--                android:background="@drawable/my_border"-->
+            <!--                android:layout_weight="2"-->
+            <!--                android:orientation="vertical">-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/MUSIC_textView"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_horizontal"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:text="Music"-->
+            <!--                    android:textSize="20sp" />-->
+
+            <!--                <SeekBar-->
+            <!--                    android:id="@+id/MUSIC_seekBar"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_weight="1" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/SOUND_textView"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_horizontal"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:text="Sound"-->
+            <!--                    android:textSize="20sp" />-->
+
+            <!--                <SeekBar-->
+            <!--                    android:id="@+id/SOUND_seekBar"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:paddingBottom="10sp"-->
+            <!--                    android:layout_weight="1" />-->
+
+            <!--            </LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/ll_Settings"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30sp"
+                android:layout_marginRight="10sp"
+                android:layout_weight="0"
+                android:orientation="vertical"
+                android:paddingHorizontal="15sp">
+
+                <ImageButton
+                    android:id="@+id/settings_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/white"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_settings_icon"
+                    tools:visibility="visible" />
+
+                <ImageButton
+                    android:id="@+id/rules_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/ic_rules_icon" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_Confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:paddingHorizontal="15sp"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_gravity="right"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/confirm_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Undo"
+                    android:textSize="20sp"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_hex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:orientation="horizontal">
+
+            <com.example.gameinterface_hex.Hex_SurfaceView
+                android:id="@+id/hex_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
