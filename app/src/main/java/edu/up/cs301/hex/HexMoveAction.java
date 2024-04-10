@@ -21,8 +21,6 @@ public class HexMoveAction extends GameAction {
 	// to satisfy the serializable interface
 	private static final long serialVersionUID = 28062013L;
 
-	//whether this move is a plus (true) or minus (false)
-	private boolean isPlus;
 	
 	/**
 	 * Constructor for the CounterMoveAction class.
@@ -34,7 +32,7 @@ public class HexMoveAction extends GameAction {
 	 */
 	public HexMoveAction(GamePlayer player, boolean isPlus) {
 		super(player);
-		this.isPlus = isPlus;
+
 	}
 	
 	/**
@@ -43,8 +41,6 @@ public class HexMoveAction extends GameAction {
 	 * @return
 	 * 		a boolean that tells whether this move is a "plus"
 	 */
-	public boolean isPlus() {
-		return isPlus;
-		
-	}
+
+
 }//class CounterMoveAction
