@@ -12,7 +12,11 @@ import android.graphics.Path;
  * @author Eduardo
  */
 public class HexTile {
-    private String color;
+
+    public static int EMPTY_COLOR = 0xFFAAAAAA;  // med gray
+    public static int RED_COLOR = 0xFF0000; // red color
+    public static int BLUE_COLOR = 0x0000FF; // blue color
+    private int color;
     protected float x; // x-coord
     protected float y; // y-coord
     protected final int size = 20; // all spots are size 20
@@ -27,7 +31,7 @@ public class HexTile {
     /** basic constructor*/
     public HexTile(){
         //tile would empty
-        color = null;
+        color = 0;
     }
     //copy constructor
     public HexTile(HexTile orig) {
@@ -57,15 +61,16 @@ public class HexTile {
         canvas.drawCircle(x, y, size, myPaint);
     }
 
-    public String getColor(){
+    public int getColor(){
         return color;
     }
-    public void setColor(String color){
+    public void setColor(int color){
         this.color = color;
     }
+
     //toString for HexTile
-    @Override
+    /*@Override
     public String toString() {
         return color != null ? color.substring(0, 1) : "."; // returns first letter of color, or "." for empty
-    }
+    }*/
 }

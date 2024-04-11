@@ -12,14 +12,12 @@ package edu.up.cs301.hex;
  */
 public class HexBoard {
 
-    public static int EMPTY_COLOR = 0xFFAAAAAA;  // med gray
-    public static int RED_COLOR = 0xFF0000; // red color
-    public static int BLUE_COLOR = 0x0000FF; // blue color
     //instance variables
     private int size;
-    private int[][] grid;
+    private HexTile hexTile;
+    private HexTile[][] grid;
     public HexBoard(HexBoard orig) {
-        this.grid = new int[orig.grid.length][orig.grid[0].length];
+        this.grid = new HexTile[orig.grid.length][orig.grid[0].length];
         for (int i = 0; i < orig.grid.length; i++) {
             for (int j = 0; j < orig.grid[0].length; j++) {
                 this.grid[i][j] = orig.grid[i][j];
@@ -32,7 +30,7 @@ public class HexBoard {
     //declare what the size of the board is
     public HexBoard(int size) {
         this.size = size;
-        this.grid = new int[size][size];
+        this.grid = new HexTile[size][size];
         /*for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 grid[i][j] = new int[size][size];
@@ -43,17 +41,17 @@ public class HexBoard {
 
 
     //boolean method if the tile is occupied
-    public boolean isTileOccupied(int x, int y) {
-        return grid[x][y] != EMPTY_COLOR;
+    public boolean isTileOccupied(int row, int col) {
+        return !(grid[row][col].equals(hexTile.EMPTY_COLOR));
     }
 
     //void method to set color of the tile to color if occupied
-    public void occupyTile(int x, int y, int color) {
+    /*public void occupyTile(int x, int y, int color) {
         if (!isTileOccupied(x, y)) {
             grid[x][y] = color;
         }
-    }
-    public int[][] getGrid(){
+    }*/
+    public HexTile[][] getGrid(){
         return this.grid;
     }
     //to string for HexBoard

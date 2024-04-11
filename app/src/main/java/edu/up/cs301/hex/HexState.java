@@ -22,6 +22,7 @@ public class HexState extends GameState {
 	private int playerTurn;
 	private boolean hasWon;
 	private HexBoard board;
+	private HexTile hexTile;
 	private String playerWinner;
 	private Player player1;
 	private Player player2;
@@ -106,10 +107,10 @@ public class HexState extends GameState {
 		}*/
 
 		// checks if it is the first player's turn and if the spot where the tile is being placed is empty
-		if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()] == board.EMPTY_COLOR))  {
+		if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.EMPTY_COLOR)))  {
 
 			//player0 places the tile in the empty tile
-			this.board.getGrid()[place.getX()][place.getY()] = board.RED_COLOR;
+			this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.RED_COLOR);
 
 			//updates the location of latest placed tile
 			lastPlaceTileX = place.getX();
@@ -121,9 +122,9 @@ public class HexState extends GameState {
 			return true;
 		}
 		// checks if it is the second player's turn and if the spot where the tile is being placed is empty
-		else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()] == board.EMPTY_COLOR)) {
+		else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.EMPTY_COLOR))) {
 			//player1 places the tile in the empty tile
-			this.board.getGrid()[place.getX()][place.getY()] = board.BLUE_COLOR;
+			this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.BLUE_COLOR);
 
 			//updates the location of latest placed tile
 			lastPlaceTileX = place.getX();
@@ -154,7 +155,7 @@ public class HexState extends GameState {
 			// finds the place in the 2d array that was last placed, removes it, then makes the player turn to who undid it
 			lastPlaceTileX = -1;
 			lastPlaceTileY = -1;
-			this.board.getGrid()[lastPlaceTileX][lastPlaceTileY] = board.EMPTY_COLOR;
+			this.board.getGrid()[lastPlaceTileX][lastPlaceTileY].equals(hexTile.EMPTY_COLOR);
 			return true;
 		}
 		else {
