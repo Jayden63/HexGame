@@ -63,7 +63,7 @@ public class HexMainActivity extends GameMainActivity {
 		// - from 1 to 2 players
 		// - name of game is "Counter Game"
 		// - port number as defined above
-		GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Counter Game",
+		GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Hex",
 				PORT_NUMBER);
 
 		// Add the default players to the configuration
@@ -91,5 +91,4 @@ public class HexMainActivity extends GameMainActivity {
 		if (state == null) state = new HexState(); //hexstate parameters originally it was zero since it took in int as a param but now we removed it
 		return new HexLocalGame(state);
 	}
-
 }
