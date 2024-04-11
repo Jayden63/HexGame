@@ -175,13 +175,13 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		this.myActivity = activity;
 
 	    // loads the layout resource for our GUI
-		activity.setContentView(R.layout.test_screen);
+		activity.setContentView(R.layout.activity_main);
 		// initializes the testResultsTextView variable with a reference to the multi-line edit text
-		this.testResultsTextView = (EditText) activity.findViewById(R.id.editTextMultiLine);
+		// this.testResultsTextView = (EditText) activity.findViewById(R.id.editTextMultiLine);
 
 		// registers the human player as a listener for the button
-		Button runTestButton = (Button) activity.findViewById(R.id.buttonRunTest);
-		runTestButton.setOnClickListener(this);
+		// Button runTestButton = (Button) activity.findViewById(R.id.buttonRunTest);
+		// runTestButton.setOnClickListener(this);
 		}
 }// class CounterHumanPlayer
 
