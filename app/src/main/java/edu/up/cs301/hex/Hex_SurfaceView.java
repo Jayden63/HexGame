@@ -120,7 +120,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
         // Iterates to make an 11x11 hex board
         for (float i = 0; i < 781; i = i + 73) {
             float xOffset = (width_SurfaceView / 2) - 590;
-            float yOffset = 100;
+            float yOffset = 50;
             for (int j = 0; j < 990; j = j + 90) {
 
                 // triangleHeight variable is used for hex edges
@@ -175,7 +175,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
                     HexTile newClosest = new HexTile(xHexCenter, yHexCenter);
                     closestSoFar = newClosest;
                 }
-                invalidate();
+                //invalidate();
             }
         }
         return closestSoFar;
@@ -201,7 +201,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
         // Iterates to make an 11x11 hex board
         for (float i = 0; i < 781; i = i + 73) {
             float xOffset = (width_SurfaceView / 2) - 590;
-            float yOffset = 100;
+            float yOffset = 50;
             for (int j = 0; j < 990; j = j + 90) {
 
                 // triangleHeight variable is used for hex edges
