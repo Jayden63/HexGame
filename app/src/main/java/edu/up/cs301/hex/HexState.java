@@ -186,6 +186,7 @@ public class HexState extends GameState {
 
 			this.board = new HexBoard(11); // don't know if this correct
 
+
 			return true;
 		}
 

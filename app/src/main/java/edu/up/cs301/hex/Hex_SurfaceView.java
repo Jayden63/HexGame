@@ -1,5 +1,7 @@
 package edu.up.cs301.hex;
 
+import static java.util.Collections.min;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -10,6 +12,9 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Region;
 import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Hex_SurfaceView extends SurfaceView {
@@ -28,6 +33,11 @@ public class Hex_SurfaceView extends SurfaceView {
     Paint hexPaint = new Paint();
     Paint hexBorderPaint = new Paint();
 
+    private float xHexCenter; // The current x center of the hex
+    private float yHexCenter; // The current y center of the hex
+
+    // ArrayList to store all hypotenuse values
+    ArrayList<Float> hypotenuseDistList = new ArrayList<Float>();
 
     Paint hexRedSide = new Paint();
     Paint hexBlueSide = new Paint();
@@ -94,6 +104,110 @@ public class Hex_SurfaceView extends SurfaceView {
 
 
     }
+    // We might need to update the draw hexagon. So it as array [][] and we can get the index of each hexagon individually
+
+    // Takes in the xpos and ypos of a user defined type in the surface view
+    public void getNearestHex (float xPos, float yPos)   {
+        // Iterates to make an 11x11 hex board
+        for (float i = 0; i < 781; i = i + 73) {
+            float xOffset = (width_SurfaceView / 2) - 590;
+            float yOffset = 100;
+            for (int j = 0; j < 990; j = j + 90) {
+
+                // triangleHeight variable is used for hex edges
+                float triangleHeight = (float) (Math.sqrt(3) * radius / 2);
+
+                // The starting point for the first hexagon
+                float centerX = (width / 2 + i);
+                float centerY = (height / 2 + j);
+
+                //calc the center of the hex
+
+
+                // Creates the hexagon grid
+
+                // The bottom point of the hexagon. Can be our center x hexagon position
+                hexagonPath.moveTo(xOffset + centerX, yOffset + centerY + radius);
+
+                // Setting up the center x position of the hexagon
+                xHexCenter = xOffset + centerX;
+
+
+                // The bottom left of the hexagon
+                hexagonPath.lineTo(xOffset + centerX  - triangleHeight, yOffset + centerY + radius / 2);
+                float yBottomLeftPoint = (yOffset + centerY + radius / 2);
+
+                // The top left of the hexagon
+                hexagonPath.lineTo(xOffset + centerX - triangleHeight, yOffset + centerY - radius / 2);
+                float yTopLeftPoint = (yOffset + centerY - radius / 2);
+
+                // The top of the hexagon
+                hexagonPath.lineTo(xOffset + centerX , yOffset + centerY - radius);
+
+                // The top right of the hexagon
+                hexagonPath.lineTo(xOffset + centerX + triangleHeight, yOffset + centerY - radius / 2);
+
+                // The bottom right of the hexagon
+                hexagonPath.lineTo(xOffset + centerX + triangleHeight, yOffset + centerY + radius / 2);
+
+
+                // Used for offsetting each drawn hexagon
+                xOffset += (70 / 2) + 2;
+                yOffset -= 25;
+
+                // Find the yCenter for each hexagon
+                // yPosition is a global private variable
+                yHexCenter = (yBottomLeftPoint + yTopLeftPoint) / 2;
+
+                //calc the distance from center to touch
+                float xDist = Math.abs(xPos - xHexCenter);
+                float yDist = Math.abs(yPos- yHexCenter);
+
+
+                // Calculate the hyp distance. Includes for cases when xDist and yDist are zero
+                float hypotenuse = (float) Math.sqrt(Math.pow(xDist, 2) + (Math.pow(yDist, 2)));
+                hypotenuseDistList.add(hypotenuse);
+
+
+
+                // if statement. If the user defined input is closest to the y and x position
+
+
+
+
+                invalidate();
+            }
+        }
+
+        // find min in array
+        float smallestDist = Collections.min(hypotenuseDistList);
+
+
+        // from 0 to 120
+        int smallestDistIndex = hypotenuseDistList.indexOf(smallestDist);
+
+
+        // Using smallestDist to find the hexagon
+        float counter = 0;
+
+        // For all hexagons in the hex grid
+        for (int i = 0; i < 10; i++)    { // This will run 11 times
+            for (int j = 0; j < 10; j++)    { // This will also run 11 times
+
+                // Add counter. Max is 121
+                counter++;
+
+                // When counter is equal to the index of smallest hypotenuse
+                if (counter == smallestDist) {
+                    // Then we get the index of the hexagon
+
+                }
+            }
+        }
+
+
+        // Set min distance in array equal to a global variable
+    }
 
 
     private void setUp() {
@@ -122,29 +236,37 @@ public class Hex_SurfaceView extends SurfaceView {
                 float centerX = (width / 2 + i);
                 float centerY = (height / 2 + j);
 
+                //calc the center of the hex
+
+
                 // Creates the hexagon grid
+
+                // The bottom point of the hexagon. Can be our center x hexagon position
                 hexagonPath.moveTo(xOffset + centerX, yOffset + centerY + radius);
-                hexagonPath.lineTo(xOffset + centerX - triangleHeight, yOffset + centerY + radius / 2);
+
+
+                // The bottom left of the hexagon
+                hexagonPath.lineTo(xOffset + centerX  - triangleHeight, yOffset + centerY + radius / 2);
+
+                // The top left of the hexagon
                 hexagonPath.lineTo(xOffset + centerX - triangleHeight, yOffset + centerY - radius / 2);
-                hexagonPath.lineTo(xOffset + centerX, yOffset + centerY - radius);
+
+                // The top of the hexagon
+                hexagonPath.lineTo(xOffset + centerX , yOffset + centerY - radius);
+
+                // The top right of the hexagon
                 hexagonPath.lineTo(xOffset + centerX + triangleHeight, yOffset + centerY - radius / 2);
+
+                // The bottom right of the hexagon
                 hexagonPath.lineTo(xOffset + centerX + triangleHeight, yOffset + centerY + radius / 2);
-                hexagonPath.moveTo(xOffset + centerX, yOffset + centerY + radius);
+
+                //hexagonPath.moveTo(xOffset + centerX , yOffset + centerY + radius);
 
                 // Used for offsetting each drawn hexagon
                 xOffset += (70 / 2) + 2;
                 yOffset -= 25;
 
 
-//                float radiusBorder = radius - 2;
-//                float triangleBorderHeight = (float) (Math.sqrt(3) * radiusBorder / 2);
-//                hexagonBorderPath.moveTo(centerX, centerY + radiusBorder);
-//                hexagonBorderPath.lineTo(centerX - triangleBorderHeight, centerY + radiusBorder / 2);
-//                hexagonBorderPath.lineTo(centerX - triangleBorderHeight, centerY - radiusBorder / 2);
-//                hexagonBorderPath.lineTo(centerX, centerY - radiusBorder);
-//                hexagonBorderPath.lineTo(centerX + triangleBorderHeight, centerY - radiusBorder / 2);
-//                hexagonBorderPath.lineTo(centerX + triangleBorderHeight, centerY + radiusBorder / 2);
-//                hexagonBorderPath.moveTo(centerX, centerY + radiusBorder);
                 invalidate();
             }
         }

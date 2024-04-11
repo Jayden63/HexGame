@@ -16,5 +16,6 @@ public class UndoMove extends GameAction {
 
     public UndoMove(GamePlayer player) {
         super(player);
+
     }
 }
