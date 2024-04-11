@@ -2,4 +2,9 @@
 
     <string name="app_name">Hex Game</string>
 
+    <string-array name="settingsItems">
+        <item>How to Play</item>
+        <item>Change Color</item>
+    </string-array>
+
 </resources>
