@@ -107,7 +107,10 @@ public class Hex_SurfaceView extends SurfaceView {
     // We might need to update the draw hexagon. So it as array [][] and we can get the index of each hexagon individually
 
     // Takes in the xpos and ypos of a user defined type in the surface view
-    public void getNearestHex (float xPos, float yPos)   {
+    public void getNearestHex(float xPos, float yPos)   {
+        float shortestSoFar = 999999.9f;
+        HexTile closestSoFar = null;
+
         // Iterates to make an 11x11 hex board
         for (float i = 0; i < 781; i = i + 73) {
             float xOffset = (width_SurfaceView / 2) - 590;
@@ -166,47 +169,15 @@ public class Hex_SurfaceView extends SurfaceView {
 
                 // Calculate the hyp distance. Includes for cases when xDist and yDist are zero
                 float hypotenuse = (float) Math.sqrt(Math.pow(xDist, 2) + (Math.pow(yDist, 2)));
-                hypotenuseDistList.add(hypotenuse);
-
-
-
+                if (hypotenuse < shortestSoFar) {
+                    shortestSoFar = hypotenuse;
+                    HexTile newClosest = new HexTile(xHexCenter, yHexCenter);
+                    closestSoFar = newClosest;
+                }
                 // if statement. If the user defined input is closest to the y and x position
-
-
-
-
                 invalidate();
             }
         }
-
-        // find min in array
-        float smallestDist = Collections.min(hypotenuseDistList);
-
-
-        // from 0 to 120
-        int smallestDistIndex = hypotenuseDistList.indexOf(smallestDist);
-
-
-        // Using smallestDist to find the hexagon
-        float counter = 0;
-
-        // For all hexagons in the hex grid
-        for (int i = 0; i < 10; i++)    { // This will run 11 times
-            for (int j = 0; j < 10; j++)    { // This will also run 11 times
-
-                // Add counter. Max is 121
-                counter++;
-
-                // When counter is equal to the index of smallest hypotenuse
-                if (counter == smallestDist) {
-                    // Then we get the index of the hexagon
-
-                }
-            }
-        }
-
-
-        // Set min distance in array equal to a global variable
     }
 
 
