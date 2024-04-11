@@ -1,7 +1,5 @@
 package edu.up.cs301.hex;
 
-import static java.util.Collections.min;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -10,14 +8,11 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.graphics.Color;
 import android.graphics.Path;
-import android.graphics.Region;
-import android.widget.Button;
-
+import android.view.View;
+import android.view.MotionEvent;
 import java.util.ArrayList;
-import java.util.Collections;
 
-
-public class Hex_SurfaceView extends SurfaceView {
+public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener {
 
     private Paint brightPink = new Paint();
     private Paint forestGreen = new Paint();
@@ -36,8 +31,8 @@ public class Hex_SurfaceView extends SurfaceView {
     private float xHexCenter; // The current x center of the hex
     private float yHexCenter; // The current y center of the hex
 
-    // ArrayList to store all hypotenuse values
-    ArrayList<Float> hypotenuseDistList = new ArrayList<Float>();
+    // ArrayList to store all HexTiles
+    ArrayList<HexTile> tileList = new ArrayList<>();
 
     Paint hexRedSide = new Paint();
     Paint hexBlueSide = new Paint();
@@ -56,6 +51,8 @@ public class Hex_SurfaceView extends SurfaceView {
 
         hexRedSide.setColor(Color.RED);
         hexBlueSide.setColor(Color.BLUE);
+
+        this.setOnTouchListener(this);
 
         setUp();
         setWillNotDraw(false);
@@ -102,12 +99,21 @@ public class Hex_SurfaceView extends SurfaceView {
 //        canvas.clipPath(hexagonPath, Region.Op.DIFFERENCE);
         canvas.save();
 
+        // draws Hex Tiles
+        for(HexTile hT : tileList) {
+            hT.draw(canvas);
+        }
 
     }
-    // We might need to update the draw hexagon. So it as array [][] and we can get the index of each hexagon individually
 
-    // Takes in the xpos and ypos of a user defined type in the surface view
-    public void getNearestHex(float xPos, float yPos)   {
+
+    /**
+     * Algorithm for finding the nearest HexTile from where the user touches on the Hex grid
+     * @param xPos
+     * @param yPos
+     * @return HexTile
+     */
+    public HexTile getNearestHex(float xPos, float yPos)   {
         float shortestSoFar = 999999.9f;
         HexTile closestSoFar = null;
 
@@ -123,11 +129,6 @@ public class Hex_SurfaceView extends SurfaceView {
                 // The starting point for the first hexagon
                 float centerX = (width / 2 + i);
                 float centerY = (height / 2 + j);
-
-                //calc the center of the hex
-
-
-                // Creates the hexagon grid
 
                 // The bottom point of the hexagon. Can be our center x hexagon position
                 hexagonPath.moveTo(xOffset + centerX, yOffset + centerY + radius);
@@ -174,10 +175,10 @@ public class Hex_SurfaceView extends SurfaceView {
                     HexTile newClosest = new HexTile(xHexCenter, yHexCenter);
                     closestSoFar = newClosest;
                 }
-                // if statement. If the user defined input is closest to the y and x position
                 invalidate();
             }
         }
+        return closestSoFar;
     }
 
 
@@ -192,6 +193,9 @@ public class Hex_SurfaceView extends SurfaceView {
     }
 
 
+    /**
+     * Draws the entire 11x11 Hex grid
+     */
     private void calculatePath() {
 
         // Iterates to make an 11x11 hex board
@@ -244,7 +248,9 @@ public class Hex_SurfaceView extends SurfaceView {
     }
 
 
-    // getting the view size and default radius
+    /**
+     *  getting the view size and default radius
+     */
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
@@ -264,7 +270,9 @@ public class Hex_SurfaceView extends SurfaceView {
         calculatePath();
     }
 
-    //method for drawing the sides of the hex board
+    /**
+     * method for drawing the sides of the hex board
+     */
     private void drawTriangle(int x, int y, int width, int height, boolean inverted, Paint paint, Canvas canvas) {
 
         //
@@ -284,5 +292,17 @@ public class Hex_SurfaceView extends SurfaceView {
         path.close();
 
         canvas.drawPath(path, paint);
+    }
+
+    /** whenever the user touches the surface view */
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+        HexTile hexTile = getNearestHex(x,y);
+        tileList.add(hexTile);
+        this.invalidate();
+
+        return false;
     }
 }
