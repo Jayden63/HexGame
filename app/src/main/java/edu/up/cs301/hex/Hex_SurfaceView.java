@@ -81,11 +81,11 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
         canvas.drawColor(Color.GRAY);
 
         //draws the blue side
-        drawTriangle(610, 80, 875, 770, true, hexBlueSide, canvas); //left
+        /*drawTriangle(610, 80, 875, 770, true, hexBlueSide, canvas); //left
         drawTriangle(1125, 850, 875, 770, false, hexBlueSide, canvas);//right
         //draws the red side
         drawTriangle(610, 80, 950, 400, true, hexRedSide, canvas);//top
-        drawTriangle(1040, 850, 950, 400, false, hexRedSide, canvas);//bottom
+        drawTriangle(1040, 850, 950, 400, false, hexRedSide, canvas);//bottom*/
 
 
         canvas.drawPath(hexagonPath, hexPaint);

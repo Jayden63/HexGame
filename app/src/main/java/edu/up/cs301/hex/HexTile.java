@@ -13,9 +13,9 @@ import android.graphics.Path;
  */
 public class HexTile {
 
-    public static int EMPTY_COLOR = 0xFFAAAAAA;  // med gray
-    public static int RED_COLOR = 0xFF0000; // red color
-    public static int BLUE_COLOR = 0x0000FF; // blue color
+    public static int EMPTY_COLOR = Color.GRAY;  // med gray
+    public static int RED_COLOR = Color.RED; // red color
+    public static int BLUE_COLOR = Color.BLUE; // blue color
     private int color;
     protected float x; // x-coord
     protected float y; // y-coord
@@ -49,17 +49,20 @@ public class HexTile {
         x = initX;
         y = initY;
         hexTilePath = new Path();
-        setRandomPaint();
+
+        myPaint = new Paint();
+        myPaint.setColor(RED_COLOR);
+        //setRandomPaint();
     }
 
     /** gives the spot a random colored paint */
-    protected void setRandomPaint() {
+   /* protected void setRandomPaint() {
         int color = Color.rgb((int) (Math.random() * 256),
                 (int) (Math.random() * 256),
                 (int) (Math.random() * 256));
         myPaint = new Paint();
-        myPaint.setColor(color);
-    }
+        myPaint.setColor(Color.RED);
+    }*/
 
     /** HexTile can draw itself on a given canvas */
     public void draw(Canvas canvas) {
