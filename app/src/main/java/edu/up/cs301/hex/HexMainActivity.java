@@ -80,6 +80,7 @@ public class HexMainActivity extends GameMainActivity {
 		return defaultConfig;
 	}//createDefaultConfig
 
+	// BY Monday.
 	/**
 	 * create a local game
 	 * 

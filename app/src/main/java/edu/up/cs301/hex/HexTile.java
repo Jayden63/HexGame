@@ -64,25 +64,41 @@ public class HexTile {
     /** HexTile can draw itself on a given canvas */
     public void draw(Canvas canvas) {
         float triangleHeight = (float) (Math.sqrt(3) * radius / 2);
+
         // sets centerX and centerY to where the user taps on the grid
         float centerX = this.x;
         float centerY = this.y;
 
         // draws the hexagon based on where the user taps on the grid
+
+        // Bottom
         hexTilePath.moveTo(centerX, centerY + radius);
-        hexTilePath.lineTo(centerX - triangleHeight, centerY + radius / 2);
-        hexTilePath.lineTo(centerX - triangleHeight, centerY - radius / 2);
-        hexTilePath.lineTo(centerX, centerY - radius);
-        hexTilePath.lineTo(centerX + triangleHeight, centerY - radius / 2);
-        hexTilePath.lineTo(centerX + triangleHeight, centerY + radius / 2);
+
+        // Bottom left
+        hexTilePath.lineTo(centerX - triangleHeight + 1, centerY + radius / 2);
+
+        // Top left
+        hexTilePath.lineTo(centerX - triangleHeight + 1, centerY - radius / 2);
+
+        // Top
+        hexTilePath.lineTo(centerX, centerY - radius + 1);
+
+        // Top right
+        hexTilePath.lineTo(centerX + triangleHeight - 1, centerY - radius / 2);
+
+        // Bottom right
+        hexTilePath.lineTo(centerX + triangleHeight - 1, centerY + radius / 2); // + means right
 
         // completes the drawn hexagon
         canvas.drawPath(hexTilePath, myPaint);
     }
 
+    // Getter method for color
     public int getColor(){
         return color;
     }
+
+    // Setter method for color
     public void setColor(int color){
         this.color = color;
     }

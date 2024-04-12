@@ -19,13 +19,13 @@ import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 public class HexState extends GameState {
 
 	// instance variables for our HexState
-	private int playerTurn;
-	private boolean hasWon;
-	private HexBoard board;
-	private HexTile hexTile;
-	private String playerWinner;
-	private Player player1;
-	private Player player2;
+	private int playerTurn; // Determines who's turn it is
+	private boolean hasWon; // To return true if a player has won
+	private HexBoard board; // The hexboard grid
+	private HexTile hexTile; // Each cell in the grid
+	private String playerWinner; // To return the name of the player winner
+	private Player player1; // First player, red
+	private Player player2; // Second player, blue
 
 	//For Undo:  save location of last move
 	private int lastPlaceTileX;
@@ -33,11 +33,17 @@ public class HexState extends GameState {
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
-	 * @param
+	 * @param none
 	 */
 	public HexState() {
+		// Assigns first player to 0
+		// 0 and even for red,  odd for blue
 		this.playerTurn = 0;
+
+		//
 		this.hasWon = false;
+
+		// Creates an 11x11 board
 		this.board = new HexBoard(11);
 
 		// Two players, red & blue players
@@ -50,6 +56,7 @@ public class HexState extends GameState {
 	 * copy constructor; makes a copy of the original object
 	 *
 	 * Implementing a copy constructor that makes a deep copy of HexState
+	 * A pointer to our original HexState
 	 *
 	 *
 	 * @param orig the object from which the copy should be made
