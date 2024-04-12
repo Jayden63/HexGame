@@ -36,13 +36,19 @@ public class HexTile {
     //copy constructor
     public HexTile(HexTile orig) {
         this.color = orig.color;
+        this.x = orig.x;
+        this.y = orig.y;
+        this.width = orig.width;
+        this.height = orig.height;
+        this.radius = orig.radius;
+        this.hexTilePath = new Path(orig.hexTilePath);
     }
 
-    /** this ctor creates a HexTile at a specified location */
+    /** Constructor creates a HexTile at a specified location */
     public HexTile(float initX, float initY) {
-        // place a spot in a random location
         x = initX;
         y = initY;
+        hexTilePath = new Path();
         setRandomPaint();
     }
 
@@ -57,8 +63,21 @@ public class HexTile {
 
     /** HexTile can draw itself on a given canvas */
     public void draw(Canvas canvas) {
-        // canvas.drawPath(hexTilePath, myPaint);
-        canvas.drawCircle(x, y, size, myPaint);
+        float triangleHeight = (float) (Math.sqrt(3) * radius / 2);
+        // sets centerX and centerY to where the user taps on the grid
+        float centerX = this.x;
+        float centerY = this.y;
+
+        // draws the hexagon based on where the user taps on the grid
+        hexTilePath.moveTo(centerX, centerY + radius);
+        hexTilePath.lineTo(centerX - triangleHeight, centerY + radius / 2);
+        hexTilePath.lineTo(centerX - triangleHeight, centerY - radius / 2);
+        hexTilePath.lineTo(centerX, centerY - radius);
+        hexTilePath.lineTo(centerX + triangleHeight, centerY - radius / 2);
+        hexTilePath.lineTo(centerX + triangleHeight, centerY + radius / 2);
+
+        // completes the drawn hexagon
+        canvas.drawPath(hexTilePath, myPaint);
     }
 
     public int getColor(){
