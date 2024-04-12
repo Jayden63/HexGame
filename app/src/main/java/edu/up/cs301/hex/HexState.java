@@ -1,5 +1,7 @@
 package edu.up.cs301.hex;
 
+import android.graphics.Color;
+
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
@@ -126,6 +128,7 @@ public class HexState extends GameState {
 			//player1's turn
 			this.playerTurn = 1;
 
+
 			return true;
 		}
 		// checks if it is the second player's turn and if the spot where the tile is being placed is empty
@@ -200,8 +203,34 @@ public class HexState extends GameState {
 
 
 	public boolean isGameOver() {
+
+
+
+
 		return this.hasWon = true;
 	}
+	public boolean redWins() {
+		//loops through left and right of the grid board
+		for (int row = 0; row < board.getGrid().length; row++) {
+			//checks if there is red tile on each index of the rows and checks if they are connected
+			if (board.getGrid()[row][0].getColor() == hexTile.RED_COLOR && board.isConnected(row, 0, new boolean[board.getGrid().length][board.getGrid().length], Color.RED)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean blueWins() {
+		//loops through left and right of the grid board
+		for (int row = 0; row < board.getGrid().length; row++) {
+			//checks if there is red tile on each index of the rows and checks if they are connected
+			if (board.getGrid()[row][0].getColor() == hexTile.BLUE_COLOR && board.isConnected(row, 0, new boolean[board.getGrid().length][board.getGrid().length], Color.BLUE)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	public int getLastPlaceTileX() {
 		return this.lastPlaceTileX;
@@ -209,6 +238,8 @@ public class HexState extends GameState {
 	public int getLastPlaceTileY() {
 		return this.lastPlaceTileY;
 	}
+
+
 
 }
 
