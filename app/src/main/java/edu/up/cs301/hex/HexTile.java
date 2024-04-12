@@ -45,13 +45,14 @@ public class HexTile {
     }
 
     /** Constructor creates a HexTile at a specified location */
-    public HexTile(float initX, float initY) {
+    public HexTile(float initX, float initY,int initColor) {
         x = initX;
         y = initY;
+       color = initColor;
         hexTilePath = new Path();
 
         myPaint = new Paint();
-        myPaint.setColor(RED_COLOR);
+        myPaint.setColor(color);
         //setRandomPaint();
     }
 

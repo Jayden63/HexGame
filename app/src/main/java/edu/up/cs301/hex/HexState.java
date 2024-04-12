@@ -116,37 +116,38 @@ public class HexState extends GameState {
 		}*/
 
 		// checks if it is the first player's turn and if the spot where the tile is being placed is empty
-		if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.EMPTY_COLOR)))  {
+		//if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.EMPTY_COLOR)))  {
 
 			//player0 places the tile in the empty tile
-			this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.RED_COLOR);
+			//this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.RED_COLOR);
 
 			//updates the location of latest placed tile
-			lastPlaceTileX = place.getX();
-			lastPlaceTileY = place.getY();
+			//lastPlaceTileX = place.getX();
+			//lastPlaceTileY = place.getY();
 
 			//player1's turn
-			this.playerTurn = 1;
+			//this.playerTurn = 1;
 
 
-			return true;
-		}
+			//return true;
+		//}
 		// checks if it is the second player's turn and if the spot where the tile is being placed is empty
-		else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.EMPTY_COLOR))) {
+		//else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.EMPTY_COLOR))) {
 			//player1 places the tile in the empty tile
-			this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.BLUE_COLOR);
+			//this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.BLUE_COLOR);
 
 			//updates the location of latest placed tile
-			lastPlaceTileX = place.getX();
-			lastPlaceTileY = place.getY();
+			//lastPlaceTileX = place.getX();
+			//lastPlaceTileY = place.getY();
 
 			//player0's turn
-			this.playerTurn = 0;
+			//this.playerTurn = 0;
 
 			return true;
-		}
-		return false;
+		//}
+		//return false;
 	}
+
 
 	/**
 	 * Checks if the player can undo a move

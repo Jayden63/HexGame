@@ -31,12 +31,13 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
     private float xHexCenter; // The current x center of the hex
     private float yHexCenter; // The current y center of the hex
 
+
     // ArrayList to store all HexTiles
     ArrayList<HexTile> tileList = new ArrayList<>();
 
     Paint hexRedSide = new Paint();
     Paint hexBlueSide = new Paint();
-
+    private int playerTurn = 0;
 
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -100,7 +101,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
         canvas.save();
 
         // draws Hex Tiles
-        for(HexTile hT : tileList) {
+        for (HexTile hT : tileList) {
             hT.draw(canvas);
         }
 
@@ -109,11 +110,12 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
     /**
      * Algorithm for finding the nearest HexTile from where the user touches on the Hex grid
+     *
      * @param xPos
      * @param yPos
      * @return HexTile
      */
-    public HexTile getNearestHex(float xPos, float yPos)   {
+    public HexTile getNearestHex(float xPos, float yPos, int color) {
         float shortestSoFar = 999999.9f;
         HexTile closestSoFar = null;
 
@@ -138,7 +140,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
 
                 // The bottom left of the hexagon
-                hexagonPath.lineTo(xOffset + centerX  - triangleHeight, yOffset + centerY + radius / 2);
+                hexagonPath.lineTo(xOffset + centerX - triangleHeight, yOffset + centerY + radius / 2);
                 float yBottomLeftPoint = (yOffset + centerY + radius / 2);
 
                 // The top left of the hexagon
@@ -146,7 +148,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
                 float yTopLeftPoint = (yOffset + centerY - radius / 2);
 
                 // The top of the hexagon
-                hexagonPath.lineTo(xOffset + centerX , yOffset + centerY - radius);
+                hexagonPath.lineTo(xOffset + centerX, yOffset + centerY - radius);
 
                 // The top right of the hexagon
                 hexagonPath.lineTo(xOffset + centerX + triangleHeight, yOffset + centerY - radius / 2);
@@ -165,14 +167,14 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
                 //calc the distance from center to touch
                 float xDist = Math.abs(xPos - xHexCenter);
-                float yDist = Math.abs(yPos- yHexCenter);
+                float yDist = Math.abs(yPos - yHexCenter);
 
 
                 // Calculate the hyp distance. Includes for cases when xDist and yDist are zero
                 float hypotenuse = (float) Math.sqrt(Math.pow(xDist, 2) + (Math.pow(yDist, 2)));
                 if (hypotenuse < shortestSoFar) {
                     shortestSoFar = hypotenuse;
-                    HexTile newClosest = new HexTile(xHexCenter, yHexCenter);
+                    HexTile newClosest = new HexTile(xHexCenter, yHexCenter, color);
                     closestSoFar = newClosest;
                 }
                 //invalidate();
@@ -221,13 +223,13 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
 
                 // The bottom left of the hexagon
-                hexagonPath.lineTo(xOffset + centerX  - triangleHeight, yOffset + centerY + radius / 2);
+                hexagonPath.lineTo(xOffset + centerX - triangleHeight, yOffset + centerY + radius / 2);
 
                 // The top left of the hexagon
                 hexagonPath.lineTo(xOffset + centerX - triangleHeight, yOffset + centerY - radius / 2);
 
                 // The top of the hexagon
-                hexagonPath.lineTo(xOffset + centerX , yOffset + centerY - radius);
+                hexagonPath.lineTo(xOffset + centerX, yOffset + centerY - radius);
 
                 // The top right of the hexagon
                 hexagonPath.lineTo(xOffset + centerX + triangleHeight, yOffset + centerY - radius / 2);
@@ -249,7 +251,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
 
     /**
-     *  getting the view size and default radius
+     * getting the view size and default radius
      */
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -294,15 +296,20 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
         canvas.drawPath(path, paint);
     }
 
-    /** whenever the user touches the surface view */
+    /**
+     * whenever the user touches the surface view
+     */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        float x = motionEvent.getX();
-        float y = motionEvent.getY();
-        HexTile hexTile = getNearestHex(x,y);
-        tileList.add(hexTile);
-        this.invalidate();
-
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            int color = (playerTurn == 0) ? HexTile.RED_COLOR : HexTile.BLUE_COLOR; // Determine color based on player turn
+            HexTile hexTile = getNearestHex(motionEvent.getX(), motionEvent.getY(), color);
+            tileList.add(hexTile);
+            this.invalidate();
+            playerTurn = 1 - playerTurn; // Switch turns
+            return true;
+        }
         return false;
     }
+
 }
