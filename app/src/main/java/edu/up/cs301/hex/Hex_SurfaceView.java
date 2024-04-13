@@ -33,7 +33,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
 
     // ArrayList to store all HexTiles
-    ArrayList<HexTile> tileList = new ArrayList<>();
+    //ArrayList<HexTile> tileList = new ArrayList<>();
 
     Paint hexRedSide = new Paint();
     Paint hexBlueSide = new Paint();
@@ -101,9 +101,9 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
         canvas.save();
 
         // draws Hex Tiles
-        for (HexTile hT : tileList) {
-            hT.draw(canvas);
-        }
+        //for (HexTile hT : tileList) {
+            //hT.draw(canvas);
+        //}
 
     }
 
@@ -303,8 +303,8 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             int color = (playerTurn == 0) ? HexTile.RED_COLOR : HexTile.BLUE_COLOR; // Determine color based on player turn
-            HexTile hexTile = getNearestHex(motionEvent.getX(), motionEvent.getY(), color);
-            tileList.add(hexTile);
+            //HexTile hexTile = getNearestHex(motionEvent.getX(), motionEvent.getY(), color);
+            //tileList.add(hexTile);
             this.invalidate();
             playerTurn = 1 - playerTurn; // Switch turns
             return true;

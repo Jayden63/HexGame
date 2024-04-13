@@ -2,6 +2,8 @@ package edu.up.cs301.hex;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
+
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
@@ -30,8 +32,11 @@ public class HexState extends GameState {
 	private Player player2; // Second player, blue
 
 	//For Undo:  save location of last move
+
 	private int lastPlaceTileX;
 	private int lastPlaceTileY;
+	private HexState hexState;
+	private ArrayList<HexTile> tileList; // Declare the tileList variable
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
@@ -52,6 +57,7 @@ public class HexState extends GameState {
 		this.player1 = new Player("player 1", "red");
 		this.player2 = new Player("player2", "blue");
 		this.playerWinner = null;
+		this.tileList = new ArrayList<>();
 	}
 
 	/**
@@ -239,6 +245,32 @@ public class HexState extends GameState {
 	public int getLastPlaceTileY() {
 		return this.lastPlaceTileY;
 	}
+
+	// method to get the entire list of HexTiles
+	public ArrayList<HexTile> getTileList() {
+		return tileList;
+	}
+
+	// method to get a single HexTile by index
+	public HexTile getTile(int index) {
+		if (index >= 0 && index < tileList.size()) {
+			return tileList.get(index);
+		}
+		return null;  // return null if the index is out of bounds
+	}
+
+	// method to add a HexTile to the list
+	public void addTile(HexTile tile) {
+		tileList.add(tile);
+	}
+
+	// method to remove a HexTile from the list
+	public void removeTile(int index) {
+		if (index >= 0 && index < tileList.size()) {
+			tileList.remove(index);
+		}
+	}
+
 
 
 
