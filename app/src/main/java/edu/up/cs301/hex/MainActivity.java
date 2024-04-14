@@ -14,11 +14,23 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+private Hex_SurfaceView hexSurfaceView;
+private HexState hexState;
+private HexHumanPlayer humanPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        hexSurfaceView = findViewById(R.id.hex_grid);
+
+
+        hexState = new HexState();
+        humanPlayer = new HexHumanPlayer(" Human Player", hexState);
+
+        humanPlayer.setSurfaceView(hexSurfaceView);
+        hexSurfaceView.setHexState(hexState);
+
+        ;
 
 //            TextView myFaveTextView = new TextView(this);
 //            myFaveTextView.setText("some text");

@@ -38,7 +38,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
     Paint hexRedSide = new Paint();
     Paint hexBlueSide = new Paint();
     private int playerTurn = 0;
-    private HexState gameState;
+    public HexState gameState;
 
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -332,6 +332,10 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
             return true;
         }
         return false;
+    }
+    public void setHexState(HexState gameState){
+        this.gameState = gameState;
+        invalidate();
     }
 
 }

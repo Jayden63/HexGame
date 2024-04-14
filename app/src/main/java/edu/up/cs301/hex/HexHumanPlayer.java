@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+import android.util.Log;
 import edu.up.cs301.hex.R;
 import android.widget.EditText;
 /**
@@ -36,18 +37,19 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 	private TextView testResultsTextView;
 	
 	// the most recent game state, as given to us by the CounterLocalGame
-	private HexState state;
+	private HexState gameState;
 	
 	// the android activity that we are running
 	private GameMainActivity myActivity;
-	
+	private Hex_SurfaceView mySurfaceView;
 	/**
 	 * constructor
 	 * @param name
 	 * 		the player's name
 	 */
-	public HexHumanPlayer(String name) {
+	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);
+		this.gameState = gameState;
 	}
 
 
@@ -62,13 +64,35 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 	public View getTopView() {
 		return myActivity.findViewById(R.id.top_layout);
 	}
-	
+
+	public void setSurfaceView(Hex_SurfaceView surfaceView) {
+		if (surfaceView == null) {
+			throw new IllegalArgumentException("SurfaceView cannot be null.");
+		}
+		this.mySurfaceView = surfaceView;
+	}
+
+
+
 	/**
 	 * sets the counter value in the text view
 	 */
 	protected void updateDisplay() {
-		// set the text in the appropriate widget
-		//counterValueTextView.setText("" + state.getCounter());
+		if (mySurfaceView == null) {
+			Log.e("HexHumanPlayer", "surfaceView is not initialized.");
+
+			return;
+		}
+
+		if (gameState == null) {
+			Log.e("HexHumanPlayer", "gameState is not initialized.");
+			return;
+		}
+
+
+			mySurfaceView.setHexState(gameState);
+
+
 	}
 
 	/**
@@ -158,7 +182,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		if (!(info instanceof HexState)) return;
 		
 		// update our state; then update the display
-		this.state = (HexState)info;
+		this.gameState = (HexState)info;
 		updateDisplay();
 	}
 	
