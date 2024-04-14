@@ -245,7 +245,18 @@ public class HexState extends GameState {
 	public int getLastPlaceTileY() {
 		return this.lastPlaceTileY;
 	}
-
+	public int getPlayerTurn(){
+		return this.playerTurn;
+	}
+	//public void setPlayerTurn(int turn){
+		//this.playerTurn = turn;
+	//}
+	public boolean isPlayerOneTurn(){
+		return playerTurn == 0;
+	}
+public void changePlayerTurn(){
+		this.playerTurn = 1- this.playerTurn;
+}
 	// method to get the entire list of HexTiles
 	public ArrayList<HexTile> getTileList() {
 		return tileList;

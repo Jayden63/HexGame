@@ -38,6 +38,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
     Paint hexRedSide = new Paint();
     Paint hexBlueSide = new Paint();
     private int playerTurn = 0;
+    private HexState gameState;
 
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -52,7 +53,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
         hexRedSide.setColor(Color.RED);
         hexBlueSide.setColor(Color.BLUE);
-
+        gameState = new HexState();
         this.setOnTouchListener(this);
 
         setUp();
@@ -104,6 +105,9 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
         //for (HexTile hT : tileList) {
             //hT.draw(canvas);
         //}
+        for (HexTile tile : gameState.getTileList()) {
+            tile.draw(canvas);
+        }
 
     }
 
@@ -302,11 +306,29 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            int color = (playerTurn == 0) ? HexTile.RED_COLOR : HexTile.BLUE_COLOR; // Determine color based on player turn
+            //int color = (playerTurn == 0) ? HexTile.RED_COLOR : HexTile.BLUE_COLOR; // Determine color based on player turn
             //HexTile hexTile = getNearestHex(motionEvent.getX(), motionEvent.getY(), color);
             //tileList.add(hexTile);
+            //this.invalidate();
+            //playerTurn = 1 - playerTurn; // Switch turns
+            //return true;
+
+
+            //float x = motionEvent.getX();
+           // float y = motionEvent.getY();
+            //color based on whos turn
+           //int color = gameState.getPlayerTurn() == 0? HexTile.RED_COLOR : HexTile.BLUE_COLOR;
+            //HexTile newTile = new HexTile(x,y,color);
+            //gameState.addTile(newTile);
+            //invalidate();
+           // gameState.setPlayerTurn(1- gameState.getPlayerTurn());
+            //return true;
+
+            int color = (gameState.isPlayerOneTurn()) ? HexTile.RED_COLOR : HexTile.BLUE_COLOR;
+            HexTile hexTile = getNearestHex(motionEvent.getX(),motionEvent.getY(),color);
+            gameState.addTile(hexTile);
             this.invalidate();
-            playerTurn = 1 - playerTurn; // Switch turns
+            gameState.changePlayerTurn();
             return true;
         }
         return false;

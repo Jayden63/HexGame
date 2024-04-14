@@ -107,6 +107,12 @@ public class HexTile {
         this.color = color;
     }
 
+    public float getX() {
+        return x;
+    }
+    public float getY(){
+        return y;
+    }
     //toString for HexTile
     /*@Override
     public String toString() {
