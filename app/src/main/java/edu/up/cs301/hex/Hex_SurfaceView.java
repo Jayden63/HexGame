@@ -100,29 +100,29 @@ private HexState hexState;
 
 
 
-        @Override
-        public boolean onTouch(View view, MotionEvent event) {
+    public boolean onTouch(View view, MotionEvent event) {
 
-            float x = event.getX();
-            float y = event.getY();
+        float x = event.getX();
+        float y = event.getY();
 
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                // Check if touch is inside any hex tile
-                for (int i = 0; i < hexState.grid.length; i++) {
-                    for (int j = 0; j < hexState.grid.length; j++) {
-                        if (hexState.grid[i][j].isTouched(x, y)) {
-                            if (hexState.grid[i][j].getColor() == Color.GRAY) {
-                                hexState.grid[i][j].setColor(hexState.playerColor);
-                                invalidate();
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            // Check if touch is inside any hex tile
+            for (int i = 0; i < hexState.grid.length; i++) {
+                for (int j = 0; j < hexState.grid.length; j++) {
+                    if (hexState.grid[i][j].isTouched(x, y)) {
 
-                                hexState.Turn();
+                        if(hexState.grid[i][j].getColor() == Color.GRAY) {
+                            hexState.grid[i][j].setColor(hexState.playerColor);
+                            invalidate();
 
-                            }
+                            hexState.Turn();
                         }
+
                     }
                 }
             }
-            return false;
-
         }
+        return false;
+
+    }
 }

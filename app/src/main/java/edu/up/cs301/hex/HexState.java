@@ -70,7 +70,10 @@ public class HexState extends GameState {
 		this.playerColor = Color.BLUE;
 		initializeGrid();
 	}
-
+	public void togglePlayerTurn() {
+		player1_turn = !player1_turn;  // Toggle the boolean value to switch turns
+		playerColor = (player1_turn) ? Color.RED : Color.BLUE;  // Set color based on the turn
+	}
 	/**
 	 * copy constructor; makes a copy of the original object
 	 *
@@ -201,24 +204,11 @@ public class HexState extends GameState {
 	public void setTextView(TextView textView) {
 		this.textView = textView;
 	}
-		public void Turn() {
+	public void Turn() {
+		player1_turn = !player1_turn;  // toggle turn
+		playerColor = player1_turn ? Color.RED : Color.BLUE;  // update color based on who's turn it is
+	}
 
-			if (textView != null) {
-				if (player1_turn) {
-
-					textView.setText("Blue's turn");
-					playerColor = Color.BLUE;
-
-					checkWinner();
-				} else {
-					textView.setText("Red's turn");
-					playerColor = Color.RED;
-
-					checkWinner();
-				}
-				player1_turn = !player1_turn;
-			}
-		}
 
 	}
 

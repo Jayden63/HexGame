@@ -4,6 +4,8 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
+
+import android.graphics.Color;
 import android.util.Log;
 
 /**
@@ -80,6 +82,7 @@ public class HexLocalGame extends LocalGame {
 			return false;
 		}
 	}//makeMove
+
 	
 	/**
 	 * send the updated state to a given player
