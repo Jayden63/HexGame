@@ -40,9 +40,11 @@ private HexState hexState;
     private int playerTurn = 0;
     public HexState gameState;
 
+
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
+        setBackgroundColor(0xFF808080);
         hexState = new HexState();
         hexState.initializeGrid();
 
@@ -83,23 +85,6 @@ private HexState hexState;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public boolean onTouch(View view, MotionEvent event) {
 
         float x = event.getX();
@@ -111,13 +96,12 @@ private HexState hexState;
                 for (int j = 0; j < hexState.grid.length; j++) {
                     if (hexState.grid[i][j].isTouched(x, y)) {
 
-                        if(hexState.grid[i][j].getColor() == Color.GRAY) {
+                        if(hexState.grid[i][j].getColor() == Color.WHITE) {
                             hexState.grid[i][j].setColor(hexState.playerColor);
                             invalidate();
 
                             hexState.Turn();
                         }
-
                     }
                 }
             }

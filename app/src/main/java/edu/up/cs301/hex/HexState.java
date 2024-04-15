@@ -67,7 +67,7 @@ public class HexState extends GameState {
 		this.tileList = new ArrayList<>();
 		this.hexSize = 40;
 		this.player1_turn = true;
-		this.playerColor = Color.BLUE;
+		this.playerColor = Color.RED;
 		initializeGrid();
 	}
 	public void togglePlayerTurn() {
@@ -125,7 +125,7 @@ public class HexState extends GameState {
 			for (int j = 0; j < gridSize; j++) {
 				float x = 100 + (i * 35) + (j * (float) (hexSize * 1.9));
 				float y = 100 + ((float) (i * hexSize * 1.7));
-				grid[i][j] = new HexTile(x, y, Color.GRAY);  // Ensuring no HexTile is null
+				grid[i][j] = new HexTile(x, y, Color.WHITE);  // Ensuring no HexTile is null
 			}
 		}
 	}
