@@ -206,7 +206,9 @@ public class HexState extends GameState {
 	}
 	public void Turn() {
 		player1_turn = !player1_turn;  // toggle turn
-		playerColor = player1_turn ? Color.RED : Color.BLUE;  // update color based on who's turn it is
+		playerColor = player1_turn ? Color.RED : Color.BLUE;
+		checkWinner();
+		// update color based on who's turn it is
 	}
 
 
