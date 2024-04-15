@@ -1,6 +1,7 @@
 package edu.up.cs301.hex;
 
 import android.graphics.Color;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,13 @@ public class HexState extends GameState {
 	private int lastPlaceTileX;
 	private int lastPlaceTileY;
 	private HexState hexState;
-	private ArrayList<HexTile> tileList; // Declare the tileList variable
+	public int gridSize;
+	HexTile[][] grid;
+	private ArrayList<HexTile> tileList;
+	public float hexSize;
+	public boolean player1_turn;// Declare the tileList variable
+	private TextView textView;
+	int playerColor;
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
@@ -51,13 +58,17 @@ public class HexState extends GameState {
 		this.hasWon = false;
 
 		// Creates an 11x11 board
-		this.board = new HexBoard(11);
-
+		//this.board = new HexBoard(11);
+		this.gridSize =11;
 		// Two players, red & blue players
 		this.player1 = new Player("player 1", "red");
 		this.player2 = new Player("player2", "blue");
 		this.playerWinner = null;
 		this.tileList = new ArrayList<>();
+		this.hexSize = 40;
+		this.player1_turn = true;
+		this.playerColor = Color.BLUE;
+		initializeGrid();
 	}
 
 	/**
@@ -75,7 +86,7 @@ public class HexState extends GameState {
 		this.playerTurn = orig.playerTurn;
 		this.hasWon = orig.hasWon;
 		this.playerWinner = orig.playerWinner;
-		this.board = new HexBoard(orig.board);
+
 		this.player1 = new Player(orig.player1);
 		this.player2 = new Player(orig.player2);
 	}
@@ -105,133 +116,47 @@ public class HexState extends GameState {
 
 		return newString.toString();
 	}
-
-	/**
-	 * Checks if a player is allowed to place a tile in a given location
-	 *
-	 * @param place
-	 * @return
-	 */
-	public boolean placeTile(PlaceTile place) {
-		// if the player's turn is correct, if the tile placement is valid, and if the space is empty,
-		// then update the state of the game
-
-		/*if (place.getPlayer() instanceof HexHumanPlayer) {
-			int playerId = -1;
-			playerId = ((HexHumanPlayer) place.getPlayer()).getPlayerId();
-		}*/
-
-		// checks if it is the first player's turn and if the spot where the tile is being placed is empty
-		//if ((this.playerTurn == 0) && (this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.EMPTY_COLOR)))  {
-
-			//player0 places the tile in the empty tile
-			//this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.RED_COLOR);
-
-			//updates the location of latest placed tile
-			//lastPlaceTileX = place.getX();
-			//lastPlaceTileY = place.getY();
-
-			//player1's turn
-			//this.playerTurn = 1;
-
-
-			//return true;
-		//}
-		// checks if it is the second player's turn and if the spot where the tile is being placed is empty
-		//else if ((this.playerTurn == 1) && (this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.EMPTY_COLOR))) {
-			//player1 places the tile in the empty tile
-			//this.board.getGrid()[place.getX()][place.getY()].equals(hexTile.BLUE_COLOR);
-
-			//updates the location of latest placed tile
-			//lastPlaceTileX = place.getX();
-			//lastPlaceTileY = place.getY();
-
-			//player0's turn
-			//this.playerTurn = 0;
-
-			return true;
-		//}
-		//return false;
-	}
-
-
-	/**
-	 * Checks if the player can undo a move
-	 *
-	 * @param undo
-	 * @return
-	 */
-	public boolean undoMove(UndoMove undo) {
-		//Make sure it is NOT the undo-er's turn
-		int playerId = -1;
-		if (undo.getPlayer() instanceof HexHumanPlayer) {
-			playerId = ((HexHumanPlayer) undo.getPlayer()).getPlayerId();
-			if (playerId == this.playerTurn) {
-				return false;
+	public void initializeGrid() {
+		grid = new HexTile[gridSize][gridSize];
+		for (int i = 0; i < gridSize; i++) {
+			for (int j = 0; j < gridSize; j++) {
+				float x = 100 + (i * 35) + (j * (float) (hexSize * 1.9));
+				float y = 100 + ((float) (i * hexSize * 1.7));
+				grid[i][j] = new HexTile(x, y, Color.GRAY);  // Ensuring no HexTile is null
 			}
-			// finds the place in the 2d array that was last placed, removes it, then makes the player turn to who undid it
-			lastPlaceTileX = -1;
-			lastPlaceTileY = -1;
-			this.board.getGrid()[lastPlaceTileX][lastPlaceTileY].equals(hexTile.EMPTY_COLOR);
-			return true;
-		}
-		else {
-			return false;
 		}
 	}
 
+	public void checkWinner() {
+		if(blueWins()) {
+			textView.setText("BLUE WINS");
 
-	/**
-	 * Checks if the player can create a new game
-	 *
-	 * @param newGame
-	 * @return
-	 */
-	public boolean newGameMove(NewGameMove newGame) {
-			if (this.playerTurn == 1) {
-				this.playerTurn = 0; //resets to player 1 turn
-			}
-
-
-			if (this.hasWon) {
-				this.hasWon = false; //resets to no one has won
-			}
-
-
-			if ("red".equals(this.playerWinner) || "blue".equals(this.playerWinner)) {
-				this.playerWinner = null; //resets the winner to no one
-			}
-
-			this.board = new HexBoard(11); // don't know if this correct
-
-
-			return true;
+		} else if (redWins()) {
+			textView.setText("RED WINS");
 		}
-
-
-	public boolean isGameOver() {
-
-
-
-
-		return this.hasWon = true;
-	}
-	public boolean redWins() {
-		//loops through left and right of the grid board
-		for (int row = 0; row < board.getGrid().length; row++) {
-			//checks if there is red tile on each index of the rows and checks if they are connected
-			if (board.getGrid()[row][0].getColor() == hexTile.RED_COLOR && board.isConnected(row, 0, new boolean[board.getGrid().length][board.getGrid().length], Color.RED)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public boolean blueWins() {
+		//loops through up and down the grid board
+		for (int col = 0; col < grid.length; col++) {
+
+			//checks if there is a blue tile on each index of the colums and checks if they are connected
+			if (grid[0][col].getColor() == Color.BLUE && isConnected(0, col, new boolean[grid.length][grid.length], Color.BLUE)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/*
+	 * checks if red wins
+	 */
+	public boolean redWins() {
 		//loops through left and right of the grid board
-		for (int row = 0; row < board.getGrid().length; row++) {
+		for (int row = 0; row < grid.length; row++) {
+
 			//checks if there is red tile on each index of the rows and checks if they are connected
-			if (board.getGrid()[row][0].getColor() == hexTile.BLUE_COLOR && board.isConnected(row, 0, new boolean[board.getGrid().length][board.getGrid().length], Color.BLUE)) {
+			if (grid[row][0].getColor() == Color.RED && isConnected(row, 0, new boolean[grid.length][grid.length], Color.RED)) {
 				return true;
 			}
 		}
@@ -239,52 +164,67 @@ public class HexState extends GameState {
 	}
 
 
-	public int getLastPlaceTileX() {
-		return this.lastPlaceTileX;
-	}
-	public int getLastPlaceTileY() {
-		return this.lastPlaceTileY;
-	}
-	public int getPlayerTurn(){
-		return this.playerTurn;
-	}
-	//public void setPlayerTurn(int turn){
-		//this.playerTurn = turn;
-	//}
-	public boolean isPlayerOneTurn(){
-		return playerTurn == 0;
-	}
-public void changePlayerTurn(){
-		this.playerTurn = 1- this.playerTurn;
-}
-	// method to get the entire list of HexTiles
-	public ArrayList<HexTile> getTileList() {
-		return tileList;
+	public boolean isValid(int row, int col) {
+		return row >= 0 && row < grid.length && col >= 0 && col < grid.length;
 	}
 
-	// method to get a single HexTile by index
-	public HexTile getTile(int index) {
-		if (index >= 0 && index < tileList.size()) {
-			return tileList.get(index);
+	public boolean isConnected(int row, int col, boolean[][] visited, int playerColor) {
+		// Base cases: Check if we reached an opposite side
+		if (playerColor == Color.BLUE && row == grid.length - 1) {
+			return true; // Blue player connected top and bottom
 		}
-		return null;  // return null if the index is out of bounds
-	}
-
-	// method to add a HexTile to the list
-	public void addTile(HexTile tile) {
-		tileList.add(tile);
-	}
-
-	// method to remove a HexTile from the list
-	public void removeTile(int index) {
-		if (index >= 0 && index < tileList.size()) {
-			tileList.remove(index);
+		if (playerColor == Color.RED && col == grid.length - 1) {
+			return true; // Red player connected left and right
 		}
+
+		//tile has been checked
+		visited[row][col] = true;
+
+		// Offsets for neighboring cells in a hexagonal grid
+		int[] dx = {-1, 1, 0, 0, 1, -1};
+		int[] dy = {0, -1, -1, 1, 0, 1};
+
+		//loops through each case of offsets
+		for (int i = 0; i < 6; i++) {
+			int newRow = row + dx[i];
+			int newCol = col + dy[i];
+
+			// Check if the neighboring cell is within bounds and belongs to the same player
+			if (isValid(newRow, newCol) && grid[newRow][newCol].getColor() == playerColor && !visited[newRow][newCol]) {
+				if (isConnected(newRow, newCol, visited, playerColor)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	public void setTextView(TextView textView) {
+		this.textView = textView;
+	}
+		public void Turn() {
+
+			if (textView != null) {
+				if (player1_turn) {
+
+					textView.setText("Blue's turn");
+					playerColor = Color.BLUE;
+
+					checkWinner();
+				} else {
+					textView.setText("Red's turn");
+					playerColor = Color.RED;
+
+					checkWinner();
+				}
+				player1_turn = !player1_turn;
+			}
+		}
+
 	}
 
 
 
 
-}
+
 
 

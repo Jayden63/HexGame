@@ -11,111 +11,59 @@ import android.graphics.Path;
  * @author Chengen
  * @author Eduardo
  */
+
 public class HexTile {
 
-    public static int EMPTY_COLOR = Color.GRAY;  // med gray
-    public static int RED_COLOR = Color.RED; // red color
-    public static int BLUE_COLOR = Color.BLUE; // blue color
+
+
+    private float centerX, centerY;
+    private float radius;
     private int color;
-    protected float x; // x-coord
-    protected float y; // y-coord
-    protected final int size = 20; // all spots are size 20
-    protected Paint myPaint; // how the spot is drawn
 
-    // instance variables to draw a hexagon
-    private float width = 85;
-    private float height = 85;
-    private float radius = (height / 2);
-    private Path hexTilePath;
-
-    /** basic constructor*/
-    public HexTile(){
-        //tile would empty
-        color = 0;
+    public HexTile(float centerX, float centerY, int color) {
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.radius = 40; // Adjust radius as needed
+        this.color = color;
     }
-    //copy constructor
-    public HexTile(HexTile orig) {
-        this.color = orig.color;
-        this.x = orig.x;
-        this.y = orig.y;
-        this.width = orig.width;
-        this.height = orig.height;
-        this.radius = orig.radius;
-        this.hexTilePath = new Path(orig.hexTilePath);
-    }
-
-    /** Constructor creates a HexTile at a specified location */
-    public HexTile(float initX, float initY,int initColor) {
-        x = initX;
-        y = initY;
-       color = initColor;
-        hexTilePath = new Path();
-
-        myPaint = new Paint();
-        myPaint.setColor(color);
-        //setRandomPaint();
-    }
-
-    /** gives the spot a random colored paint */
-   /* protected void setRandomPaint() {
-        int color = Color.rgb((int) (Math.random() * 256),
-                (int) (Math.random() * 256),
-                (int) (Math.random() * 256));
-        myPaint = new Paint();
-        myPaint.setColor(Color.RED);
-    }*/
-
-    /** HexTile can draw itself on a given canvas */
     public void draw(Canvas canvas) {
-        float triangleHeight = (float) (Math.sqrt(3) * radius / 2);
+        Paint paint = new Paint();
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
 
-        // sets centerX and centerY to where the user taps on the grid
-        float centerX = this.x;
-        float centerY = this.y;
+        Path path = new Path();
+        float angle_deg, x, y;
 
-        // draws the hexagon based on where the user taps on the grid
+        // Start the path at the top vertex
+        angle_deg = 30;
+        x = centerX + radius * (float) Math.cos(Math.toRadians(angle_deg));
+        y = centerY + radius * (float) Math.sin(Math.toRadians(angle_deg));
+        path.moveTo(x, y);
 
-        // Bottom
-        hexTilePath.moveTo(centerX, centerY + radius);
+        // Draw the other vertices of the hexagon
+        for (int i = 1; i < 6; i++) {
+            angle_deg += 60;
+            x = centerX + radius * (float) Math.cos(Math.toRadians(angle_deg));
+            y = centerY + radius * (float) Math.sin(Math.toRadians(angle_deg));
+            path.lineTo(x, y);
+        }
 
-        // Bottom left
-        hexTilePath.lineTo(centerX - triangleHeight + 1, centerY + radius / 2);
-
-        // Top left
-        hexTilePath.lineTo(centerX - triangleHeight + 1, centerY - radius / 2);
-
-        // Top
-        hexTilePath.lineTo(centerX, centerY - radius + 1);
-
-        // Top right
-        hexTilePath.lineTo(centerX + triangleHeight - 1, centerY - radius / 2);
-
-        // Bottom right
-        hexTilePath.lineTo(centerX + triangleHeight - 1, centerY + radius / 2); // + means right
-
-        // completes the drawn hexagon
-        canvas.drawPath(hexTilePath, myPaint);
+        path.close();
+        canvas.drawPath(path, paint);
     }
 
-    // Getter method for color
-    public int getColor(){
-        return color;
-    }
-
-    // Setter method for color
-    public void setColor(int color){
+    public void setColor(int color) {
         this.color = color;
     }
 
-    public float getX() {
-        return x;
+    public int getColor() {
+        return color;
     }
-    public float getY(){
-        return y;
+
+    public boolean isTouched(float x, float y) {
+        // Check if touch coordinates are inside the hexagon
+        double dx = x - centerX;
+        double dy = y - centerY;
+        return dx * dx + dy * dy < radius * radius;
     }
-    //toString for HexTile
-    /*@Override
-    public String toString() {
-        return color != null ? color.substring(0, 1) : "."; // returns first letter of color, or "." for empty
-    }*/
 }

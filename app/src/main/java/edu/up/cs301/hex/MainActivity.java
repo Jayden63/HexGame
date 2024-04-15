@@ -15,21 +15,21 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 private Hex_SurfaceView hexSurfaceView;
-private HexState hexState;
+public HexState hexState;
 private HexHumanPlayer humanPlayer;
+
+    private TextView tv;
+    private Hex_SurfaceView hv;
+    private HexState gameState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        hexSurfaceView = findViewById(R.id.hex_grid);
-
-
         hexState = new HexState();
-        humanPlayer = new HexHumanPlayer(" Human Player", hexState);
-
-        humanPlayer.setSurfaceView(hexSurfaceView);
-        hexSurfaceView.setHexState(hexState);
-
+        hv = findViewById(R.id.hex_grid);
+        tv = (TextView) findViewById(R.id.textView);
+        hv.setHexState(hexState);
         ;
 
 //            TextView myFaveTextView = new TextView(this);

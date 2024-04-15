@@ -90,7 +90,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		}
 
 
-			mySurfaceView.setHexState(gameState);
+
 
 
 	}
@@ -116,40 +116,40 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		HexState firstCopy = new HexState(firstInstance);
 
 		//while the game is running
-		while (!firstInstance.isGameOver()) {
+		//while (!firstInstance.isGameOver()) {
 
-			PlaceTile placeTile = new PlaceTile(this, firstInstance.getLastPlaceTileX(), firstInstance.getLastPlaceTileY());
+			//PlaceTile placeTile = new PlaceTile(this, firstInstance.getLastPlaceTileX(), firstInstance.getLastPlaceTileY());
 
 			UndoMove undo = new UndoMove(this);
 
 			NewGameMove newGameMove = new NewGameMove(this);
 
 			//if a player places a tile it will show as a message
-			if (firstInstance.placeTile(placeTile)) {
-				int x = firstInstance.getLastPlaceTileX();
-				int y = firstInstance.getLastPlaceTileY();
-				testResultsTextView.append("Player " + getPlayerId() + "has placed a piece on " + "x: " + x +" y: "+ y);
+			//if (firstInstance.placeTile(placeTile)) {
+				//int x = firstInstance.getLastPlaceTileX();
+				//int y = firstInstance.getLastPlaceTileY();
+				//testResultsTextView.append("Player " + getPlayerId() + "has placed a piece on " + "x: " + x +" y: "+ y);
 				//not sure if we need this return;
-				return;
+				//return;
 			//if the player undos their move
-			} else if (firstInstance.undoMove(undo)) {
-				testResultsTextView.append("Player " + getPlayerId() + " took back their move.");
+			//} else if (firstInstance.undoMove(undo)) {
+				//testResultsTextView.append("Player " + getPlayerId() + " took back their move.");
 
-				return;
+				//return;
 			//if the player starts a new game
-			} else if (firstInstance.newGameMove(newGameMove)) {
-				testResultsTextView.append("Player " + getPlayerId() + "started a new game. ");
+			//} else if (firstInstance.newGameMove(newGameMove)) {
+				//testResultsTextView.append("Player " + getPlayerId() + "started a new game. ");
 
-				return;
-			}
+				//return;
+			//}
 
 			//winner message
-			if (firstInstance.isGameOver()) {
-				testResultsTextView.append("Player " + getPlayerId() + " is the winner!");
+			//if (firstInstance.isGameOver()) {
+				//testResultsTextView.append("Player " + getPlayerId() + " is the winner!");
 
-				return;
-			}
-		}
+				//return;
+			//}
+		//}
 
 		//create 2nd new instance of hexState
 		HexState secondInstance = new HexState();
