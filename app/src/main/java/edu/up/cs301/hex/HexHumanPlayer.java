@@ -35,6 +35,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 	
 	// The TextView the displays the current counter value
 	private TextView testResultsTextView;
+	private TextView playerWin;
 	
 	// the most recent game state, as given to us by the CounterLocalGame
 	private HexState gameState;
@@ -185,6 +186,14 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		this.gameState = (HexState)info;
 		updateDisplay();
 	}
+	public void checkWinner() {
+		if(gameState.blueWins()) {
+			playerWin.setText("BLUE WINS");
+
+		} else if (gameState.redWins()) {
+			playerWin.setText("RED WINS");
+		}
+	}
 	
 	/**
 	 * callback method--our game has been chosen/rechosen to be the GUI,
@@ -206,6 +215,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements OnClickListener {
 		// registers the human player as a listener for the button
 		// Button runTestButton = (Button) activity.findViewById(R.id.buttonRunTest);
 		// runTestButton.setOnClickListener(this);
+		this.playerWin = (TextView) activity.findViewById(R.id.textView);
+
 		}
 }// class CounterHumanPlayer
 

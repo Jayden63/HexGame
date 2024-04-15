@@ -130,14 +130,6 @@ public class HexState extends GameState {
 		}
 	}
 
-	public void checkWinner() {
-		if(blueWins()) {
-			textView.setText("BLUE WINS");
-
-		} else if (redWins()) {
-			textView.setText("RED WINS");
-		}
-	}
 
 	public boolean blueWins() {
 		//loops through up and down the grid board
@@ -207,7 +199,7 @@ public class HexState extends GameState {
 	public void Turn() {
 		player1_turn = !player1_turn;  // toggle turn
 		playerColor = player1_turn ? Color.RED : Color.BLUE;
-		checkWinner();
+
 		// update color based on who's turn it is
 	}
 
