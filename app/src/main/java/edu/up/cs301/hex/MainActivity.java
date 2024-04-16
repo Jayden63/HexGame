@@ -14,48 +14,22 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-private Hex_SurfaceView hexSurfaceView;
-public HexState hexState;
-private HexHumanPlayer humanPlayer;
-
+    private Hex_SurfaceView hexSurfaceView;
+    public HexState hexState;
+    private HexHumanPlayer humanPlayer;
     private TextView tv;
-    private Hex_SurfaceView hv;
-    private HexState gameState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        hexState = new HexState();
-        hv = findViewById(R.id.hex_grid);
-        tv = (TextView) findViewById(R.id.textView);
-        hv.setHexState(hexState);
-        ;
-
-//            TextView myFaveTextView = new TextView(this);
-//            myFaveTextView.setText("some text");
-        ImageButton btn1 = (ImageButton) findViewById(R.id.settings_button);
-        ImageButton btn2 = (ImageButton) findViewById(R.id.rules_button);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ShowDialog();
-            }
-        });
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ShowRuleBook();
-            }
-        });
-
     }
 
     //code by Chengen
     //
     //method to show the settings popup
     //contains volume seekbars for volume, sfx
-    //
+    //TODO:  Nuxoll says move this to HexHumanPlayer :)
     public void ShowDialog() {
         AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);

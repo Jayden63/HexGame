@@ -12,7 +12,7 @@ import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 
 /**
  * This contains the state for our Hex game. The state consist of who won the game and whos turn it is
- * 
+ *
  * @author Steven R. Vegdahl
  * @author Cody Gima
  * @author Jayden Zeng
@@ -42,12 +42,11 @@ public class HexState extends GameState {
 	private ArrayList<HexTile> tileList;
 	public float hexSize;
 	public boolean player1_turn;// Declare the tileList variable
-	private TextView textView;
+
 	int playerColor;
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
-	 * @param none
 	 */
 	public HexState() {
 		// Assigns first player to 0
@@ -59,21 +58,20 @@ public class HexState extends GameState {
 
 		// Creates an 11x11 board
 		//this.board = new HexBoard(11);
-		this.gridSize =11;
+		this.gridSize = 11;
 		// Two players, red & blue players
 		this.player1 = new Player("player 1", "red");
 		this.player2 = new Player("player2", "blue");
+
 		this.playerWinner = null;
 		this.tileList = new ArrayList<>();
 		this.hexSize = 40;
 		this.player1_turn = true;
 		this.playerColor = Color.RED;
+
 		initializeGrid();
 	}
-	public void togglePlayerTurn() {
-		player1_turn = !player1_turn;  // Toggle the boolean value to switch turns
-		playerColor = (player1_turn) ? Color.RED : Color.BLUE;  // Set color based on the turn
-	}
+
 	/**
 	 * copy constructor; makes a copy of the original object
 	 *
@@ -129,6 +127,7 @@ public class HexState extends GameState {
 			}
 		}
 	}
+
 
 
 	public boolean blueWins() {
@@ -193,22 +192,10 @@ public class HexState extends GameState {
 		}
 		return false;
 	}
-	public void setTextView(TextView textView) {
-		this.textView = textView;
-	}
 	public void Turn() {
 		player1_turn = !player1_turn;  // toggle turn
 		playerColor = player1_turn ? Color.RED : Color.BLUE;
 
-		// update color based on who's turn it is
-	}
-
 
 	}
-
-
-
-
-
-
-
+}
