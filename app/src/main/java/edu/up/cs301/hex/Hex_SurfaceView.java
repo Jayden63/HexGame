@@ -78,6 +78,32 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+
+        for (int i = 0; i < hexState.gridSize; i++) {
+
+                //draws the red and blue boards around the board
+                // hard coded for now
+                float x = 100 + (i * 35) + (i * (float) (hexState.hexSize * 1.02));
+                HexTile topBoarderTiles = new HexTile(x, 85, Color.BLUE);
+                topBoarderTiles.draw(canvas);
+
+                float x2 = 450 + (i * 35) + (i * (float) (hexState.hexSize * 1.02));
+                HexTile bottomBoarderTiles = new HexTile(x2 , 795, Color.BLUE);
+                bottomBoarderTiles.draw(canvas);
+
+                float x3 = 90 + (i * 35);
+                float y = 100 + (i * 28) + (i * (float) (hexState.hexSize));
+                HexTile leftBoarderTiles = new HexTile(x3, y, Color.RED);
+                leftBoarderTiles.draw(canvas);
+
+
+                float x4 = 875 + (i * 35);
+                float y2 = 100 + (i * 28) + (i * (float) (hexState.hexSize));
+                HexTile rightBoarderTiles = new HexTile(x4, y2, Color.RED);
+                rightBoarderTiles.draw(canvas);
+        }
+
         for (int i = 0; i < hexState.gridSize; i++) {
             for (int j = 0; j < hexState.gridSize; j++) {
                 HexTile tile = hexState.grid[i][j];

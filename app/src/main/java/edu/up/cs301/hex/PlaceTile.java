@@ -20,6 +20,7 @@ public class PlaceTile extends GameAction {
         this.y = y;
     }
 
+
     // getter methods for x and y coordinates
     public int getX() {
         return this.x;

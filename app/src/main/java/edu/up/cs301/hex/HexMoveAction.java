@@ -27,10 +27,10 @@ public class HexMoveAction extends GameAction {
 	 * 
 	 * @param player
 	 *            the player making the move
-	 * @param isPlus
-	 *            value to initialize this.isPlus
+	 * @param isRed
+	 *            value to initialize this.isRed
 	 */
-	public HexMoveAction(GamePlayer player, boolean isPlus) {
+	public HexMoveAction(GamePlayer player, boolean isRed) {
 		super(player);
 
 	}

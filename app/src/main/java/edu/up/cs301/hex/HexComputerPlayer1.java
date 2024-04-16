@@ -1,5 +1,8 @@
 package edu.up.cs301.hex;
 
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.utilities.Tickable;
@@ -19,8 +22,8 @@ import edu.up.cs301.GameFramework.utilities.Tickable;
  * @version March 2024
  */
 
-public class HexComputerPlayer1 extends GameComputerPlayer implements Tickable {
-	
+public class HexComputerPlayer1 extends GameComputerPlayer {
+
     /**
      * Constructor for objects of class CounterComputerPlayer1
      * 
@@ -31,9 +34,7 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Tickable {
         // invoke superclass constructor
         super(name);
         
-        // start the timer, ticking 20 times per second
-        getTimer().setInterval(50);
-        getTimer().start();
+
     }
     
     /**
@@ -44,21 +45,22 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Tickable {
      */
 	@Override
 	protected void receiveInfo(GameInfo info) {
-		// Do nothing, as we ignore all state in deciding our next move. It
-		// depends totally on the timer and random numbers.
-	}
-	
-	/**
-	 * callback method: the timer ticked
-	 */
-	protected void timerTicked() {
-		// 5% of the time, increment or decrement the counter
-		if (Math.random() >= 0.05) return; // do nothing 95% of the time
 
-		// "flip a coin" to determine whether to increment or decrement
-		boolean move = Math.random() >= 0.5;
-		
-		// send the move-action to the game
-		game.sendAction(new HexMoveAction(this, move));
+		if (info instanceof HexState) {
+			HexState hexState = (HexState) info;
+			if (!hexState.getPlayerTurn()) {
+				HexMoveAction a = new HexMoveAction(this, false);
+				game.sendAction(a);
+			}
+
+
+			try {
+				TimeUnit.SECONDS.sleep(2);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
 	}
+
 }

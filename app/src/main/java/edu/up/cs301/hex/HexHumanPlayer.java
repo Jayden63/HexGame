@@ -89,7 +89,7 @@ public class HexHumanPlayer extends GameHumanPlayer {
 
 		//Tell the user whose turn it is
 		String turnText = "Blue's turn";
-		if (this.gameState.player1_turn) {
+		if (this.gameState.getPlayerTurn()) {
 			turnText = "Red's turn";
 		}
 		this.turnTV.setText(turnText);
