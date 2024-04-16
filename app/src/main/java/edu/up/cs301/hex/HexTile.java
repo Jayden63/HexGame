@@ -34,6 +34,14 @@ public class HexTile {
         this.radius = 41; // Adjust radius as needed
         this.color = color;
     }
+
+
+    /**void draw(Canvas canvas)
+     *
+     * draws a hexagon when HexTile is called
+     *
+     * @param canvas
+     */
     public void draw(Canvas canvas) {
 
         // Paint Object for HexTile

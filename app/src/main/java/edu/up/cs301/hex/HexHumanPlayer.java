@@ -33,7 +33,6 @@ public class HexHumanPlayer extends GameHumanPlayer {
 
 	/* instance variables */
 
-
 	//Whose turn is it / winner notification text view
 	TextView turnTV;
 
@@ -43,11 +42,9 @@ public class HexHumanPlayer extends GameHumanPlayer {
 	// the android activity that we are running
 	private GameMainActivity myActivity;
 	private Hex_SurfaceView mySurfaceView;
-	/**
-	 * constructor
-	 * @param name
-	 * 		the player's name
-	 */
+
+
+
 	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);
 		this.gameState = gameState;
@@ -76,7 +73,7 @@ public class HexHumanPlayer extends GameHumanPlayer {
 
 
 	/**
-	 * sets the counter value in the text view
+	 * updates the gameState to know who's turn it is
 	 */
 	protected void updateDisplay() {
 		if (mySurfaceView == null) {
@@ -134,7 +131,7 @@ public class HexHumanPlayer extends GameHumanPlayer {
 		// loads the layout resource for our GUI
 		activity.setContentView(R.layout.activity_main);
 
-		//this.turnTV = activity.findViewById(R.id.turnView);
+		this.turnTV = activity.findViewById(R.id.turnView);
 
 	}
-}// class CounterHumanPlayer
+}

@@ -117,6 +117,10 @@ public class HexState extends GameState {
 
 		return newString.toString();
 	}
+
+	/**
+	 * sets the coordinates for each new HexTile
+	 */
 	public void initializeGrid() {
 		grid = new HexTile[gridSize][gridSize];
 		for (int i = 0; i < gridSize; i++) {
@@ -129,7 +133,11 @@ public class HexState extends GameState {
 	}
 
 
-
+	/**
+	 * Checks if blue wins
+	 *
+	 * @return
+	 */
 	public boolean blueWins() {
 		//loops through up and down the grid board
 		for (int col = 0; col < grid.length; col++) {
@@ -142,8 +150,10 @@ public class HexState extends GameState {
 		return false;
 	}
 
-	/*
+	/**
 	 * checks if red wins
+	 *
+	 * @return
 	 */
 	public boolean redWins() {
 		//loops through left and right of the grid board
@@ -157,10 +167,27 @@ public class HexState extends GameState {
 		return false;
 	}
 
-
+	/**
+	 * checks if the tile being placed is within the bounds of hex board
+	 *
+	 * @param row
+	 * @param col
+	 * @return
+	 */
 	public boolean isValid(int row, int col) {
 		return row >= 0 && row < grid.length && col >= 0 && col < grid.length;
 	}
+
+	/**Checks if the matching color tiles are connected in any way
+	 *
+	 * @param row // row of the hex board
+	 * @param col // col of the hex board
+	 * @param visited
+	 * 		checks if the tile has been visited, if so move on to the next one
+	 * @param playerColor
+	 *
+	 * @return
+	 */
 
 	public boolean isConnected(int row, int col, boolean[][] visited, int playerColor) {
 		// Base cases: Check if we reached an opposite side
@@ -192,6 +219,10 @@ public class HexState extends GameState {
 		}
 		return false;
 	}
+
+	/**
+	 * sets the color of the hexTiles based on which player's turn it is
+	 */
 	public void Turn() {
 		player1_turn = !player1_turn;  // toggle turn
 		playerColor = player1_turn ? Color.RED : Color.BLUE;
