@@ -24,6 +24,8 @@ import edu.up.cs301.GameFramework.utilities.Tickable;
 
 public class HexComputerPlayer1 extends GameComputerPlayer {
 
+    // The dumb ai player
+
     /**
      * Constructor for objects of class CounterComputerPlayer1
      * 

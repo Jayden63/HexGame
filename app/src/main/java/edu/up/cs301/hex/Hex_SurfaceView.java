@@ -16,53 +16,46 @@ import java.util.ArrayList;
 
 public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener {
 
-    private Paint brightPink = new Paint();
-    private Paint forestGreen = new Paint();
-    private Paint teal = new Paint();
-
-    // Size and shape variables
-    private Path hexagonPath;
-    private Path hexagonBorderPath;
-    private float radius;
-    private float width, height;
-    private float height_SurfaceView;
-    private float width_SurfaceView;
-    Paint hexPaint = new Paint();
-    Paint hexBorderPaint = new Paint();
-
-    private float xHexCenter; // The current x center of the hex
-    private float yHexCenter; // The current y center of the hex
-
     private HexState hexState;
 
-    TextView textView;
-
-    // ArrayList to store all HexTiles
-    //ArrayList<HexTile> tileList = new ArrayList<>();
-
-    Paint hexRedSide = new Paint();
-    Paint hexBlueSide = new Paint();
-    private int playerTurn = 0;
-
+    /**
+     * Hex_SurfaceView
+     * @param context handles the system of the game
+     * @param attrs handles the attributes of the game, such as
+     */
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
+
+        // Sets the background of the surface view
         setBackgroundColor(0xFF808080);
+
+        // Creates new instance of the hex state
         hexState = new HexState();
+
+        // Initializes the hex grif
         hexState.initializeGrid();
 
 
+        // The listener for the surface view
+        // Handles events performed in the surface view
+        setOnTouchListener(this);
 
-        this.setOnTouchListener(this);
+        // To draw the game
         setWillNotDraw(false);
-    }
+
+    }//Hex_SurfaceView
+
+
     public void setHexState(HexState hexState) {
 
         this.hexState = hexState;
 
+
         invalidate();
         //TODO:  trigger a redraw event (mystery to solve)
-    }
+
+    }//setHexState
 
 
     /**
@@ -75,6 +68,11 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
      * Only change is the size and position of the hexagon
      */
 
+    /**
+     * onDraw method will draw the hex tiles on the board
+     *
+     * @param canvas the canvas on which the background will be drawn
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -104,6 +102,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
                 rightBoarderTiles.draw(canvas);
         }
 
+        // To draw the hex grid
         for (int i = 0; i < hexState.gridSize; i++) {
             for (int j = 0; j < hexState.gridSize; j++) {
                 HexTile tile = hexState.grid[i][j];
@@ -112,7 +111,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
                 }
             }
         }
-    }
+    }//onDraw
 
 
     /**
@@ -151,7 +150,6 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
                             hexState.Turn();
                         }
-
                     }
                 }
             }

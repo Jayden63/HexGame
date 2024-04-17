@@ -52,8 +52,10 @@ public class HexLocalGame extends LocalGame {
 		super.state = state;
 	}
 
+
+
 	/**
-	 * The only type of GameAction that should be sent is CounterMoveAction
+	 * The only type of GameAction that should be sent is HexMoveAction
 	 */
 	@Override
 	protected boolean makeMove(GameAction action) {
@@ -80,6 +82,7 @@ public class HexLocalGame extends LocalGame {
 	}//makeMove
 
 
+
 	/**
 	 * send the updated state to a given player
 	 */
@@ -90,6 +93,8 @@ public class HexLocalGame extends LocalGame {
 		p.sendInfo(new HexState(this.gameState));
 
 	}//sendUpdatedSate
+
+
 
 	/**
 	 * Check if the game is over. It is over, return a string that tells
