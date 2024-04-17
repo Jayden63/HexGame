@@ -60,14 +60,21 @@ public class HexLocalGame extends LocalGame {
 		Log.i("action", action.getClass().toString());
 
 		if (action instanceof HexMoveAction) {
+			// Cast the action to HexMoveAction
+			HexMoveAction hexMoveAction = (HexMoveAction) action;
 
-			// cast so that we Java knows it's a CounterMoveAction
-			HexMoveAction cma = (HexMoveAction)action;
+			// Update the game state with the move action
+			HexState newState = new HexState(gameState);
+			newState.grid[hexMoveAction.getRow()][hexMoveAction.getCol()].setColor(gameState.getPlayerColor());
+			newState.Turn(); // Update the player turn
 
+			// Set the new game state
+			gameState = newState;
+
+			// Return true to indicate a valid move
 			return true;
-		}
-		else {
-			// denote that this was an illegal move
+		} else {
+			// Return false for an illegal move
 			return false;
 		}
 	}//makeMove
@@ -95,10 +102,10 @@ public class HexLocalGame extends LocalGame {
 	@Override
 	protected String checkIfGameOver() {
 		if (gameState.blueWins()) {
-			return "BLUE WINS";
+			return playerNames[0] + " BLUE WINS";
 
 		} else if (gameState.redWins()) {
-			return "RED WINS";
+			return playerNames[1] + " RED WINS";
 		}
 
 		return null;

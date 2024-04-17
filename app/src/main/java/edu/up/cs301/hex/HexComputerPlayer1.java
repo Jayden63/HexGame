@@ -46,11 +46,13 @@ public class HexComputerPlayer1 extends GameComputerPlayer {
 	@Override
 	protected void receiveInfo(GameInfo info) {
 
-		if (info instanceof HexState) {
+		/*if (info instanceof HexState) {
 			HexState hexState = (HexState) info;
 			if (!hexState.getPlayerTurn()) {
 				HexMoveAction a = new HexMoveAction(this, false);
 				game.sendAction(a);
+
+
 			}
 
 
@@ -60,7 +62,7 @@ public class HexComputerPlayer1 extends GameComputerPlayer {
 				throw new RuntimeException(e);
 			}
 
-		}
+		}*/
 	}
 
 }

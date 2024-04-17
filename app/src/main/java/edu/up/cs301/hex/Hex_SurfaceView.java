@@ -127,7 +127,7 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
                     if (hexState.grid[i][j].isTouched(x, y)) {
 
                         if(hexState.grid[i][j].getColor() == Color.WHITE) {
-                            hexState.grid[i][j].setColor(hexState.playerColor);
+                            hexState.grid[i][j].setColor(hexState.getPlayerColor());
                             invalidate();
 
                             hexState.Turn();

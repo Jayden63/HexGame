@@ -43,7 +43,7 @@ public class HexState extends GameState {
 	public float hexSize;
 	private boolean player1_turn; //is it player1's turn? if so return true
 
-	int playerColor;
+	private int playerColor;
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
@@ -85,7 +85,8 @@ public class HexState extends GameState {
 		this.player2 = new Player(orig.player2);
 
 		this.hexSize = orig.hexSize;
-		this.playerColor = Color.RED;
+		this.playerColor = orig.playerColor;
+		this.player1_turn = orig.player1_turn;
 
 		orig.initializeGrid();
 	}
@@ -95,7 +96,6 @@ public class HexState extends GameState {
 	 * sets the coordinates for each new HexTile
 	 */
 	public void initializeGrid() {
-
 
 		grid = new HexTile[gridSize][gridSize];
 		for (int i = 0; i < gridSize; i++) {
@@ -116,7 +116,6 @@ public class HexState extends GameState {
 	public boolean blueWins() {
 		//loops through up and down the grid board
 		for (int col = 0; col < grid.length; col++) {
-
 			//checks if there is a blue tile on each index of the colums and checks if they are connected
 			if (grid[0][col].getColor() == Color.BLUE && isConnected(0, col, new boolean[grid.length][grid.length], Color.BLUE)) {
 				return true;
@@ -210,5 +209,9 @@ public class HexState extends GameState {
 	 */
 	public boolean getPlayerTurn() {
 		return player1_turn;
+	}
+
+	public int getPlayerColor() {
+		return playerColor;
 	}
 }
