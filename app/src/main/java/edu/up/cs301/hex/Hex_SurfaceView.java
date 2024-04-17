@@ -115,23 +115,41 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
     }
 
 
+    /**
+     *
+     *onTouch method to handle touch events in the SurfaceView
+     *
+     *@param view represents the view in which the touch event happened
+     *@param event contains details (x,ycoord) of the touch
+     *@return true if a touch has been performed and handled
+     */
+
     public boolean onTouch(View view, MotionEvent event) {
 
+        // The coordinates registered by the touch
         float x = event.getX();
         float y = event.getY();
 
+
+        // If the action is a tap
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            // Check if touch is inside any hex tile
+            // Check if touch is inside any hex tile in the grid
             for (int i = 0; i < hexState.grid.length; i++) {
                 for (int j = 0; j < hexState.grid.length; j++) {
+
+
                     if (hexState.grid[i][j].isTouched(x, y)) {
 
+                        // If the Hix Tile is color white (not yet touched)
                         if(hexState.grid[i][j].getColor() == Color.WHITE) {
+
+                            // Set the color to the respective player's color
                             hexState.grid[i][j].setColor(hexState.getPlayerColor());
+
+                            // Update the new color of the Hex Tile
                             invalidate();
 
                             hexState.Turn();
-
                         }
 
                     }
@@ -141,6 +159,4 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
         return false;
 
     }
-
-
-}
+}//onTouch
