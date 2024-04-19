@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener {
+public class Hex_SurfaceView extends SurfaceView  {
 
     private Paint brightPink = new Paint();
     private Paint forestGreen = new Paint();
@@ -42,18 +42,16 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
 
     Paint hexRedSide = new Paint();
     Paint hexBlueSide = new Paint();
-    private int playerTurn = 0;
 
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
+
         setBackgroundColor(0xFF808080);
         hexState = new HexState();
-        hexState.initializeGrid();
+        //hexState.initializeGrid();
 
 
-
-        this.setOnTouchListener(this);
         setWillNotDraw(false);
     }
     public void setHexState(HexState hexState) {
@@ -104,6 +102,16 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
                 rightBoarderTiles.draw(canvas);
         }
 
+        //Don't draw any tiles until there is a game state
+        if (hexState == null) {
+            return;
+        }
+
+        if (hexState.grid == null) {
+            return;
+        }
+
+        //
         for (int i = 0; i < hexState.gridSize; i++) {
             for (int j = 0; j < hexState.gridSize; j++) {
                 HexTile tile = hexState.grid[i][j];
@@ -124,39 +132,5 @@ public class Hex_SurfaceView extends SurfaceView implements View.OnTouchListener
      *@return true if a touch has been performed and handled
      */
 
-    public boolean onTouch(View view, MotionEvent event) {
 
-        // The coordinates registered by the touch
-        float x = event.getX();
-        float y = event.getY();
-
-
-        // If the action is a tap
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            // Check if touch is inside any hex tile in the grid
-            for (int i = 0; i < hexState.grid.length; i++) {
-                for (int j = 0; j < hexState.grid.length; j++) {
-
-
-                    if (hexState.grid[i][j].isTouched(x, y)) {
-
-                        // If the Hix Tile is color white (not yet touched)
-                        if(hexState.grid[i][j].getColor() == Color.WHITE) {
-
-                            // Set the color to the respective player's color
-                            hexState.grid[i][j].setColor(hexState.getPlayerColor());
-
-                            // Update the new color of the Hex Tile
-                            invalidate();
-
-                            hexState.Turn();
-                        }
-
-                    }
-                }
-            }
-        }
-        return false;
-
-    }
 }//onTouch

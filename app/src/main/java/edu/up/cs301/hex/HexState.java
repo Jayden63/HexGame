@@ -23,10 +23,6 @@ import edu.up.cs301.GameFramework.players.GameComputerPlayer;
  */
 public class HexState extends GameState {
 
-	// instance variables for our HexState
-	private boolean hasWon; // To return true if a player has won
-	private HexBoard board; // The hexboard grid
-	private HexTile hexTile; // Each cell in the grid
 	private String playerWinner; // To return the name of the player winner
 	private Player player1; // First player, red
 	private Player player2; // Second player, blue
@@ -37,30 +33,20 @@ public class HexState extends GameState {
 	private int lastPlaceTileY;
 	private HexState hexState;
 	public int gridSize;
-
-	HexTile[] boarderGrid;
 	HexTile[][] grid;
 	public float hexSize;
-	private boolean player1_turn; //is it player1's turn? if so return true
-
-	private int playerColor;
+	private int playerTurnID;
+	private int playerColor;// color of the current hexTile based on who's turn it is
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
 	 */
 	public HexState() {
 
-		this.hasWon = false;
 
-		// Creates an 11x11 board
-		//this.board = new HexBoard(11);
 		this.gridSize = 11;
-		// Two players, red & blue players
-		this.player1 = new Player("player 1", "red");
-		this.player2 = new Player("player2", "blue");
-
 		this.hexSize = 40;
-		this.player1_turn = true;
+		this.playerTurnID = 0;
 		this.playerColor = Color.RED;
 
 		initializeGrid();
@@ -76,19 +62,14 @@ public class HexState extends GameState {
 	 * @param orig the object from which the copy should be made
 	 */
 	public HexState(HexState orig) {
-		// set the counter to that of the original
-		// Deep copy
-		this.hasWon = orig.hasWon;
-		this.playerWinner = orig.playerWinner;
 
-		this.player1 = new Player(orig.player1);
-		this.player2 = new Player(orig.player2);
-
+		this.gridSize = orig.gridSize;
 		this.hexSize = orig.hexSize;
 		this.playerColor = orig.playerColor;
-		this.player1_turn = orig.player1_turn;
+		this.playerTurnID= orig.playerTurnID;
 
-		orig.initializeGrid();
+		//this doens't work
+		copyGrid(orig.grid);
 	}
 
 
@@ -107,7 +88,18 @@ public class HexState extends GameState {
 		}
 	}
 
+	/**
+	 * sets the coordinates for each new HexTile
+	 */
+	public void copyGrid(HexTile[][] orig) {
 
+		grid = new HexTile[gridSize][gridSize];
+		for (int i = 0; i < gridSize; i++) {
+			for (int j = 0; j < gridSize; j++) {
+				grid[i][j] = new HexTile(orig[i][j].getCenterX(), orig[i][j].getCenterY(), orig[i][j].getColor());  // Ensuring no HexTile is null
+			}
+		}
+	}
 	/**
 	 * Checks if blue wins
 	 *
@@ -151,6 +143,38 @@ public class HexState extends GameState {
 	public boolean isValid(int row, int col) {
 		return row >= 0 && row < grid.length && col >= 0 && col < grid.length;
 	}
+
+	public boolean isLegalMove(int row, int col) {
+		// Check if the specified row and column are within the bounds of the grid
+		if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) {
+			return false; // Move is out of bounds, so it's not legal
+		}
+		// Check if the corresponding hex tile is empty (white)
+		return grid[row][col].getColor() == Color.WHITE;
+	}
+
+
+
+
+	public boolean placeTileAction(int row, int col) {
+
+		// Check if the move is legal
+		if (!isLegalMove(row, col)) {
+			return false;
+		}
+
+		// Place the tile at the specified row and column
+		grid[row][col].setColor(playerColor);
+
+		// Update the player turn and color
+		playerTurnID = 1 - playerTurnID; // Toggle between player 0 and player 1
+		playerColor = (playerTurnID == 0) ? Color.RED : Color.BLUE;
+		return true;
+	}
+
+
+
+
 
 	/**Checks if the matching color tiles are connected in any way
 	 *
@@ -197,21 +221,38 @@ public class HexState extends GameState {
 	/**
 	 * sets the color of the hexTiles based on which player's turn it is
 	 */
-	public void Turn() {
-		player1_turn = !player1_turn;  // toggle turn
-		playerColor = player1_turn ? Color.RED : Color.BLUE;
-	}
+
+
+
+
+
 
 	/**
 	 * gets the
 	 *
 	 * @return
 	 */
-	public boolean getPlayerTurn() {
-		return player1_turn;
+	public int getPlayerTurnID() {
+		return playerTurnID;
+	}
+
+	public void setPlayerTurnID(int playerTurnID) {
+		this.playerTurnID = playerTurnID;
 	}
 
 	public int getPlayerColor() {
 		return playerColor;
+	}
+
+	public void setPlayerColor(int playerColor) {
+		this.playerColor = playerColor;
+	}
+
+	protected void switchTurns() {
+		if (this.getPlayerTurnID() == 0) {
+			this.setPlayerTurnID(1); // Switch to player 1's turn
+		} else {
+			this.setPlayerTurnID(0); // Switch to player 0's turn
+		}
 	}
 }

@@ -4,6 +4,9 @@ import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
+
+import android.graphics.Color;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,7 +32,7 @@ import android.widget.EditText;
  *
  *  @version March 2024
  */
-public class HexHumanPlayer extends GameHumanPlayer {
+public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener {
 
 	/* instance variables */
 
@@ -48,6 +51,8 @@ public class HexHumanPlayer extends GameHumanPlayer {
 	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);
 		this.gameState = gameState;
+
+
 	}
 
 
@@ -88,9 +93,9 @@ public class HexHumanPlayer extends GameHumanPlayer {
 		}
 
 		//Tell the user whose turn it is
-		String turnText = "Blue's turn";
-		if (this.gameState.getPlayerTurn()) {
-			turnText = "Red's turn";
+		String turnText = "Red's turn";
+		if (this.gameState.getPlayerTurnID() == 1) {
+			turnText = "Blue's turn";
 		}
 		this.turnTV.setText(turnText);
 
@@ -132,6 +137,41 @@ public class HexHumanPlayer extends GameHumanPlayer {
 		activity.setContentView(R.layout.activity_main);
 
 		this.turnTV = activity.findViewById(R.id.turnView);
+
+		mySurfaceView = myActivity.findViewById(R.id.hex_grid);
+
+		mySurfaceView.setOnTouchListener(this);
+	}
+
+
+	@Override
+	public boolean onTouch(View view, MotionEvent event) {
+
+		// The coordinates registered by the touch
+		float x = event.getX();
+		float y = event.getY();
+
+
+		// If the action is a tap
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			// Check if touch is inside any hex tile in the grid
+			for (int i = 0; i < gameState.grid.length; i++) {
+				for (int j = 0; j < gameState.grid.length; j++) {
+					//Step 1:  figure row/col of corresponding HexTile that was touched (if any)
+
+					//Step 2:  Create a HexMoveAction that indicates this row/col is being played
+
+					//Step 3:  game.sendAction(pta)
+
+					if (gameState.grid[i][j].isTouched(x, y)) {
+						game.sendAction(new HexMoveAction(this, i, j));
+						return true;
+					}
+
+				}
+			}
+		}
+		return false;
 
 	}
 }

@@ -60,24 +60,24 @@ public class HexLocalGame extends LocalGame {
 		Log.i("action", action.getClass().toString());
 
 		if (action instanceof HexMoveAction) {
-			// Cast the action to HexMoveAction
-			HexMoveAction hexMoveAction = (HexMoveAction) action;
+			HexMoveAction placePieceAction = (HexMoveAction) action;
 
-			// Update the game state with the move action
-			HexState newState = new HexState(gameState);
-			newState.grid[hexMoveAction.getRow()][hexMoveAction.getCol()].setColor(gameState.getPlayerColor());
-			newState.Turn(); // Update the player turn
+			// Check if the move is legal
+			if (gameState.isLegalMove(placePieceAction.getRow(), placePieceAction.getCol())) {
+				// Place the piece on the board
+				gameState.placeTileAction(placePieceAction.getRow(), placePieceAction.getCol());
 
-			// Set the new game state
-			gameState = newState;
+				gameState.switchTurns();
+				return true; // Move was successfully processed
 
-			// Return true to indicate a valid move
-			return true;
-		} else {
-			// Return false for an illegal move
-			return false;
+			} else {
+				return false; // Move was not legal
+			}
 		}
+		return false;
+
 	}//makeMove
+
 
 
 	/**
@@ -102,10 +102,10 @@ public class HexLocalGame extends LocalGame {
 	@Override
 	protected String checkIfGameOver() {
 		if (gameState.blueWins()) {
-			return playerNames[0] + " BLUE WINS";
+			return gameState.getPlayerTurnID() + " BLUE WINS! ";
 
 		} else if (gameState.redWins()) {
-			return playerNames[1] + " RED WINS";
+			return gameState.getPlayerTurnID() + " RED WINS! ";
 		}
 
 		return null;

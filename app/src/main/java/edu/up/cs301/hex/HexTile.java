@@ -36,6 +36,7 @@ public class HexTile {
     }
 
 
+
     /**void draw(Canvas canvas)
      *
      * draws a hexagon when HexTile is called
@@ -86,6 +87,13 @@ public class HexTile {
         return color;
     }
 
+    public float getCenterX() {
+        return centerX;
+    }
+
+    public float getCenterY() {
+        return centerY;
+    }
 
     /** isTouched(float x, float y)
      *

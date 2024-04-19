@@ -1,5 +1,7 @@
 package edu.up.cs301.hex;
 
+import android.graphics.Color;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +26,8 @@ import edu.up.cs301.GameFramework.utilities.Tickable;
 
 public class HexComputerPlayer1 extends GameComputerPlayer {
 
+
+    private Random random;
     /**
      * Constructor for objects of class CounterComputerPlayer1
      * 
@@ -32,8 +36,10 @@ public class HexComputerPlayer1 extends GameComputerPlayer {
      */
     public HexComputerPlayer1(String name) {
         // invoke superclass constructor
+
         super(name);
-        
+
+        random = new Random();
 
     }
     
@@ -45,24 +51,33 @@ public class HexComputerPlayer1 extends GameComputerPlayer {
      */
 	@Override
 	protected void receiveInfo(GameInfo info) {
+        // Check if it's not the computer player's turn
+        if (!(info instanceof HexState)) {
+            return; // Ignore the message if it's not the computer player's turn or if the player is not active
+        }
 
-		/*if (info instanceof HexState) {
-			HexState hexState = (HexState) info;
-			if (!hexState.getPlayerTurn()) {
-				HexMoveAction a = new HexMoveAction(this, false);
-				game.sendAction(a);
+        HexState state = (HexState) info;
 
+        // Check if it's the computer player's turn
+        if (state.getPlayerTurnID() != playerNum) {
+            return; // It's not this player's turn, so ignore
+        }
 
-			}
+        // Get the board size
+        int gridSize = state.gridSize;
 
+        // Loop until a valid move is made
+        while (true) {
+            // Generate random coordinates for the piece placement
+            int randomRow = random.nextInt(gridSize);
+            int randomCol = random.nextInt(gridSize);
 
-			try {
-				TimeUnit.SECONDS.sleep(2);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
-
-		}*/
-	}
-
+            // Check if the selected position is empty
+            if (state.grid[randomRow][randomCol].getColor() == Color.WHITE) {
+                // Send a move action to the game
+                game.sendAction(new HexMoveAction(this, randomRow, randomCol));
+                break; // Exit the loop
+            }
+        }
+    }
 }
