@@ -24,8 +24,8 @@ import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 public class HexState extends GameState {
 
 	private String playerWinner; // To return the name of the player winner
-	private Player player1; // First player, red
-	private Player player2; // Second player, blue
+	//private Player player1; // First player, red
+	//private Player player2; // Second player, blue
 
 	//For Undo:  save location of last move
 

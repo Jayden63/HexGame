@@ -37,7 +37,10 @@ public class HexLocalGame extends LocalGame {
 	 */
 	@Override
 	protected boolean canMove(int playerIdx) {
-		return true;
+		if (gameState.getPlayerTurnID() == playerIdx) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -62,19 +65,12 @@ public class HexLocalGame extends LocalGame {
 		Log.i("action", action.getClass().toString());
 
 		if (action instanceof HexMoveAction) {
-			HexMoveAction placePieceAction = (HexMoveAction) action;
+			HexMoveAction ppa = (HexMoveAction) action;
+			int row = ppa.getRow();
+			int col = ppa.getCol();
 
-			// Check if the move is legal
-			if (gameState.isLegalMove(placePieceAction.getRow(), placePieceAction.getCol())) {
-				// Place the piece on the board
-				gameState.placeTileAction(placePieceAction.getRow(), placePieceAction.getCol());
+			return gameState.placeTileAction(row,col);
 
-				gameState.switchTurns();
-				return true; // Move was successfully processed
-
-			} else {
-				return false; // Move was not legal
-			}
 		}
 		return false;
 

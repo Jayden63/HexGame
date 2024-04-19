@@ -103,6 +103,13 @@
 
             </LinearLayout>-->
 
+            <TextView
+                android:id="@+id/playerTurnIDView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="TextView" />
+
             <LinearLayout
                 android:id="@+id/ll_Settings"
                 android:layout_width="wrap_content"

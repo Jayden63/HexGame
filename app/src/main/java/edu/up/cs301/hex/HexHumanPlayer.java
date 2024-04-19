@@ -32,6 +32,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 	//Whose turn is it / winner notification text view
 	TextView turnTV;
+	TextView playerTurnID_View;
 
 	// the most recent game state, as given to us by the CounterLocalGame
 	private HexState gameState;
@@ -62,12 +63,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		return myActivity.findViewById(R.id.top_layout);
 	}
 
-//	public void setSurfaceView(Hex_SurfaceView surfaceView) {
-//		if (surfaceView == null) {
-//			throw new IllegalArgumentException("SurfaceView cannot be null.");
-//		}
-//		this.mySurfaceView = surfaceView;
-//	}
 
 
 
@@ -80,24 +75,27 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 			return;
 		}
-
 		if (gameState == null) {
 			Log.e("HexHumanPlayer", "gameState is not initialized.");
 			return;
 		}
 
 		//Tell the user whose turn it is
+		String turnIdText = "current player ID: " + Integer.toString(gameState.getPlayerTurnID());
 		String turnText = "Red's turn";
 		if (this.gameState.getPlayerTurnID() == 1) {
 			turnText = "Blue's turn";
 		}
+
 		this.turnTV.setText(turnText);
 
+		this.playerTurnID_View.setText(turnIdText);
 		//Update the surface view
 		this.mySurfaceView.setHexState(this.gameState);
 
 
 	}
+
 
 	/**
 	 * callback method when we get a message (e.g., from the game)
@@ -131,6 +129,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		activity.setContentView(R.layout.activity_main);
 
 		this.turnTV = activity.findViewById(R.id.turnView);
+		this.playerTurnID_View = activity.findViewById(R.id.playerTurnIDView);
 
 		mySurfaceView = myActivity.findViewById(R.id.hex_grid);
 
