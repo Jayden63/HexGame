@@ -71,6 +71,12 @@ public class HexComputerPlayer1 extends GameComputerPlayer {
             // Generate random coordinates for the piece placement
             int randomRow = random.nextInt(gridSize);
             int randomCol = random.nextInt(gridSize);
+            try {
+                Thread.sleep(500); // Wait for .5 seconds before making a move
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Restore interrupted status
+                return;
+            }
 
             // Check if the selected position is empty
             if (state.grid[randomRow][randomCol].getColor() == Color.WHITE) {
