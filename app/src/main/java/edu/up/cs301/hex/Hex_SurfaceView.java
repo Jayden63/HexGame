@@ -82,24 +82,24 @@ public class Hex_SurfaceView extends SurfaceView  {
 
                 //draws the red and blue boards around the board
                 // hard coded for now
-                float x = 100 + (i * 35) + (i * (float) (hexState.hexSize * 1.02));
-                HexTile topBoarderTiles = new HexTile(x, 85, Color.BLUE);
-                topBoarderTiles.draw(canvas);
+            float x = 450 + (i * 35) + (i * (float) (hexState.hexSize * 1.02));
+            HexTile topBoarderTiles = new HexTile(x, 85 + 50, Color.BLUE);
+            topBoarderTiles.draw(canvas);
 
-                float x2 = 450 + (i * 35) + (i * (float) (hexState.hexSize * 1.02));
-                HexTile bottomBoarderTiles = new HexTile(x2 , 795, Color.BLUE);
-                bottomBoarderTiles.draw(canvas);
+            float x2 = 800 + (i * 35) + (i * (float) (hexState.hexSize * 1.02));
+            HexTile bottomBoarderTiles = new HexTile(x2, 795 + 50, Color.BLUE);
+            bottomBoarderTiles.draw(canvas);
 
-                float x3 = 90 + (i * 35);
-                float y = 100 + (i * 28) + (i * (float) (hexState.hexSize));
-                HexTile leftBoarderTiles = new HexTile(x3, y, Color.RED);
-                leftBoarderTiles.draw(canvas);
+            float x3 = 440 + (i * 35);
+            float y = 100 + 50 + (i * 28) + (i * (float) (hexState.hexSize));
+            HexTile leftBoarderTiles = new HexTile(x3, y, Color.RED);
+            leftBoarderTiles.draw(canvas);
 
+            float x4 = 1225 + (i * 35);
+            float y2 = 100 + 50 + (i * 28) + (i * (float) (hexState.hexSize));
+            HexTile rightBoarderTiles = new HexTile(x4, y2, Color.RED);
+            rightBoarderTiles.draw(canvas);
 
-                float x4 = 875 + (i * 35);
-                float y2 = 100 + (i * 28) + (i * (float) (hexState.hexSize));
-                HexTile rightBoarderTiles = new HexTile(x4, y2, Color.RED);
-                rightBoarderTiles.draw(canvas);
         }
 
         //Don't draw any tiles until there is a game state

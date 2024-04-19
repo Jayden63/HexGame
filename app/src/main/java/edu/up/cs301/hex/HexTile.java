@@ -29,8 +29,8 @@ public class HexTile {
 
     // Constructor for HexTile
     public HexTile(float centerX, float centerY, int color) {
-        this.centerX = centerX;
-        this.centerY = centerY;
+        this.centerX = centerX+350;
+        this.centerY = centerY+50;
         this.radius = 41; // Adjust radius as needed
         this.color = color;
     }
