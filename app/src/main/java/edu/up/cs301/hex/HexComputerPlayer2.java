@@ -59,20 +59,26 @@ public class HexComputerPlayer2 extends GameComputerPlayer {
 			if (state.getPlayerTurnID() != this.playerNum) {
 				return; // Not this player's turn
 			}
+			try {
+				Thread.sleep(250); // Wait for .25 seconds before making a move
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				return;
+			}
 
 			// Find the best strategic move
 			int[] move = findStrategicMove(state);
 			if (move != null) {
-				// Check again to make sure the tile is still empty before making the move
+				// check again to make sure the tile is still empty before making the move
 				if (state.grid[move[0]][move[1]].getColor() == Color.WHITE) {
-					// Send a move action to the game
+					// send a move action to the game
 					game.sendAction(new HexMoveAction(this, move[0], move[1]));
-					// After making a move, we should return to avoid making further moves
+					// after making a move, we should return to avoid making further moves
 					return;
 				}
 			}
 
-			// If no move was made, it may be useful to log an error or handle this case appropriately
+
 		}
 	}
 

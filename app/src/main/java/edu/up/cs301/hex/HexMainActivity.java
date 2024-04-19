@@ -47,13 +47,13 @@ public class HexMainActivity extends GameMainActivity {
 			}});
 		
 		// a computer player type (player type 1)
-		playerTypes.add(new GamePlayerType("Computer Player") {
+		playerTypes.add(new GamePlayerType("Dumb Computer Player") {
 			public GamePlayer createPlayer(String name) {
 				return new HexComputerPlayer1(name);
 			}});
 		
 		// a computer player type (player type 2)
-		playerTypes.add(new GamePlayerType("Computer Player (GUI)") {
+		playerTypes.add(new GamePlayerType("Smart Computer Player ") {
 			public GamePlayer createPlayer(String name) {
 				return new HexComputerPlayer2(name);
 			}});
