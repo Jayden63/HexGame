@@ -37,6 +37,8 @@ public class HexState extends GameState {
 	public float hexSize;
 	private int playerTurnID;
 	private int playerColor;// color of the current hexTile based on who's turn it is
+	public static final int RED = Color.RED;
+	public static final int BLUE = Color.BLUE;
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
@@ -218,9 +220,14 @@ public class HexState extends GameState {
 		return false;
 	}
 
-	/**
-	 * sets the color of the hexTiles based on which player's turn it is
-	 */
+
+	public int getPiece(int row, int col) {
+		if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) {
+			// coordinates are out of bounds, return a value to indicate this
+			return -1;
+		}
+		return grid[row][col].getColor(); // return the color of the tile
+	}
 
 
 

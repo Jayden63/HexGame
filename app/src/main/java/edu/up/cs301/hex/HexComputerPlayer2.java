@@ -2,14 +2,17 @@ package edu.up.cs301.hex;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
+import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.hex.R;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Random;
 
 
 /**
@@ -31,123 +34,97 @@ import android.widget.TextView;
  */
 
 
-public class HexComputerPlayer2 extends HexComputerPlayer1 {
-	
-	/*
-	 * instance variables
-	 */
-	
-	// the most recent game state, as given to us by the CounterLocalGame
-	private HexState currentGameState = null;
-	
-	// If this player is running the GUI, the activity (null if the player is
-	// not running a GUI).
-	private Activity activityForGui = null;
-	
-	// If this player is running the GUI, the widget containing the counter's
-	// value (otherwise, null);
-	private TextView counterValueTextView = null;
-	
-	// If this player is running the GUI, the handler for the GUI thread (otherwise
-	// null)
-	private Handler guiHandler = null;
-	
+public class HexComputerPlayer2 extends GameComputerPlayer {
+
+	private Random random;
+
 	/**
-	 * constructor
-	 * 
-	 * @param name
-	 * 		the player's name
+	 * Constructor for objects of class HexComputerPlayer2
+	 *
+	 * @param name the player's name
 	 */
 	public HexComputerPlayer2(String name) {
 		super(name);
+		random = new Random();
 	}
-	
-    /**
-     * callback method--game's state has changed
-     * 
-     * @param info
-     * 		the information (presumably containing the game's state)
-     */
-	@Override
+
+	/**
+	 * Called when the game state updates
+	 *
+	 * @param info the game info, should be an instance of HexState
+	 */
 	protected void receiveInfo(GameInfo info) {
-		// perform superclass behavior
-		super.receiveInfo(info);
-		
-		Log.i("computer player", "receiving");
-		
-		// if there is no game, ignore
-		if (game == null) {
-			return;
-		}
-		else if (info instanceof HexState) {
-			// if we indeed have a counter-state, update the GUI
-			currentGameState = (HexState)info;
-			updateDisplay();
-		}
-	}
-	
-	
-	/** 
-	 * sets the counter value in the text view
-	 *  */
-	private void updateDisplay() {
-		// if the guiHandler is available, set the new counter value
-		// in the counter-display widget, doing it in the Activity's
-		// thread.
-		if (guiHandler != null) {
-			guiHandler.post(
-					new Runnable() {
-						public void run() {
-						//if (counterValueTextView != null && currentGameState != null) {
-							//counterValueTextView.setText("" + currentGameState.getCounter());
-						//}
-					}});
-		}
-	}
-	
-	/**
-	 * Tells whether we support a GUI
-	 * 
-	 * @return
-	 * 		true because we support a GUI
-	 */
-	public boolean supportsGui() {
-		return true;
-	}
-	
-	/**
-	 * callback method--our player has been chosen/rechosen to be the GUI,
-	 * called from the GUI thread.
-	 * 
-	 * @param a
-	 * 		the activity under which we are running
-	 */
-	@Override
-	public void setAsGui(GameMainActivity a) {
-		
-		// remember who our activity is
-		this.activityForGui = a;
-		
-		// remember the handler for the GUI thread
-		this.guiHandler = new Handler();
-		
-		// Load the layout resource for the our GUI's configuration
-		activityForGui.setContentView(R.layout.counter_human_player);
+		if (info instanceof HexState) {
+			HexState state = (HexState) info;
+			if (state.getPlayerTurnID() != this.playerNum) {
+				return; // Not this player's turn
+			}
 
-		// remember who our text view is, for updating the counter value
-		//this.counterValueTextView =
-				//(TextView) activityForGui.findViewById(R.id.counterValueTextView);
-		
-		// disable the buttons, since they will have no effect anyway
-		Button plusButton = (Button)activityForGui.findViewById(R.id.plusButton);
-		plusButton.setEnabled(false);
-		Button minusButton = (Button)activityForGui.findViewById(R.id.minusButton);
-		minusButton.setEnabled(false);
-		
-		// if the state is non=null, update the display
-		if (currentGameState != null) {
-			updateDisplay();
+			// Find the best strategic move
+			int[] move = findStrategicMove(state);
+			if (move != null) {
+				// Check again to make sure the tile is still empty before making the move
+				if (state.grid[move[0]][move[1]].getColor() == Color.WHITE) {
+					// Send a move action to the game
+					game.sendAction(new HexMoveAction(this, move[0], move[1]));
+					// After making a move, we should return to avoid making further moves
+					return;
+				}
+			}
+
+			// If no move was made, it may be useful to log an error or handle this case appropriately
 		}
 	}
 
-}
+	/**
+	 * Finds a strategic move based on the current state and the player's number.
+	 *
+	 * @param state the current state of the Hex game
+	 * @return coordinates for the move as [x, y], or null if no move is found
+	 */
+	private int[] findStrategicMove(HexState state) {
+		int gridSize = state.gridSize;
+		int[] bestMove = null;
+		double bestScore = Double.NEGATIVE_INFINITY;
+
+		// Loop through the entire grid to evaluate the best move
+		for (int x = 0; x < gridSize; x++) {
+			for (int y = 0; y < gridSize; y++) {
+				// Check if the current position is empty
+				if (state.grid[x][y].getColor() == Color.WHITE) {
+					// Evaluate the move based on the AI's strategy
+					double score = evaluateMove(state, x, y, playerNum);
+					if (score > bestScore) {
+						bestScore = score;
+						bestMove = new int[] {x, y};
+					}
+				}
+			}
+		}
+
+		// If a move was found, return it; otherwise, return null
+		return bestMove;
+	}
+
+
+	private double evaluateMove(HexState state, int x, int y, int playerNum) {
+		double score = 0;
+		int gridSize = state.gridSize;
+
+		if (playerNum == 1) { // Red plays horizontally
+			score -= Math.min(x, gridSize - 1 - x);
+		} else { // Blue plays vertically
+			score -= Math.min(y, gridSize - 1 - y);
+		}
+
+		int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}};
+		for (int[] dir : directions) {
+			int nx = x + dir[0];
+			int ny = y + dir[1];
+			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (playerNum == 1 ? HexState.RED : HexState.BLUE)) {
+				score += 5;
+			}
+		}
+
+		return score;
+	}}
