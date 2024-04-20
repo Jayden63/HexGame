@@ -5,10 +5,16 @@ import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.util.Log;
@@ -26,7 +32,7 @@ import android.widget.EditText;
  *
  *  @version March 2024
  */
-public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener {
+public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener, View.OnClickListener {
 
 	/* instance variables */
 
@@ -123,7 +129,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	public void setAsGui(GameMainActivity activity) {
 
 		// remember the activity
-		this.myActivity = activity;
+		this.myActivity = (HexMainActivity) activity;
 
 		// loads the layout resource for our GUI
 		activity.setContentView(R.layout.activity_main);
@@ -133,7 +139,12 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 		mySurfaceView = myActivity.findViewById(R.id.hex_grid);
 
+
+
 		mySurfaceView.setOnTouchListener(this);
+
+
+
 	}
 
 
@@ -165,6 +176,12 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			}
 		}
 		return false;
+
+	}
+
+
+	@Override
+	public void onClick(View v) {
 
 	}
 }
