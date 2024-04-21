@@ -32,7 +32,7 @@ import android.widget.EditText;
  *
  *  @version March 2024
  */
-public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener, View.OnClickListener {
+public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener {
 
 	/* instance variables */
 
@@ -56,9 +56,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 	}
 
-
-	//Why doesn't his already exist??
-	public int getPlayerId() { return this.playerNum; }
 	/**
 	 * Returns the GUI's top view object
 	 *
@@ -139,12 +136,116 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 		mySurfaceView = myActivity.findViewById(R.id.hex_grid);
 
+		ImageButton btn1 = (ImageButton) activity.findViewById(R.id.settings_button);
+		ImageButton btn2 = (ImageButton) activity.findViewById(R.id.rules_button);
 
+		btn1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ShowSettings();
+			}
+		});
+		btn2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ShowRuleBook();
+			}
+		});
 
 		mySurfaceView.setOnTouchListener(this);
 
+	}
+
+	public void ShowSettings() {
+		AlertDialog.Builder popDialog = new AlertDialog.Builder(myActivity);
+		LayoutInflater inflater = (LayoutInflater) myActivity.getLayoutInflater();
+
+		View viewLayout = inflater.inflate(R.layout.activity_dialog,
+				(ViewGroup) myActivity.findViewById(R.id.layout_dialog));
+
+		TextView item1 = (TextView) viewLayout.findViewById(R.id.textView);
+		TextView item2 = (TextView) viewLayout.findViewById(R.id.textView2);
+
+		popDialog.setTitle("Settings");
+		popDialog.setView(viewLayout);
+
+		SeekBar seek1 = (SeekBar) viewLayout.findViewById(R.id.seekBar);
+
+		seek1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+				//tv.setText("Value of :" + progress);
+				item1.setText("SFX Volume: " + progress);
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+
+			}
+		});
+
+		SeekBar seek2 = (SeekBar) viewLayout.findViewById(R.id.seekBar2);
+		seek2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+				//tv.setText("Value of :" + progress);
+				item2.setText("Music Volume: " + progress);
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+
+			}
+		});
+
+		popDialog.setPositiveButton("OK",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						dialogInterface.dismiss();
+					}
+				});
+		popDialog.create();
+		popDialog.show();
+	}
+
+	//code by Chengen
+	//
+	//method for the rules popup
+	//contains the textviews for the rules of the game
+	//
+	public void ShowRuleBook() {
+		AlertDialog.Builder popDialog = new AlertDialog.Builder(myActivity);
+		LayoutInflater inflater = (LayoutInflater) myActivity.getLayoutInflater();
+
+		View viewLayout = inflater.inflate(R.layout.activity_rule,
+				(ViewGroup) myActivity.findViewById(R.id.layout_rule));
+
+		TextView item2 = (TextView) viewLayout.findViewById(R.id.rule_text);
+
+		popDialog.setTitle("How To Play");
+		popDialog.setView(viewLayout);
 
 
+		popDialog.setPositiveButton("OK",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						dialogInterface.dismiss();
+					}
+				});
+		popDialog.create();
+		popDialog.show();
 	}
 
 
@@ -161,13 +262,11 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			// Check if touch is inside any hex tile in the grid
 			for (int i = 0; i < gameState.grid.length; i++) {
 				for (int j = 0; j < gameState.grid.length; j++) {
-					//Step 1:  figure row/col of corresponding HexTile that was touched (if any)
 
-					//Step 2:  Create a HexMoveAction that indicates this row/col is being played
-
-					//Step 3:  game.sendAction(pta)
-
+					//checks if the tapped location is within a hexTile
 					if (gameState.grid[i][j].isTouched(x, y)) {
+
+						//sends a HexMoveAction
 						game.sendAction(new HexMoveAction(this, i, j));
 						return true;
 					}
@@ -180,8 +279,5 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	}
 
 
-	@Override
-	public void onClick(View v) {
 
-	}
 }

@@ -255,11 +255,5 @@ public class HexState extends GameState {
 		this.playerColor = playerColor;
 	}
 
-	protected void switchTurns() {
-		if (this.getPlayerTurnID() == 0) {
-			this.setPlayerTurnID(1); // Switch to player 1's turn
-		} else {
-			this.setPlayerTurnID(0); // Switch to player 0's turn
-		}
-	}
+
 }

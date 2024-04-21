@@ -10,17 +10,13 @@
 
 
     <TextView
-        android:id="@+id/rule_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Rules of HEX" />
-
-    <TextView
         android:id="@+id/rule_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="1. Turned based game \n 2. Red Player vs. Blue Player\n3. Red always has the first move\n4. Red must connect the top and bottom edges\n5. Blue must connect the left and right edges\n6. First player to connect their edges wins" />
+        android:textAlignment="textStart"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="1. Turned based game \n2. Red Player vs. Blue Player\n3. Red always has the first move\n4. Red must connect the top and bottom edges\n5. Blue must connect the left and right edges\n6. First player to connect their edges wins" />
 
 </LinearLayout>

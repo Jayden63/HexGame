@@ -27,21 +27,8 @@ public class Hex_SurfaceView extends SurfaceView  {
     private float width, height;
     private float height_SurfaceView;
     private float width_SurfaceView;
-    Paint hexPaint = new Paint();
-    Paint hexBorderPaint = new Paint();
-
-    private float xHexCenter; // The current x center of the hex
-    private float yHexCenter; // The current y center of the hex
-
     private HexState hexState;
 
-    TextView textView;
-
-    // ArrayList to store all HexTiles
-    //ArrayList<HexTile> tileList = new ArrayList<>();
-
-    Paint hexRedSide = new Paint();
-    Paint hexBlueSide = new Paint();
 
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
 
@@ -102,16 +89,8 @@ public class Hex_SurfaceView extends SurfaceView  {
 
         }
 
-        //Don't draw any tiles until there is a game state
-        if (hexState == null) {
-            return;
-        }
 
-        if (hexState.grid == null) {
-            return;
-        }
-
-        //
+        //draws each tile from the hexState
         for (int i = 0; i < hexState.gridSize; i++) {
             for (int j = 0; j < hexState.gridSize; j++) {
                 HexTile tile = hexState.grid[i][j];
@@ -122,15 +101,4 @@ public class Hex_SurfaceView extends SurfaceView  {
         }
     }
 
-
-    /**
-     *
-     *onTouch method to handle touch events in the SurfaceView
-     *
-     *@param view represents the view in which the touch event happened
-     *@param event contains details (x,ycoord) of the touch
-     *@return true if a touch has been performed and handled
-     */
-
-
-}//onTouch
+}//onDraw

@@ -36,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="10dp"
         android:padding="20dp"
         />
     <Button
@@ -43,11 +44,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New game"
+        android:layout_marginBottom="10dp"
         android:textSize="20sp"/>
     <Button
         android:id="@+id/exitgame_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Exit Game"
+        android:layout_marginBottom="10dp"
         android:textSize="20sp"/>
 </LinearLayout>
