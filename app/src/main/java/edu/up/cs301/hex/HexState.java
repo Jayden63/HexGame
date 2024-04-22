@@ -39,6 +39,7 @@ public class HexState extends GameState {
 	private int playerColor;// color of the current hexTile based on who's turn it is
 	public static final int RED = Color.RED;
 	public static final int BLUE = Color.BLUE;
+	public float surfaceWidth, surfaceHeight;
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
@@ -83,8 +84,8 @@ public class HexState extends GameState {
 		grid = new HexTile[gridSize][gridSize];
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
-				float x = 100 + (i * 35) + (j * (float) (hexSize * 1.9));
-				float y = 100 + ((float) (i * hexSize * 1.7));
+				float x = 0 + (i * 35) + (j * (float) (hexSize * 1.9));
+				float y = 0 + ((float) (i * hexSize * 1.7));
 				grid[i][j] = new HexTile(x, y, Color.WHITE);  // Ensuring no HexTile is null
 			}
 		}

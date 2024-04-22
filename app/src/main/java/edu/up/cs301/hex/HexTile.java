@@ -29,13 +29,13 @@ public class HexTile {
 
     // Constructor for HexTile
     public HexTile(float centerX, float centerY, int color) {
-        this.centerX = centerX+350;
-        this.centerY = centerY+50;
+
+        // The starting position of the first hexTile
+        this.centerX = centerX;
+        this.centerY = centerY;
         this.radius = 41; // Adjust radius as needed
         this.color = color;
     }
-
-
 
     /**void draw(Canvas canvas)
      *
@@ -92,7 +92,14 @@ public class HexTile {
     }
 
     public float getCenterY() {
-        return centerY;
+        return centerY ;
+    }
+    public void setCenterX(float centerX)    {
+        this.centerX = centerX;
+    }
+
+    public void setCenterY(float centerY) {
+        this.centerY = centerY;
     }
 
     /** isTouched(float x, float y)
