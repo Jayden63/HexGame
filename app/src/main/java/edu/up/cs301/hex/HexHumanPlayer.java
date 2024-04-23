@@ -210,7 +210,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 				exitGameButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						myActivity.setContentView(R.layout.game_config_main);
+						myActivity.finish();
+						System.exit(0);
 					}
 				});
 
