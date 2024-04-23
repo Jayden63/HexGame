@@ -156,7 +156,7 @@ public abstract class GameMainActivity extends Activity implements
      * "main" for the game framework
      */
     @Override
-    public final void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Set Context for Toast Logging
