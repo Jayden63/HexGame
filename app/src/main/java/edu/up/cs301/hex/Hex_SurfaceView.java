@@ -3,12 +3,14 @@ package edu.up.cs301.hex;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.graphics.Color;
 import android.graphics.Path;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.io.Serializable;
 
@@ -31,8 +33,9 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
         super(context, attrs);
 
-        // Sets the background to gray
-        setBackgroundColor(0xFF808080);
+
+        setBackgroundColor(0xFF000000);
+
         hexState = new HexState();
         //hexState.initializeGrid();
 
@@ -44,6 +47,9 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         setWillNotDraw(false);
 
     }//Hex_SurfaceView
+
+    private void setContentView(int activityMain) {
+    }
 
 
     public void setHexState(HexState hexState) {
