@@ -50,10 +50,11 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	// the android activity that we are running
 	private GameMainActivity myActivity;
 	private Hex_SurfaceView mySurfaceView;
-//new game button
+
+	//settings buttons
 	Button newGameButton;
-//exit game button
 	Button exitGameButton;
+	Button changeThemeButton;
 
 
 
@@ -201,17 +202,24 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		TextView item2 = (TextView) viewLayout.findViewById(R.id.textView2);
 		this.newGameButton =(Button) viewLayout.findViewById(R.id.newgame_button);
 		this.exitGameButton = (Button) viewLayout.findViewById(R.id.exitgame_button);
+		this.changeThemeButton = (Button) viewLayout.findViewById(R.id.change_theme);
 				newGameButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-			myActivity.restartGame();
-			}
-		});
+					@Override
+					public void onClick(View v) {
+					myActivity.restartGame();
+					}
+				});
 				exitGameButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						myActivity.finish();
 						System.exit(0);
+					}
+				});
+				exitGameButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+
 					}
 				});
 
