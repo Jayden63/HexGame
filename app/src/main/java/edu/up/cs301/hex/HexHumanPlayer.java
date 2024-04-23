@@ -86,6 +86,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		//Tell the user whose turn it is
 		String turnIdText = "current player ID: " + Integer.toString(gameState.getPlayerTurnID());
 		String turnText = "Red's turn";
+
 		if (this.gameState.getPlayerTurnID() == 1) {
 			turnText = "Blue's turn";
 		}
