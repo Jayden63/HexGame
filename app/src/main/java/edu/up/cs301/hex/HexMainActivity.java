@@ -38,7 +38,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// initializes the MediaPlayer and plays the music
-		musicPlayer = MediaPlayer.create(getApplicationContext(), R.raw.home_depot_theme);
+		musicPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lebronmysun);
 		musicPlayer.setLooping(true);
 		musicPlayer.start();
 	}
