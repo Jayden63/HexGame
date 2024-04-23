@@ -46,14 +46,15 @@ public class HexState extends GameState {
 	 */
 	public HexState() {
 
-
 		this.gridSize = 11;
-		this.hexSize = 40;
+		this.hexSize = 39;
 		this.playerTurnID = 0;
 		this.playerColor = Color.RED;
 
 		initializeGrid();
 	}
+
+
 
 	/**
 	 * copy constructor; makes a copy of the original object
@@ -73,7 +74,8 @@ public class HexState extends GameState {
 
 		//this doens't work
 		copyGrid(orig.grid);
-	}
+	}//HexState
+
 
 
 	/**
@@ -84,12 +86,17 @@ public class HexState extends GameState {
 		grid = new HexTile[gridSize][gridSize];
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
-				float x = 0 + (i * 35) + (j * (float) (hexSize * 1.9));
-				float y = 0 + ((float) (i * hexSize * 1.7));
+
+				// Same values found in Hex_SurfaceView
+				float x = (i * 37) + (j * (float) (hexSize * 1.90));
+				float y = ((float) (i * hexSize * 1.65));
+
 				grid[i][j] = new HexTile(x, y, Color.WHITE);  // Ensuring no HexTile is null
 			}
 		}
-	}
+	}//initializeGrid
+
+
 
 	/**
 	 * sets the coordinates for each new HexTile
@@ -99,10 +106,14 @@ public class HexState extends GameState {
 		grid = new HexTile[gridSize][gridSize];
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
-				grid[i][j] = new HexTile(orig[i][j].getCenterX(), orig[i][j].getCenterY(), orig[i][j].getColor());  // Ensuring no HexTile is null
+				// Copying HexTile into the grid
+				grid[i][j] = new HexTile(orig[i][j].getCenterX(), orig[i][j].getCenterY(), orig[i][j].getColor());// Ensuring no HexTile is null
 			}
 		}
-	}
+	}//copyGrid
+
+
+
 	/**
 	 * Checks if blue wins
 	 *
@@ -117,7 +128,9 @@ public class HexState extends GameState {
 			}
 		}
 		return false;
-	}
+	}//blueWins
+
+
 
 	/**
 	 * checks if red wins
@@ -134,7 +147,9 @@ public class HexState extends GameState {
 			}
 		}
 		return false;
-	}
+	}//redWins
+
+
 
 	/**
 	 * checks if the tile being placed is within the bounds of hex board
@@ -147,6 +162,8 @@ public class HexState extends GameState {
 		return row >= 0 && row < grid.length && col >= 0 && col < grid.length;
 	}
 
+
+
 	public boolean isLegalMove(int row, int col) {
 		// Check if the specified row and column are within the bounds of the grid
 		if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) {
@@ -154,8 +171,7 @@ public class HexState extends GameState {
 		}
 		// Check if the corresponding hex tile is empty (white)
 		return grid[row][col].getColor() == Color.WHITE;
-	}
-
+	}//isLegalMove
 
 
 
@@ -173,9 +189,7 @@ public class HexState extends GameState {
 		playerTurnID = 1 - playerTurnID; // Toggle between player 0 and player 1
 		playerColor = (playerTurnID == 0) ? Color.RED : Color.BLUE;
 		return true;
-	}
-
-
+	}//placeTileAction
 
 
 
@@ -189,7 +203,6 @@ public class HexState extends GameState {
 	 *
 	 * @return
 	 */
-
 	public boolean isConnected(int row, int col, boolean[][] visited, int playerColor) {
 		// Base cases: Check if we reached an opposite side
 		if (playerColor == Color.BLUE && row == grid.length - 1) {
@@ -219,7 +232,8 @@ public class HexState extends GameState {
 			}
 		}
 		return false;
-	}
+	}//isConnected
+
 
 
 	public int getPiece(int row, int col) {
@@ -228,10 +242,7 @@ public class HexState extends GameState {
 			return -1;
 		}
 		return grid[row][col].getColor(); // return the color of the tile
-	}
-
-
-
+	}//getPiece
 
 
 
@@ -255,6 +266,5 @@ public class HexState extends GameState {
 	public void setPlayerColor(int playerColor) {
 		this.playerColor = playerColor;
 	}
-
 
 }

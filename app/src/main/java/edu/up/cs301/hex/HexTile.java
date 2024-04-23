@@ -33,9 +33,11 @@ public class HexTile {
         // The starting position of the first hexTile
         this.centerX = centerX;
         this.centerY = centerY;
-        this.radius = 41; // Adjust radius as needed
+        this.radius = 42; // Adjust radius as needed
         this.color = color;
     }
+
+
 
     /**void draw(Canvas canvas)
      *
@@ -47,8 +49,22 @@ public class HexTile {
 
         // Paint Object for HexTile
         Paint paint = new Paint();
+        Paint borderPaint = new Paint();
+
+        // Setting colors for hexTile
         paint.setColor(color);
+
+        // The border color of the HexTile
+        borderPaint.setColor(Color.BLACK);
+
+
         paint.setStyle(Paint.Style.FILL);
+
+        // Outlines the perimeter of the hexTile
+        borderPaint.setStyle(Paint.Style.STROKE);
+
+        // For a solid visible border
+        borderPaint.setStrokeWidth(1);
 
         // Path will determine the path of the HexTile
         Path path = new Path();
@@ -71,10 +87,14 @@ public class HexTile {
         // Closing the path
         path.close();
 
-        // Coloring the grid
+        // Colors the border HexTiles
+        canvas.drawPath(path, borderPaint);
+
+        // Colors the grid HexTiles
         canvas.drawPath(path, paint);
 
     }//draw
+
 
 
     // Setter method for setting HexTile color
@@ -101,6 +121,8 @@ public class HexTile {
     public void setCenterY(float centerY) {
         this.centerY = centerY;
     }
+
+
 
     /** isTouched(float x, float y)
      *
