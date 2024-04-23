@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-/**
+/*
  * @author Cody
  * @author Jayden
  * @author Chengen
@@ -39,11 +39,10 @@ public class HexTile {
 
 
 
-    /**void draw(Canvas canvas)
-     *
+    /** void draw(Canvas canvas)
      * draws a hexagon when HexTile is called
      *
-     * @param canvas
+     * @param canvas // the canvas to be drawn on
      */
     public void draw(Canvas canvas) {
 
@@ -125,7 +124,6 @@ public class HexTile {
 
 
     /** isTouched(float x, float y)
-     *
      * The isTouched method will return true if the user tapped coordinates
      * Are inside a HexTile in the hex grid
      * Returns false is the tap is not inside a HexTile

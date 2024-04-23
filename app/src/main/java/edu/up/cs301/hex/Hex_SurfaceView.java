@@ -3,19 +3,13 @@ package edu.up.cs301.hex;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 import android.graphics.Color;
 import android.graphics.Path;
-import android.view.ViewGroup;
 
-import android.view.View;
-import android.view.MotionEvent;
-import android.widget.TextView;
+import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 
 public class Hex_SurfaceView extends SurfaceView  {
 
@@ -25,8 +19,8 @@ public class Hex_SurfaceView extends SurfaceView  {
     private float width_SurfaceView;
     private float width, height;
     private HexState hexState;
-    private Paint redBackground = new Paint();
-    private Paint blueBackground = new Paint();
+    private final Paint redBackground = new Paint();
+    private final Paint blueBackground = new Paint();
 
 
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
@@ -96,13 +90,13 @@ public class Hex_SurfaceView extends SurfaceView  {
      * Date: 13 February 2024
      * Problem: Could not draw a hexagon on the surface view
      * Resource:
-     * https://stackoverflow.com/questions/30217450/how-to-draw-hexagons-in-android
+     * <a href="https://stackoverflow.com/questions/30217450/how-to-draw-hexagons-in-android">...</a>
      * Solution: I used the example code from this post as the basis for the code below
      * Only change is the size and position of the hexagon
      */
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
         // Shape of red rectangle
