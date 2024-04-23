@@ -102,10 +102,10 @@ public class HexLocalGame extends LocalGame {
 	@Override
 	protected String checkIfGameOver() {
 		if (gameState.blueWins()) {
-			return gameState.getPlayerTurnID() + " BLUE WINS! ";
+			return " BLUE WINS! ";
 
 		} else if (gameState.redWins()) {
-			return gameState.getPlayerTurnID() + " RED WINS! ";
+			return " RED WINS! ";
 		}
 
 		return null;
