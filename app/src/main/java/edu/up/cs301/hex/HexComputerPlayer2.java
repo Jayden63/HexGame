@@ -131,7 +131,7 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 		for (int[] dir : directions) {
 			int nx = x + dir[0];
 			int ny = y + dir[1];
-			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (playerNum == 1 ? HexState.player1 : HexState.player2)) {
+			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (playerNum == 1 ? HexState.RED : HexState.BLUE)) {
 				score += 5;
 			}
 		}
