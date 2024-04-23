@@ -9,6 +9,9 @@ import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.gameConfiguration.*;
 
+import android.media.MediaPlayer;
+import android.os.Bundle;
+
 /**
  * this is the primary activity for Counter game
  * 
@@ -27,6 +30,18 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 	// the port number that this game will use when playing over the network
 	private static final int PORT_NUMBER = 2234;
+
+	// to play the music
+	private MediaPlayer music;
+
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// initializes the MediaPlayer and plays the music
+		music = MediaPlayer.create(getApplicationContext(), R.raw.home_depot_theme);
+		music.setLooping(true);
+		music.start();
+	}
 
 	/**
 	 * Create the default configuration for this game:
@@ -92,7 +107,26 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	 */
 	@Override
 	public LocalGame createLocalGame(GameState state) {
-		if (state == null) state = new HexState(); //hexstate parameters originally it was zero since it took in int as a param but now we removed it
+		if (state == null)
+			state = new HexState(); //hexstate parameters originally it was zero since it took in int as a param but now we removed it
 		return new HexLocalGame(state);
 	}
+
+	/**
+	 External Citation
+	 Date: 23 April 2024
+	 Problem: Did not know how to add music to the game
+	 Resource:
+	 https://www.geeksforgeeks.org/how-to-add-audio-files-to-android-app-in-android-studio/
+	 Solution: I had to add a separate MediaPlayer class to play music
+	 */
+	protected void onDestroy() {
+		super.onDestroy();
+		// Release MediaPlayer resources
+		if (music != null) {
+			music.release();
+			music = null;
+		}
+	}
+
 }
