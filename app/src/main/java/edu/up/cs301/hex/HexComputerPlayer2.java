@@ -12,6 +12,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Random;
 
 
@@ -34,7 +36,9 @@ import java.util.Random;
  */
 
 
-public class HexComputerPlayer2 extends GameComputerPlayer {
+public class HexComputerPlayer2 extends GameComputerPlayer implements Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442391220L;
 
 	private Random random;
 
@@ -127,7 +131,7 @@ public class HexComputerPlayer2 extends GameComputerPlayer {
 		for (int[] dir : directions) {
 			int nx = x + dir[0];
 			int ny = y + dir[1];
-			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (playerNum == 1 ? HexState.RED : HexState.BLUE)) {
+			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (playerNum == 1 ? HexState.player1 : HexState.player2)) {
 				score += 5;
 			}
 		}

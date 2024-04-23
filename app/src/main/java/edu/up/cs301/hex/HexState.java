@@ -3,6 +3,7 @@ package edu.up.cs301.hex;
 import android.graphics.Color;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
@@ -21,13 +22,18 @@ import edu.up.cs301.GameFramework.players.GameComputerPlayer;
  *
  * @version March 2024
  */
-public class HexState extends GameState {
+public class HexState extends GameState implements Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442384830L;
 
 	private String playerWinner; // To return the name of the player winner
 	//private Player player1; // First player, red
 	//private Player player2; // Second player, blue
 
 	//For Undo:  save location of last move
+
+	private int lastPlaceTileX;
+	private int lastPlaceTileY;
 
 	public int gridSize;
 	HexTile[][] grid;

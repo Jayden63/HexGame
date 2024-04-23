@@ -1,5 +1,6 @@
 package edu.up.cs301.hex;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
@@ -20,8 +21,10 @@ import edu.up.cs301.GameFramework.gameConfiguration.*;
  *
  * @version March 2024
  */
-public class HexMainActivity extends GameMainActivity {
-	
+public class HexMainActivity extends GameMainActivity implements Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442385127L;
+
 	// the port number that this game will use when playing over the network
 	private static final int PORT_NUMBER = 2234;
 

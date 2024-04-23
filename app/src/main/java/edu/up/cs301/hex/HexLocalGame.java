@@ -8,6 +8,8 @@ import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import android.graphics.Color;
 import android.util.Log;
 
+import java.io.Serializable;
+
 /**
  * A class that represents the state of a game. In our counter game, the only
  * relevant piece of information is the value of the game's counter. The
@@ -22,8 +24,10 @@ import android.util.Log;
  *
  * @version March 2024
  */
-public class HexLocalGame extends LocalGame {
+public class HexLocalGame extends LocalGame implements Serializable {
 
+	// serial ID
+	public static final long serialVersionUID = 202442384845L;
 
 	// the game's state
 	private HexState gameState;

@@ -10,8 +10,12 @@ import android.graphics.Path;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 
-public class Hex_SurfaceView extends SurfaceView  {
+
+public class Hex_SurfaceView extends SurfaceView implements Serializable {
+    // serial ID
+    public static final long serialVersionUID = 202442385352L;
 
 
     // Size and shape variables
