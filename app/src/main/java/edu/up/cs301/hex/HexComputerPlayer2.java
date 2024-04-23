@@ -12,6 +12,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Random;
 
 
@@ -34,18 +36,9 @@ import java.util.Random;
  */
 
 
-
-/**
- * External Citation
- * Date: 23 February 2024
- * Problem: Could not find out a algorithm for smart ai
- * Resource:
- * <a href="https://stackoverflow.com/questions/75662140/fastest-way-to-find-a-winner-in-the-game-of-hex">...</a>
- * Solution: I used the example code from this post as the basis for the code below
- *  change is the evaulate move and find strategic move
- */
-
-public class HexComputerPlayer2 extends GameComputerPlayer {
+public class HexComputerPlayer2 extends GameComputerPlayer implements Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442391220L;
 
 	private Random random;
 

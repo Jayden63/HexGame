@@ -3,6 +3,7 @@ package edu.up.cs301.hex;
 import android.graphics.Color;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
@@ -21,7 +22,9 @@ import edu.up.cs301.GameFramework.players.GameComputerPlayer;
  *
  * @version March 2024
  */
-public class HexState extends GameState {
+public class HexState extends GameState implements Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442384830L;
 
 	private String playerWinner; // To return the name of the player winner
 	//private Player player1; // First player, red
@@ -31,7 +34,7 @@ public class HexState extends GameState {
 
 	private int lastPlaceTileX;
 	private int lastPlaceTileY;
-	private HexState hexState;
+
 	public int gridSize;
 	HexTile[][] grid;
 	public float hexSize;
@@ -39,7 +42,8 @@ public class HexState extends GameState {
 	private int playerColor;// color of the current hexTile based on who's turn it is
 	public static final int RED = Color.RED;
 	public static final int BLUE = Color.BLUE;
-	public float surfaceWidth, surfaceHeight;
+
+	public static final int EMPTY = Color.WHITE;
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
@@ -49,7 +53,7 @@ public class HexState extends GameState {
 		this.gridSize = 11;
 		this.hexSize = 39;
 		this.playerTurnID = 0;
-		this.playerColor = Color.RED;
+		this.playerColor = RED;
 
 		initializeGrid();
 	}
@@ -91,7 +95,7 @@ public class HexState extends GameState {
 				float x = (i * 37) + (j * (float) (hexSize * 1.90));
 				float y = ((float) (i * hexSize * 1.65));
 
-				grid[i][j] = new HexTile(x, y, Color.WHITE);  // Ensuring no HexTile is null
+				grid[i][j] = new HexTile(x, y, EMPTY);  // Ensuring no HexTile is null
 			}
 		}
 	}//initializeGrid
@@ -123,7 +127,7 @@ public class HexState extends GameState {
 		//loops through up and down the grid board
 		for (int col = 0; col < grid.length; col++) {
 			//checks if there is a blue tile on each index of the colums and checks if they are connected
-			if (grid[0][col].getColor() == Color.BLUE && isConnected(0, col, new boolean[grid.length][grid.length], Color.BLUE)) {
+			if (grid[0][col].getColor() == Color.BLUE && isConnected(0, col, new boolean[grid.length][grid.length], BLUE)) {
 				return true;
 			}
 		}
@@ -142,7 +146,7 @@ public class HexState extends GameState {
 		for (int row = 0; row < grid.length; row++) {
 
 			//checks if there is red tile on each index of the rows and checks if they are connected
-			if (grid[row][0].getColor() == Color.RED && isConnected(row, 0, new boolean[grid.length][grid.length], Color.RED)) {
+			if (grid[row][0].getColor() == Color.RED && isConnected(row, 0, new boolean[grid.length][grid.length], RED)) {
 				return true;
 			}
 		}

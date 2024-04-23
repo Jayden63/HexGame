@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
+import java.io.Serializable;
+
 /*
  * @author Cody
  * @author Jayden
@@ -16,7 +18,9 @@ import android.graphics.Path;
  * and display the correct changes to the user
  *
  */
-public class HexTile {
+public class HexTile implements Serializable {
+    // serial ID
+    public static final long serialVersionUID = 202442391158L;
 
     // The center x & y coordinates of a hexagon
     private float centerX, centerY;

@@ -2,7 +2,6 @@ package edu.up.cs301.hex;
 
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
-import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 
 import android.app.AlertDialog;
@@ -18,8 +17,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.util.Log;
-import edu.up.cs301.hex.R;
-import android.widget.EditText;
+
+import java.io.Serializable;
+
 /**
  * A GUI of a hex-player.
  *
@@ -32,7 +32,9 @@ import android.widget.EditText;
  *
  *  @version March 2024
  */
-public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener {
+public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener, Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442385148L;
 
 	/* instance variables */
 
@@ -43,6 +45,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	// the most recent game state, as given to us by the CounterLocalGame
 	private HexState gameState;
 
+	private HexTile tile;
+
 	// the android activity that we are running
 	private GameMainActivity myActivity;
 	private Hex_SurfaceView mySurfaceView;
@@ -50,6 +54,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	Button newGameButton;
 //exit game button
 	Button exitGameButton;
+
+
 
 	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);
@@ -85,20 +91,46 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			return;
 		}
 
+		//declares the turnTV as turnView
+		this.turnTV = (TextView) myActivity.findViewById(R.id.turnView);
+
+
 		//Tell the user whose turn it is
 		String turnIdText = "current player ID: " + Integer.toString(gameState.getPlayerTurnID());
 		String turnText = "Red's turn";
+		turnTV.setTextColor(Color.RED);
+
 		if (this.gameState.getPlayerTurnID() == 1) {
 			turnText = "Blue's turn";
+			turnTV.setTextColor(Color.BLUE);
+
 		}
 
-		this.turnTV.setText(turnText);
+
 
 		this.playerTurnID_View.setText(turnIdText);
 		//Update the surface view
 		this.mySurfaceView.setHexState(this.gameState);
 
 
+		//if player has won, change text to game over
+		if (gameState.blueWins() || gameState.redWins()) {
+			turnText = "GAME OVER";
+			turnTV.setTextColor(Color.BLACK);
+
+			for (int i = 0; i < gameState.gridSize; i++ ) {
+				for (int j = 0; j < gameState.gridSize; j++) {
+					if (gameState.grid[i][j].getColor() == Color.RED && gameState.redWins()) {
+						gameState.grid[i][j].setColor(Color.GREEN);
+
+					}
+				}
+			}
+		}
+
+
+		//updates the turnTV textView
+		this.turnTV.setText(turnText);
 	}
 
 
@@ -136,7 +168,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		this.turnTV = activity.findViewById(R.id.turnView);
 		this.playerTurnID_View = activity.findViewById(R.id.playerTurnIDView);
 
-
 		mySurfaceView = myActivity.findViewById(R.id.hex_grid);
 
 		ImageButton btn1 = (ImageButton) activity.findViewById(R.id.settings_button);
@@ -155,9 +186,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			}
 		});
 
-
 		mySurfaceView.setOnTouchListener(this);
-
 
 	}
 
@@ -191,9 +220,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		popDialog.setView(viewLayout);
 
 		SeekBar seek1 = (SeekBar) viewLayout.findViewById(R.id.seekBar);
-
-
-
 
 		seek1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override

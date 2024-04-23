@@ -2,6 +2,7 @@ package edu.up.cs301.hex;
 
 import android.graphics.Color;
 
+import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -24,9 +25,9 @@ import edu.up.cs301.GameFramework.utilities.Tickable;
  * @version March 2024
  */
 
-public class HexComputerPlayer1 extends GameComputerPlayer {
-
-
+public class HexComputerPlayer1 extends GameComputerPlayer implements Serializable {
+    // serial ID
+    public static final long serialVersionUID = 202442385217L;
     private Random random;
     /**
      * Constructor for objects of class CounterComputerPlayer1
