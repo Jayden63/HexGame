@@ -34,6 +34,17 @@ import java.util.Random;
  */
 
 
+
+/**
+ * External Citation
+ * Date: 23 February 2024
+ * Problem: Could not find out a algorithm for smart ai
+ * Resource:
+ * <a href="https://stackoverflow.com/questions/75662140/fastest-way-to-find-a-winner-in-the-game-of-hex">...</a>
+ * Solution: I used the example code from this post as the basis for the code below
+ *  change is the evaulate move and find strategic move
+ */
+
 public class HexComputerPlayer2 extends GameComputerPlayer {
 
 	private Random random;

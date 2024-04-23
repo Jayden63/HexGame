@@ -46,8 +46,10 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	// the android activity that we are running
 	private GameMainActivity myActivity;
 	private Hex_SurfaceView mySurfaceView;
-
-
+//new game button
+	Button newGameButton;
+//exit game button
+	Button exitGameButton;
 
 	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);
@@ -134,6 +136,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		this.turnTV = activity.findViewById(R.id.turnView);
 		this.playerTurnID_View = activity.findViewById(R.id.playerTurnIDView);
 
+
 		mySurfaceView = myActivity.findViewById(R.id.hex_grid);
 
 		ImageButton btn1 = (ImageButton) activity.findViewById(R.id.settings_button);
@@ -152,7 +155,9 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			}
 		});
 
+
 		mySurfaceView.setOnTouchListener(this);
+
 
 	}
 
@@ -165,11 +170,30 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 		TextView item1 = (TextView) viewLayout.findViewById(R.id.textView);
 		TextView item2 = (TextView) viewLayout.findViewById(R.id.textView2);
+		this.newGameButton =(Button) viewLayout.findViewById(R.id.newgame_button);
+		this.exitGameButton = (Button) viewLayout.findViewById(R.id.exitgame_button);
+				newGameButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			myActivity.restartGame();
+			}
+		});
+				exitGameButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						myActivity.setContentView(R.layout.game_config_main);
+					}
+				});
+
+
 
 		popDialog.setTitle("Settings");
 		popDialog.setView(viewLayout);
 
 		SeekBar seek1 = (SeekBar) viewLayout.findViewById(R.id.seekBar);
+
+
+
 
 		seek1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override
