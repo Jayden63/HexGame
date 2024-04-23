@@ -50,6 +50,11 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	// the android activity that we are running
 	private GameMainActivity myActivity;
 	private Hex_SurfaceView mySurfaceView;
+//new game button
+	Button newGameButton;
+//exit game button
+	Button exitGameButton;
+
 
 
 	public HexHumanPlayer(String name, HexState gameState) {
@@ -62,11 +67,14 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	/**
 	 * Returns the GUI's top view object
 	 *
-	 * @return the top object in the GUI's view heirarchy
+	 * @return
+	 * 		the top object in the GUI's view heirarchy
 	 */
 	public View getTopView() {
 		return myActivity.findViewById(R.id.top_layout);
 	}
+
+
 
 
 	/**
@@ -99,6 +107,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		}
 
 
+
 		this.playerTurnID_View.setText(turnIdText);
 		//Update the surface view
 		this.mySurfaceView.setHexState(this.gameState);
@@ -128,7 +137,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	/**
 	 * callback method when we get a message (e.g., from the game)
 	 *
-	 * @param info the message
+	 * @param info
+	 * 		the message
 	 */
 	@Override
 	public void receiveInfo(GameInfo info) {
@@ -136,7 +146,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		if (!(info instanceof HexState)) return;
 
 		// update our state; then update the display
-		this.gameState = (HexState) info;
+		this.gameState = (HexState)info;
 		updateDisplay();
 	}
 
@@ -144,7 +154,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	 * callback method--our game has been chosen/rechosen to be the GUI,
 	 * called from the GUI thread
 	 *
-	 * @param activity the activity under which we are running
+	 * @param activity
+	 * 		the activity under which we are running
 	 */
 	public void setAsGui(GameMainActivity activity) {
 
@@ -175,17 +186,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			}
 		});
 
-		// registers and sets the change theme button
-		/*Button chngTheme = activity.findViewById(R.id.change_theme);
-		chngTheme.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				gameState.player1 = Color.GREEN;
-				gameState.player2 = Color.YELLOW;
-
-			}
-		});*/
-
 		mySurfaceView.setOnTouchListener(this);
 
 	}
@@ -199,6 +199,22 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 		TextView item1 = (TextView) viewLayout.findViewById(R.id.textView);
 		TextView item2 = (TextView) viewLayout.findViewById(R.id.textView2);
+		this.newGameButton =(Button) viewLayout.findViewById(R.id.newgame_button);
+		this.exitGameButton = (Button) viewLayout.findViewById(R.id.exitgame_button);
+				newGameButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			myActivity.restartGame();
+			}
+		});
+				exitGameButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						myActivity.setContentView(R.layout.game_config_main);
+					}
+				});
+
+
 
 		popDialog.setTitle("Settings");
 		popDialog.setView(viewLayout);
@@ -311,4 +327,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		return false;
 
 	}
+
+
+
 }
