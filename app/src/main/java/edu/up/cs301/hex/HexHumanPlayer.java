@@ -76,8 +76,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	}
 
 
-
-
 	/**
 	 * updates the gameState to know who's turn it is
 	 */
@@ -118,15 +116,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		if (gameState.blueWins() || gameState.redWins()) {
 			turnText = "GAME OVER";
 			turnTV.setTextColor(Color.BLACK);
-
-			for (int i = 0; i < gameState.gridSize; i++ ) {
-				for (int j = 0; j < gameState.gridSize; j++) {
-					if (gameState.grid[i][j].getColor() == Color.RED && gameState.redWins()) {
-						gameState.grid[i][j].setColor(Color.GREEN);
-
-					}
-				}
-			}
 		}
 
 

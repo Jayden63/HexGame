@@ -8,10 +8,13 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -26,6 +29,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import edu.up.cs301.GameFramework.gameConfiguration.GameConfig;
 import edu.up.cs301.GameFramework.gameConfiguration.GamePlayerType;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
@@ -79,6 +85,8 @@ public abstract class GameMainActivity extends Activity implements
     // whether the game is in the "configuration" stage, before the actual game
     // has started
     private boolean doingConfiguration = true;
+    private SurfaceView surfaceView;
+    private SurfaceHolder surfaceHolder;
 
     /**
      * contains the game configuration this activity will be used to initialize
@@ -164,6 +172,7 @@ public abstract class GameMainActivity extends Activity implements
 
         // Initialize the layout
         setContentView(R.layout.game_config_main);
+
 
         // create the default configuration for this game
         this.config = createDefaultConfig();
@@ -293,6 +302,7 @@ public abstract class GameMainActivity extends Activity implements
         // Set the title text with the game's name
         this.setTitle(config.getGameName());
 
+
         // create the game if it's local (we defer remote game creation
         // until further down so that we do not attempt to make the
         // network connection until other errors are checked)
@@ -303,6 +313,7 @@ public abstract class GameMainActivity extends Activity implements
                 return Resources.getSystem().getString(R.string.Game_Creation_Error_Msg);
             }
         }
+
 
         //////////////////////////////////////
         // create the players
