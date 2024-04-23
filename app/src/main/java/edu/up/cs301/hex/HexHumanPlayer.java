@@ -2,7 +2,6 @@ package edu.up.cs301.hex;
 
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
-import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 
 import android.app.AlertDialog;
@@ -18,8 +17,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.util.Log;
-import edu.up.cs301.hex.R;
-import android.widget.EditText;
+
+import java.io.Serializable;
+
 /**
  * A GUI of a hex-player.
  *
@@ -32,7 +32,9 @@ import android.widget.EditText;
  *
  *  @version March 2024
  */
-public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener {
+public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListener, Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442385148L;
 
 	/* instance variables */
 
@@ -48,7 +50,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	private Hex_SurfaceView mySurfaceView;
 
 
-
 	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);
 		this.gameState = gameState;
@@ -59,14 +60,11 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	/**
 	 * Returns the GUI's top view object
 	 *
-	 * @return
-	 * 		the top object in the GUI's view heirarchy
+	 * @return the top object in the GUI's view heirarchy
 	 */
 	public View getTopView() {
 		return myActivity.findViewById(R.id.top_layout);
 	}
-
-
 
 
 	/**
@@ -103,8 +101,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	/**
 	 * callback method when we get a message (e.g., from the game)
 	 *
-	 * @param info
-	 * 		the message
+	 * @param info the message
 	 */
 	@Override
 	public void receiveInfo(GameInfo info) {
@@ -112,7 +109,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		if (!(info instanceof HexState)) return;
 
 		// update our state; then update the display
-		this.gameState = (HexState)info;
+		this.gameState = (HexState) info;
 		updateDisplay();
 	}
 
@@ -120,8 +117,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	 * callback method--our game has been chosen/rechosen to be the GUI,
 	 * called from the GUI thread
 	 *
-	 * @param activity
-	 * 		the activity under which we are running
+	 * @param activity the activity under which we are running
 	 */
 	public void setAsGui(GameMainActivity activity) {
 
@@ -151,6 +147,17 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 				ShowRuleBook();
 			}
 		});
+
+		// registers and sets the change theme button
+		/*Button chngTheme = activity.findViewById(R.id.change_theme);
+		chngTheme.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				gameState.player1 = Color.GREEN;
+				gameState.player2 = Color.YELLOW;
+
+			}
+		});*/
 
 		mySurfaceView.setOnTouchListener(this);
 
@@ -277,7 +284,4 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		return false;
 
 	}
-
-
-
 }

@@ -1,5 +1,7 @@
 package edu.up.cs301.hex;
 
+import java.io.Serializable;
+
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 
@@ -16,10 +18,9 @@ import edu.up.cs301.GameFramework.actionMessage.GameAction;
  *
  * @version March 2024
  */
-	public class HexMoveAction extends GameAction {
-
-		// to satisfy the serializable interface
-		private static final long serialVersionUID = 28062013L;
+	public class HexMoveAction extends GameAction implements Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442385301L;
 
 		// The row where the player wants to place the hex tile
 		private int row;

@@ -53,4 +53,11 @@
         android:text="Exit Game"
         android:layout_marginBottom="10dp"
         android:textSize="20sp"/>
+    <Button
+        android:id="@+id/change_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Theme"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"/>
 </LinearLayout>

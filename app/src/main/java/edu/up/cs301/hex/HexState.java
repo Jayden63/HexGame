@@ -3,6 +3,7 @@ package edu.up.cs301.hex;
 import android.graphics.Color;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
@@ -21,7 +22,9 @@ import edu.up.cs301.GameFramework.players.GameComputerPlayer;
  *
  * @version March 2024
  */
-public class HexState extends GameState {
+public class HexState extends GameState implements Serializable {
+	// serial ID
+	public static final long serialVersionUID = 202442384830L;
 
 	private String playerWinner; // To return the name of the player winner
 	//private Player player1; // First player, red
@@ -31,14 +34,13 @@ public class HexState extends GameState {
 
 	private int lastPlaceTileX;
 	private int lastPlaceTileY;
-	private HexState hexState;
 	public int gridSize;
 	HexTile[][] grid;
 	public float hexSize;
 	private int playerTurnID;
 	private int playerColor;// color of the current hexTile based on who's turn it is
-	public static final int RED = Color.RED;
-	public static final int BLUE = Color.BLUE;
+	public static int player1 = Color.RED;
+	public static int player2 = Color.BLUE;
 	public float surfaceWidth, surfaceHeight;
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
