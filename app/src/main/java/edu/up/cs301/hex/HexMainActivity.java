@@ -32,15 +32,15 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	private static final int PORT_NUMBER = 2234;
 
 	// to play the music
-	private MediaPlayer music;
+	private MediaPlayer musicPlayer;
 
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// initializes the MediaPlayer and plays the music
-		music = MediaPlayer.create(getApplicationContext(), R.raw.home_depot_theme);
-		music.setLooping(true);
-		music.start();
+		musicPlayer = MediaPlayer.create(getApplicationContext(), R.raw.home_depot_theme);
+		musicPlayer.setLooping(true);
+		musicPlayer.start();
 	}
 
 	/**
@@ -123,9 +123,9 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	protected void onDestroy() {
 		super.onDestroy();
 		// Release MediaPlayer resources
-		if (music != null) {
-			music.release();
-			music = null;
+		if (musicPlayer != null) {
+			musicPlayer.release();
+			musicPlayer = null;
 		}
 	}
 
