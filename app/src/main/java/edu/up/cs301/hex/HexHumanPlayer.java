@@ -75,8 +75,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	}
 
 
-
-
 	/**
 	 * updates the gameState to know who's turn it is
 	 */
