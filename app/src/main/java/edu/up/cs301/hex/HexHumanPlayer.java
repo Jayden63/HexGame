@@ -43,6 +43,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	// the most recent game state, as given to us by the CounterLocalGame
 	private HexState gameState;
 
+	private HexTile tile;
+
 	// the android activity that we are running
 	private GameMainActivity myActivity;
 	private Hex_SurfaceView mySurfaceView;
@@ -83,21 +85,45 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			return;
 		}
 
+		//declares the turnTV as turnView
+		this.turnTV = (TextView) myActivity.findViewById(R.id.turnView);
+
+
 		//Tell the user whose turn it is
 		String turnIdText = "current player ID: " + Integer.toString(gameState.getPlayerTurnID());
 		String turnText = "Red's turn";
+		turnTV.setTextColor(Color.RED);
 
 		if (this.gameState.getPlayerTurnID() == 1) {
 			turnText = "Blue's turn";
+			turnTV.setTextColor(Color.BLUE);
+
 		}
 
-		this.turnTV.setText(turnText);
 
 		this.playerTurnID_View.setText(turnIdText);
 		//Update the surface view
 		this.mySurfaceView.setHexState(this.gameState);
 
 
+		//if player has won, change text to game over
+		if (gameState.blueWins() || gameState.redWins()) {
+			turnText = "GAME OVER";
+			turnTV.setTextColor(Color.BLACK);
+
+			for (int i = 0; i < gameState.gridSize; i++ ) {
+				for (int j = 0; j < gameState.gridSize; j++) {
+					if (gameState.grid[i][j].getColor() == Color.RED && gameState.redWins()) {
+						gameState.grid[i][j].setColor(Color.GREEN);
+
+					}
+				}
+			}
+		}
+
+
+		//updates the turnTV textView
+		this.turnTV.setText(turnText);
 	}
 
 
