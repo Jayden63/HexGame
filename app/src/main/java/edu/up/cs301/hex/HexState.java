@@ -46,14 +46,15 @@ public class HexState extends GameState {
 	 */
 	public HexState() {
 
-
 		this.gridSize = 11;
-		this.hexSize = 40;
+		this.hexSize = 39;
 		this.playerTurnID = 0;
 		this.playerColor = Color.RED;
 
 		initializeGrid();
 	}
+
+
 
 	/**
 	 * copy constructor; makes a copy of the original object
@@ -73,7 +74,8 @@ public class HexState extends GameState {
 
 		//this doens't work
 		copyGrid(orig.grid);
-	}
+	}//HexState
+
 
 
 	/**
@@ -84,12 +86,17 @@ public class HexState extends GameState {
 		grid = new HexTile[gridSize][gridSize];
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
-				float x = 0 + (i * 35) + (j * (float) (hexSize * 1.9));
-				float y = 0 + ((float) (i * hexSize * 1.7));
+
+				// Same values found in Hex_SurfaceView
+				float x = (i * 37) + (j * (float) (hexSize * 1.90));
+				float y = ((float) (i * hexSize * 1.65));
+
 				grid[i][j] = new HexTile(x, y, Color.WHITE);  // Ensuring no HexTile is null
 			}
 		}
-	}
+	}//initializeGrid
+
+
 
 	/**
 	 * sets the coordinates for each new HexTile
@@ -99,14 +106,18 @@ public class HexState extends GameState {
 		grid = new HexTile[gridSize][gridSize];
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
-				grid[i][j] = new HexTile(orig[i][j].getCenterX(), orig[i][j].getCenterY(), orig[i][j].getColor());  // Ensuring no HexTile is null
+				// Copying HexTile into the grid
+				grid[i][j] = new HexTile(orig[i][j].getCenterX(), orig[i][j].getCenterY(), orig[i][j].getColor());// Ensuring no HexTile is null
 			}
 		}
-	}
+	}//copyGrid
+
+
+
 	/**
 	 * Checks if blue wins
 	 *
-	 * @return
+	 * @return blueWins // if the blue player wins
 	 */
 	public boolean blueWins() {
 		//loops through up and down the grid board
@@ -117,12 +128,14 @@ public class HexState extends GameState {
 			}
 		}
 		return false;
-	}
+	}//blueWins
+
+
 
 	/**
 	 * checks if red wins
 	 *
-	 * @return
+	 * @return redWins // if the red player wins
 	 */
 	public boolean redWins() {
 		//loops through left and right of the grid board
@@ -134,18 +147,22 @@ public class HexState extends GameState {
 			}
 		}
 		return false;
-	}
+	}//redWins
+
+
 
 	/**
 	 * checks if the tile being placed is within the bounds of hex board
 	 *
-	 * @param row
-	 * @param col
-	 * @return
+	 * @param row // The row in the hex grid
+	 * @param col // the column in the hex grid
+	 * @return true // if the move is a valid play
 	 */
 	public boolean isValid(int row, int col) {
 		return row >= 0 && row < grid.length && col >= 0 && col < grid.length;
 	}
+
+
 
 	public boolean isLegalMove(int row, int col) {
 		// Check if the specified row and column are within the bounds of the grid
@@ -154,8 +171,7 @@ public class HexState extends GameState {
 		}
 		// Check if the corresponding hex tile is empty (white)
 		return grid[row][col].getColor() == Color.WHITE;
-	}
-
+	}//isLegalMove
 
 
 
@@ -173,9 +189,7 @@ public class HexState extends GameState {
 		playerTurnID = 1 - playerTurnID; // Toggle between player 0 and player 1
 		playerColor = (playerTurnID == 0) ? Color.RED : Color.BLUE;
 		return true;
-	}
-
-
+	}//placeTileAction
 
 
 
@@ -185,11 +199,10 @@ public class HexState extends GameState {
 	 * @param col // col of the hex board
 	 * @param visited
 	 * 		checks if the tile has been visited, if so move on to the next one
-	 * @param playerColor
+	 * @param playerColor // Either the red or blue player ID
 	 *
-	 * @return
+	 * @return true if a connection is made
 	 */
-
 	public boolean isConnected(int row, int col, boolean[][] visited, int playerColor) {
 		// Base cases: Check if we reached an opposite side
 		if (playerColor == Color.BLUE && row == grid.length - 1) {
@@ -219,7 +232,8 @@ public class HexState extends GameState {
 			}
 		}
 		return false;
-	}
+	}//isConnected
+
 
 
 	public int getPiece(int row, int col) {
@@ -228,17 +242,14 @@ public class HexState extends GameState {
 			return -1;
 		}
 		return grid[row][col].getColor(); // return the color of the tile
-	}
-
-
-
+	}//getPiece
 
 
 
 	/**
-	 * gets the
+	 * gets the player turn's ID
 	 *
-	 * @return
+	 * @return playerTurnID // the id the player
 	 */
 	public int getPlayerTurnID() {
 		return playerTurnID;
@@ -255,6 +266,5 @@ public class HexState extends GameState {
 	public void setPlayerColor(int playerColor) {
 		this.playerColor = playerColor;
 	}
-
 
 }

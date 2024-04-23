@@ -43,6 +43,8 @@ import edu.up.cs301.GameFramework.actionMessage.GameAction;
 			this.col = col;
 		}
 
+
+
 		/**
 		 * Getter method to retrieve the row of the move.
 		 *

@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-/**
+/*
  * @author Cody
  * @author Jayden
  * @author Chengen
@@ -33,22 +33,37 @@ public class HexTile {
         // The starting position of the first hexTile
         this.centerX = centerX;
         this.centerY = centerY;
-        this.radius = 41; // Adjust radius as needed
+        this.radius = 42; // Adjust radius as needed
         this.color = color;
     }
 
-    /**void draw(Canvas canvas)
-     *
+
+
+    /** void draw(Canvas canvas)
      * draws a hexagon when HexTile is called
      *
-     * @param canvas
+     * @param canvas // the canvas to be drawn on
      */
     public void draw(Canvas canvas) {
 
         // Paint Object for HexTile
         Paint paint = new Paint();
+        Paint borderPaint = new Paint();
+
+        // Setting colors for hexTile
         paint.setColor(color);
+
+        // The border color of the HexTile
+        borderPaint.setColor(Color.BLACK);
+
+
         paint.setStyle(Paint.Style.FILL);
+
+        // Outlines the perimeter of the hexTile
+        borderPaint.setStyle(Paint.Style.STROKE);
+
+        // For a solid visible border
+        borderPaint.setStrokeWidth(1);
 
         // Path will determine the path of the HexTile
         Path path = new Path();
@@ -71,10 +86,14 @@ public class HexTile {
         // Closing the path
         path.close();
 
-        // Coloring the grid
+        // Colors the border HexTiles
+        canvas.drawPath(path, borderPaint);
+
+        // Colors the grid HexTiles
         canvas.drawPath(path, paint);
 
     }//draw
+
 
 
     // Setter method for setting HexTile color
@@ -102,8 +121,9 @@ public class HexTile {
         this.centerY = centerY;
     }
 
+
+
     /** isTouched(float x, float y)
-     *
      * The isTouched method will return true if the user tapped coordinates
      * Are inside a HexTile in the hex grid
      * Returns false is the tap is not inside a HexTile
