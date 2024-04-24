@@ -1,52 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_title"
+            android:textAlignment="center"
+            android:textSize="60dp"
+            android:textColor="@drawable/background_blue"
+            android:padding="20dp"
+            android:layout_marginBottom="10dp"
+            ></TextView>
+
+    </LinearLayout>
 
     <include
         android:id="@+id/tabHost"
+        layout="@layout/game_config_tabhost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/game_config_tabhost" />
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/table_row_vert_pad" >
 
-        <Button
-            android:id="@+id/saveConfigButton"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/config_horiz_margin"
-            android:text="@string/save_config_as_default" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/playGameButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:textSize="20dp"
+                android:background="@drawable/background_blue"
+                android:text="@string/start_the_game" />
+
+            <Button
+                android:id="@+id/saveConfigButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:background="@drawable/background_red"
+                android:textFontWeight=
+                android:text="@string/save_config_as_default" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+
+
 
         <CheckBox
             android:id="@+id/onScreenLogging"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/debugLogging"
+            android:layout_gravity="bottom"
             android:text="@string/on_screen_logging" />
 
         <CheckBox
             android:id="@+id/debugLogging"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_toLeftOf="@+id/playGameButton"
-            android:layout_marginRight="20dp"
             android:text="@string/debug_logging"/>
 
-        <Button
-            android:id="@+id/playGameButton"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom">
+
+        </Space>
+
+
+        <TextView
+            android:id="@+id/ipCodeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="@dimen/config_horiz_margin"
-            android:text="@string/start_the_game" />
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="50dp"
+            android:text="IP code is: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
-</RelativeLayout>
+
+
+</LinearLayout>
