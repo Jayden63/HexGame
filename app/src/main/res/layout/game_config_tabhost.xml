@@ -1,7 +1,8 @@
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tabHost"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    >
 
     <TabWidget
         android:id="@android:id/tabs"
@@ -22,9 +23,9 @@
 
             <include
                 android:id="@+id/localTabLayout"
+                layout="@layout/game_local_tab"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/game_local_tab" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
