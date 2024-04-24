@@ -88,17 +88,27 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		}
 	}
 
-	private void playNextRandomSong() {
+	private int lastSongIndex = -1;//keep track of last song played
+	public void playNextRandomSong() {
 		// Release the current MediaPlayer
 		if (musicPlayer != null) {
 			musicPlayer.release();
 		}
 
-		// Select a random new song index
-		int randomIndex = random.nextInt(songResources.length);
+		int randomIndex;
+		if (songResources.length > 1) {  // Ensure there is more than one song to avoid infinite loop
+			do {
+				randomIndex = random.nextInt(songResources.length);
+			} while (randomIndex == lastSongIndex);  // Ensure not to repeat the last song
+		} else {
+			randomIndex = 0;  // Only one song available, no choice but to repeat
+		}
+
+		lastSongIndex = randomIndex;  // Update the last song index to the new song
+
 		musicPlayer = MediaPlayer.create(this, songResources[randomIndex]);
 
-		// Listen for completion again
+		// Set up the MediaPlayer to listen for completion again
 		musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 			@Override
 			public void onCompletion(MediaPlayer mp) {
@@ -107,7 +117,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 			}
 		});
 
-		musicPlayer.start(); // Start playing the new random song
+		musicPlayer.start();  // Start playing the new random song
 	}
 
 

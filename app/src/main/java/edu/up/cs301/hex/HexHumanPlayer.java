@@ -61,6 +61,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	Button newGameButton;
 //exit game button
 	Button exitGameButton;
+	Button skipButton;
 
 	Switch musicSwitch;
 
@@ -178,6 +179,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 		ImageButton btn1 = (ImageButton) activity.findViewById(R.id.settings_button);
 		ImageButton btn2 = (ImageButton) activity.findViewById(R.id.rules_button);
+		ImageButton btn3 = (ImageButton) activity.findViewById(R.id.skip_button);
+
 
 		btn1.setOnClickListener(new OnClickListener() {
 			@Override
@@ -189,6 +192,12 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			@Override
 			public void onClick(View v) {
 				ShowRuleBook();
+			}
+		});
+		btn3.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				((HexMainActivity) myActivity).playNextRandomSong();
 			}
 		});
 
@@ -208,6 +217,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		this.newGameButton =(Button) viewLayout.findViewById(R.id.newgame_button);
 		this.exitGameButton = (Button) viewLayout.findViewById(R.id.exitgame_button);
 		this.musicSwitch = (Switch) viewLayout.findViewById(R.id.switch2);
+
 				newGameButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
