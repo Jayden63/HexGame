@@ -44,6 +44,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.2"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical">
@@ -66,7 +67,6 @@
                 android:gravity="center"
                 android:textSize="20dp"
                 android:background="@drawable/background_red"
-                android:textFontWeight=
                 android:text="@string/save_config_as_default" />
 
 
