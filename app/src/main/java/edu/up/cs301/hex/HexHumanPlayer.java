@@ -7,6 +7,7 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,7 +57,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	Button exitGameButton;
 	Button changeThemeButton;
 
-
+	private MediaPlayer sfx;
 
 	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);
@@ -107,7 +108,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 
 
-		this.playerTurnID_View.setText(turnIdText);
+		//this.playerTurnID_View.setText(turnIdText);
 		//Update the surface view
 		this.mySurfaceView.setHexState(this.gameState);
 
@@ -149,6 +150,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	 */
 	public void setAsGui(GameMainActivity activity) {
 
+
 		// remember the activity
 		this.myActivity = (HexMainActivity) activity;
 
@@ -156,7 +158,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		activity.setContentView(R.layout.activity_main);
 
 		this.turnTV = activity.findViewById(R.id.turnView);
-		this.playerTurnID_View = activity.findViewById(R.id.playerTurnIDView);
+		//this.playerTurnID_View = activity.findViewById(R.id.playerTurnIDView);
 
 		mySurfaceView = myActivity.findViewById(R.id.hex_grid);
 
@@ -217,7 +219,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		popDialog.setTitle("Settings");
 		popDialog.setView(viewLayout);
 
-		SeekBar seek1 = (SeekBar) viewLayout.findViewById(R.id.seekBar);
+		/*SeekBar seek1 = (SeekBar) viewLayout.findViewById(R.id.seekBar);
 
 		seek1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override
@@ -254,7 +256,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			public void onStopTrackingTouch(SeekBar seekBar) {
 
 			}
-		});
+		});*/
 
 		popDialog.setPositiveButton("OK",
 				new DialogInterface.OnClickListener() {
@@ -300,6 +302,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	@Override
 	public boolean onTouch(View view, MotionEvent event) {
 
+		HexMainActivity activity = new HexMainActivity();
 		// The coordinates registered by the touch
 		float x = event.getX();
 		float y = event.getY();
@@ -316,6 +319,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 						//sends a HexMoveAction
 						game.sendAction(new HexMoveAction(this, i, j));
+
 						return true;
 					}
 

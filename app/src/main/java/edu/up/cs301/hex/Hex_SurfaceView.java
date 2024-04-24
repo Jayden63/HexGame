@@ -116,7 +116,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         redRect.lineTo(width, height / 2f + 200); // Bottom right
         redRect.lineTo(0, height / 2f + 200); // Bottom left
         redRect.close();
-        canvas.drawPath(redRect, redBackground);
+        //canvas.drawPath(redRect, redBackground);
 
         // Shape of blue rectangle
         Path blueRect = new Path();
@@ -125,7 +125,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         blueRect.lineTo(width / 2f + 425, height); // Bottom right
         blueRect.lineTo(width / 2f - 30, height); // Bottom left
         blueRect.close();
-        canvas.drawPath(blueRect, blueBackground);
+        //canvas.drawPath(blueRect, blueBackground);
 
 
         // To draw the hexTile borders of the hex grid

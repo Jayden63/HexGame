@@ -14,50 +14,66 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="SFX Volume" />
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="match_parent"
+
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:padding="20dp"
-        />
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+         />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
 
         android:text="Music Volume" />
 
-    <SeekBar
+    <!--<SeekBar
         android:id="@+id/seekBar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="10dp"
-        android:padding="20dp"
+        android:padding="20dp"-->
+
         />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+         />
+
+    <Button
+        android:id="@+id/change_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Change Theme"
+        android:textSize="20sp" />
+
     <Button
         android:id="@+id/newgame_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New game"
+        android:text="     New game    "
         android:layout_marginBottom="10dp"
         android:textSize="20sp"/>
     <Button
         android:id="@+id/exitgame_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exit Game"
+        android:text="     Exit Game    "
         android:layout_marginBottom="10dp"
         android:textSize="20sp"/>
-    <Button
-        android:id="@+id/change_theme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change Theme"
-        android:layout_marginBottom="10dp"
-        android:textSize="20sp"/>
+
 </LinearLayout>

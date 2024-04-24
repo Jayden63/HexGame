@@ -35,6 +35,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	private MediaPlayer musicPlayer;
 
 
+
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// initializes the MediaPlayer and plays the music
@@ -42,6 +44,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		// loops the music
 		musicPlayer.setLooping(true);
 		musicPlayer.start();
+
+
 	}
 
 	/**
