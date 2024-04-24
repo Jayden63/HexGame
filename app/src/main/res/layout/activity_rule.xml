@@ -17,6 +17,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="20dp"
-        android:text="1. Turned based game \n2. Red Player vs. Blue Player\n3. Red always has the first move\n4. Red must connect the top and bottom edges\n5. Blue must connect the left and right edges\n6. First player to connect their edges wins" />
+        android:text="1. Turned based game \n2. Red Player vs. Blue Player\n3. Red always has the first move\n4. Red must connect the left and right edges\n5. Blue must connect the top and bottom edges\n6. First player to connect their edges wins" />
 
 </LinearLayout>
