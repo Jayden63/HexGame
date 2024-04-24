@@ -1,8 +1,12 @@
 package edu.up.cs301.hex;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Shader;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
@@ -27,14 +31,20 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     private HexState hexState;
     private final Paint redBackground = new Paint();
     private final Paint blueBackground = new Paint();
+    private final Paint gradPaint = new Paint();
+    private final Path redRect = new Path();
+    private int startColor = Color.BLUE;
+    private int endColor = Color.RED;
+    private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+    private float gradientPosition = 0;
+
+
 
 
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
 
-
-        setBackgroundColor(0xFF000000);
 
         hexState = new HexState();
         //hexState.initializeGrid();
@@ -43,6 +53,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         redBackground.setColor(0xFFFF2233);
         redBackground.setStyle(Paint.Style.FILL_AND_STROKE);
         blueBackground.setColor(0xFF2233FF);
+        startAnimation();
 
         setWillNotDraw(false);
 
@@ -110,7 +121,31 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         super.onDraw(canvas);
 
 
+        // Calculate the current color based on the gradient position
+        int currentColor = (Integer) argbEvaluator.evaluate(gradientPosition, startColor, endColor);
 
+        // Create a new gradient using the current color and a fixed end color
+        LinearGradient gradient = new LinearGradient(0, 0, 0, getHeight(), currentColor, endColor, Shader.TileMode.REPEAT);
+        gradPaint.setShader(gradient);
+        canvas.drawPaint(gradPaint);
+
+
+        // Shape of red rectangle
+        redRect.moveTo(0, height / 2f - 200); // Top left
+        redRect.lineTo(width, height / 2f - 200); // Top right
+        redRect.lineTo(width, height / 2f + 200); // Bottom right
+        redRect.lineTo(0, height / 2f + 200); // Bottom left
+        redRect.close();
+        //canvas.drawPath(redRect, redBackground);
+
+        // Shape of blue rectangle
+        Path blueRect = new Path();
+        blueRect.moveTo(width / 2f - 425, 0); // Top left
+        blueRect.lineTo(width / 2f + 30, 0); // Top right
+        blueRect.lineTo(width / 2f + 425, height); // Bottom right
+        blueRect.lineTo(width / 2f - 30, height); // Bottom left
+        blueRect.close();
+        //canvas.drawPath(blueRect, blueBackground);
 
 
         // To draw the hexTile borders of the hex grid
@@ -166,5 +201,23 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
                 }
             }
         }
+    }//onDraw
+
+
+    public void startAnimation() {
+        ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
+        animator.setDuration(4000); // Duration can be changed
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                gradientPosition = (float) animation.getAnimatedValue();
+                invalidate(); // Redraw the view
+            }
+        });
+        animator.start();
     }
 }//onDraw
+
+
