@@ -11,6 +11,8 @@ import edu.up.cs301.GameFramework.gameConfiguration.*;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.Random;
 
 /**
  * this is the primary activity for Counter game
@@ -33,20 +35,58 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 	// to play the music
 	private MediaPlayer musicPlayer;
-
-
-
+	public int[] songResources = {R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself}; // Array of song resources
+	public Random random = new Random();
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// initializes the MediaPlayer and plays the music
-		musicPlayer = MediaPlayer.create(getApplicationContext(), R.raw.home_depot_theme);
-		// loops the music
-		musicPlayer.setLooping(true);
-		musicPlayer.start();
+		setupMusicPlayer();
+
 
 
 	}
+
+	private void setupMusicPlayer() {
+		// Initialize MediaPlayer with a random song
+		int randomIndex = random.nextInt(songResources.length);
+		musicPlayer = MediaPlayer.create(this, songResources[randomIndex]);
+		musicPlayer.setLooping(false); // Ensure the player does not loop songs
+
+		// Set up listener to play a random song when one finishes
+		musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				playNextRandomSong();
+			}
+		});
+
+		musicPlayer.start(); // Start playing the song
+	}
+
+	private void playNextRandomSong() {
+		// Release the current MediaPlayer
+		if (musicPlayer != null) {
+			musicPlayer.release();
+		}
+
+		// Select a random new song index
+		int randomIndex = random.nextInt(songResources.length);
+		musicPlayer = MediaPlayer.create(this, songResources[randomIndex]);
+
+		// Listen for completion again
+		musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				playNextRandomSong(); // Recursive call to change to another random song when current ends
+			}
+		});
+
+		musicPlayer.start(); // Start playing the new random song
+	}
+
+
+
 
 	/**
 	 * Create the default configuration for this game:
