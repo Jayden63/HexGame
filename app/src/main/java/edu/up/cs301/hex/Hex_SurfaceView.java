@@ -7,15 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
-import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.graphics.Color;
 import android.graphics.Path;
-
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import java.io.Serializable;
 
 
@@ -33,9 +29,9 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     private final Paint blueBackground = new Paint();
     private final Paint gradPaint = new Paint();
     private final Path redRect = new Path();
-    private int startColor = Color.BLUE;
-    private int endColor = Color.RED;
-    private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+    private int startColor = Color.BLUE; // For gradient
+    private int endColor = Color.RED; // For gradient
+    private final ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private float gradientPosition = 0;
 
 
@@ -49,10 +45,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         hexState = new HexState();
         //hexState.initializeGrid();
 
-        // For background rectangles
-        redBackground.setColor(0xFFFF2233);
-        redBackground.setStyle(Paint.Style.FILL_AND_STROKE);
-        blueBackground.setColor(0xFF2233FF);
+        // Starts the dynamic gradient background
         startAnimation();
 
         setWillNotDraw(false);
@@ -122,30 +115,21 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
 
         // Calculate the current color based on the gradient position
-        int currentColor = (Integer) argbEvaluator.evaluate(gradientPosition, startColor, endColor);
+        int currentColor =
+                (Integer) argbEvaluator.evaluate(gradientPosition, startColor, endColor);
 
         // Create a new gradient using the current color and a fixed end color
-        LinearGradient gradient = new LinearGradient(0, 0, 0, getHeight(), currentColor, endColor, Shader.TileMode.REPEAT);
+        LinearGradient gradient =
+                // The style of the gradient
+                new LinearGradient(00, 00, getWidth() * 10, 0,
+                        currentColor, endColor, Shader.TileMode.CLAMP);
+
+
+        // Sets the paint to the gradient object
         gradPaint.setShader(gradient);
+
+        // Draws the gradient in the surface view
         canvas.drawPaint(gradPaint);
-
-
-        // Shape of red rectangle
-        redRect.moveTo(0, height / 2f - 200); // Top left
-        redRect.lineTo(width, height / 2f - 200); // Top right
-        redRect.lineTo(width, height / 2f + 200); // Bottom right
-        redRect.lineTo(0, height / 2f + 200); // Bottom left
-        redRect.close();
-        //canvas.drawPath(redRect, redBackground);
-
-        // Shape of blue rectangle
-        Path blueRect = new Path();
-        blueRect.moveTo(width / 2f - 425, 0); // Top left
-        blueRect.lineTo(width / 2f + 30, 0); // Top right
-        blueRect.lineTo(width / 2f + 425, height); // Bottom right
-        blueRect.lineTo(width / 2f - 30, height); // Bottom left
-        blueRect.close();
-        //canvas.drawPath(blueRect, blueBackground);
 
 
         // To draw the hexTile borders of the hex grid
@@ -154,7 +138,8 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
             // The top border of the hex grid
             float x = width_SurfaceView + (i * (float) (hexState.hexSize * 1.9f));
-            HexTile topBorderTiles = new HexTile(x, height_SurfaceView - 21, Color.BLUE);
+            HexTile topBorderTiles =
+                    new HexTile(x, height_SurfaceView - 21, Color.BLUE);
             topBorderTiles.draw(canvas);
 
             // The right border of the hex grid
@@ -165,7 +150,8 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
             // The bottom border of the hex grid
             float x2 = width_SurfaceView + 370 + (i * (float) (hexState.hexSize * 1.9f));
-            HexTile bottomBorderTiles = new HexTile(x2, height_SurfaceView + 666, Color.BLUE);
+            HexTile bottomBorderTiles =
+                    new HexTile(x2, height_SurfaceView + 666, Color.BLUE);
             bottomBorderTiles.draw(canvas);
 
             // The left border of the hex grid
@@ -174,7 +160,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
             HexTile leftBorderTiles = new HexTile(x3, y, Color.RED);
             leftBorderTiles.draw(canvas);
 
-        }//onDraw
+        }
 
 
         // Draws each tile in the Hex Grid
@@ -187,6 +173,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
                 hexState.grid[i][j].setCenterX(width_SurfaceView + (i * 37)
                         // The x distance between individual tiles in the same row
                         + (float) (j * hexState.hexSize * 1.90));
+
 
                 // The y distance between rows. Greater value = greater distance
                 hexState.grid[i][j].setCenterY(height_SurfaceView
@@ -204,20 +191,38 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     }//onDraw
 
 
+    /**
+     * startAnimation()
+     *
+     * This method is used to start the dynamic gradient background animation
+     * In the Surface View.
+     */
     public void startAnimation() {
+        // Animator object animates between two values, the two colors
         ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
-        animator.setDuration(4000); // Duration can be changed
+
+        // 10 seconds is a good time to minimize distraction and seizures
+        animator.setDuration(10000); // Duration can be changed
+
+        // Animation will run in the anti direction when it ends
         animator.setRepeatMode(ValueAnimator.REVERSE);
+
+        // Will always run
         animator.setRepeatCount(ValueAnimator.INFINITE);
+
+        // Updates the value to 0 or 1, the red & blue colors
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
+            // Always called to update the animation
             public void onAnimationUpdate(ValueAnimator animation) {
                 gradientPosition = (float) animation.getAnimatedValue();
                 invalidate(); // Redraw the view
             }
         });
+        // Called in every animation frame
         animator.start();
-    }
-}//onDraw
+
+    }//startAnimation
+}
 
 
