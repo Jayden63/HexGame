@@ -8,10 +8,8 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.gameConfiguration.*;
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
 /**
@@ -35,7 +33,9 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 	// to play the music
 	private MediaPlayer musicPlayer;
-	public int[] songResources = {R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself}; // Array of song resources
+
+	// Array of song resources
+	public int[] songResources = {R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself};
 	public Random random = new Random();
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,30 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 		musicPlayer.start(); // Start playing the song
 	}
+	// Method to handle starting or resuming the music
+	public void playMusic() {
+		if (musicPlayer == null) {
+			int randomIndex = random.nextInt(songResources.length);
+			musicPlayer = MediaPlayer.create(this, songResources[randomIndex]);
+			musicPlayer.setLooping(true);
+			musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					playNextRandomSong(); // Play next random song when current ends
+				}
+			});
+			musicPlayer.start();
+		} else {
+			musicPlayer.start(); // Resume playing if already initialized
+		}
+	}
+
+	// Method to pause the music
+	public void pauseMusic() {
+		if (musicPlayer != null && musicPlayer.isPlaying()) {
+			musicPlayer.pause();
+		}
+	}
 
 	private void playNextRandomSong() {
 		// Release the current MediaPlayer
@@ -78,7 +102,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 			@Override
 			public void onCompletion(MediaPlayer mp) {
-				playNextRandomSong(); // Recursive call to change to another random song when current ends
+				// Recursive call to change to another random song when current ends
+				playNextRandomSong();
 			}
 		});
 
@@ -126,8 +151,9 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		// - from 1 to 2 players
 		// - name of game is "Counter Game"
 		// - port number as defined above
-		GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Hex",
-				PORT_NUMBER);
+		GameConfig defaultConfig =
+				new GameConfig(playerTypes, 1, 2,
+						"Hex", PORT_NUMBER);
 
 		// Add the default players to the configuration
 		defaultConfig.addPlayer("Human", 0); // player 1: a human player
@@ -153,7 +179,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	@Override
 	public LocalGame createLocalGame(GameState state) {
 		if (state == null)
-			state = new HexState(); //hexstate parameters originally it was zero since it took in int as a param but now we removed it
+			//hexstate parameters originally was zero since it took in int as a param but now we removed it
+			state = new HexState();
 		return new HexLocalGame(state);
 	}
 
@@ -162,7 +189,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	 Date: 23 April 2024
 	 Problem: Did not know how to add music to the game
 	 Resource:
-	 https://www.geeksforgeeks.org/how-to-add-audio-files-to-android-app-in-android-studio/
+	 <a href="https://www.geeksforgeeks.org/how-to-add-audio-files-to-android-app-in-android-studio/">...</a>
 	 Solution: I had to add a separate MediaPlayer class to play music
 	 */
 	protected void onDestroy() {

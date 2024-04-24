@@ -1,20 +1,9 @@
 package edu.up.cs301.hex;
 
-import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
-import edu.up.cs301.hex.R;
-
-import android.app.Activity;
 import android.graphics.Color;
-import android.os.Handler;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
-
-import java.io.Serial;
 import java.io.Serializable;
-import java.util.Random;
 
 
 /**
@@ -40,8 +29,6 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 	// serial ID
 	public static final long serialVersionUID = 202442391220L;
 
-	private Random random;
-
 	/**
 	 * Constructor for objects of class HexComputerPlayer2
 	 *
@@ -49,8 +36,8 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 	 */
 	public HexComputerPlayer2(String name) {
 		super(name);
-		random = new Random();
 	}
+
 
 	/**
 	 * Called when the game state updates
@@ -78,13 +65,13 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 					// send a move action to the game
 					game.sendAction(new HexMoveAction(this, move[0], move[1]));
 					// after making a move, we should return to avoid making further moves
-					return;
 				}
 			}
 
 
 		}
 	}
+
 
 	/**
 	 * Finds a strategic move based on the current state and the player's number.
@@ -117,8 +104,20 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 	}
 
 
+	/**
+	 * evaluateMove() evaluates the score of a game for the smart AI player
+	 * @param state // The state of the game
+	 * @param x // the hexTile x position in the hex grid array
+	 * @param y // the hexTile y position in the hex grid array
+	 * @param playerNum // To determine the AI's player color
+	 * @return double // The score of the move
+	 */
 	private double evaluateMove(HexState state, int x, int y, int playerNum) {
+
+		// The value to return
 		double score = 0;
+
+		// Gets the size of the grid
 		int gridSize = state.gridSize;
 
 		if (playerNum == 1) { // Red plays horizontally
@@ -127,14 +126,21 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 			score -= Math.min(y, gridSize - 1 - y);
 		}
 
-		int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}};
+		// Defines the possible direction of movements in the grid
+		int[][] directions =
+				{{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}};
 		for (int[] dir : directions) {
+			// To calculate the new coordinates
 			int nx = x + dir[0];
 			int ny = y + dir[1];
-			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (playerNum == 1 ? HexState.RED : HexState.BLUE)) {
+
+			// Plays move if valid move & tile in new coordinate is player color
+			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (playerNum == 1 ?
+					HexState.RED : HexState.BLUE)) {
 				score += 5;
 			}
 		}
 
 		return score;
-	}}
+	}//evaluateMove
+}

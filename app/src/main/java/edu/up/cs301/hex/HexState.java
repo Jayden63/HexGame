@@ -1,18 +1,12 @@
 package edu.up.cs301.hex;
 
 import android.graphics.Color;
-import android.widget.TextView;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-
-import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
-import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 
 
 /**
- * This contains the state for our Hex game. The state consist of who won the game and whos turn it is
+ * This contains the state for our Hex game. The state consist of who won the game and who's turn it is
  *
  * @author Steven R. Vegdahl
  * @author Cody Gima
@@ -26,14 +20,9 @@ public class HexState extends GameState implements Serializable {
 	// serial ID
 	public static final long serialVersionUID = 202442384830L;
 
-	private String playerWinner; // To return the name of the player winner
+	//private String playerWinner; // To return the name of the player winner
 	//private Player player1; // First player, red
 	//private Player player2; // Second player, blue
-
-	//For Undo:  save location of last move
-
-	private int lastPlaceTileX;
-	private int lastPlaceTileY;
 
 	public int gridSize;
 	HexTile[][] grid;
@@ -62,10 +51,8 @@ public class HexState extends GameState implements Serializable {
 
 	/**
 	 * copy constructor; makes a copy of the original object
-	 *
 	 * Implementing a copy constructor that makes a deep copy of HexState
 	 * A pointer to our original HexState
-	 *
 	 *
 	 * @param orig the object from which the copy should be made
 	 */
@@ -76,7 +63,7 @@ public class HexState extends GameState implements Serializable {
 		this.playerColor = orig.playerColor;
 		this.playerTurnID= orig.playerTurnID;
 
-		//this doens't work
+		//this doesn't work
 		copyGrid(orig.grid);
 	}//HexState
 
@@ -126,7 +113,7 @@ public class HexState extends GameState implements Serializable {
 	public boolean blueWins() {
 		//loops through up and down the grid board
 		for (int col = 0; col < grid.length; col++) {
-			//checks if there is a blue tile on each index of the colums and checks if they are connected
+			//checks if there is a blue tile on each index of the columns and checks if they are connected
 			if (grid[0][col].getColor() == Color.BLUE && isConnected(0, col, new boolean[grid.length][grid.length], BLUE)) {
 				return true;
 			}
