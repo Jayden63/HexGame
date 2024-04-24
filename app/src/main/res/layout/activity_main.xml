@@ -105,13 +105,6 @@
 
             </LinearLayout>-->
 
-            <TextView
-                android:id="@+id/playerTurnIDView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="TextView" />
-
             <LinearLayout
                 android:id="@+id/ll_Settings"
                 android:layout_width="wrap_content"
@@ -119,9 +112,20 @@
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="10sp"
                 android:layout_weight="0"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingHorizontal="15sp">
 
+
+                <ImageButton
+                    android:id="@+id/skip_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:background="#00000000"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_skip" />
 
                 <ImageButton
                     android:id="@+id/settings_button"

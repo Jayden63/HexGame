@@ -10,7 +10,7 @@ really need to.-->
     <string name="delete_game">Delete Game</string>
     <!--The following are Configuration menu strings-->
     <string name="title_activity_game_main">Shall We Play A Game?</string>
-    <string name="menu_title">MAIN MENU</string>
+    <string name="menu_title">HEX GAME MENU</string>
     <string name="save_config">Save As Default Configuration</string>
     <string name="begin_game">Begin Game</string>
     <string name="name_label">Name:</string>

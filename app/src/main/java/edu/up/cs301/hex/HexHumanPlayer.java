@@ -1,5 +1,6 @@
 package edu.up.cs301.hex;
 
+import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
@@ -42,6 +43,9 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 	//Whose turn is it / winner notification text view
 	TextView turnTV;
+
+	TextView playerOneText;
+	TextView playerTwoText;
 	TextView playerTurnID_View;
 
 	// the most recent game state, as given to us by the CounterLocalGame
@@ -157,8 +161,15 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		// remember the activity
 		this.myActivity = (HexMainActivity) activity;
 
+
+
 		// loads the layout resource for our GUI
 		activity.setContentView(R.layout.activity_main);
+
+		this.playerOneText = activity.findViewById(R.id.PLAYER1_textView);
+		this.playerTwoText = activity.findViewById(R.id.PLAYER2_textView);
+
+
 
 		this.turnTV = activity.findViewById(R.id.turnView);
 		//this.playerTurnID_View = activity.findViewById(R.id.playerTurnIDView);
