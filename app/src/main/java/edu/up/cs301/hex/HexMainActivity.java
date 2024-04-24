@@ -113,6 +113,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 
 
+
 	/**
 	 * Create the default configuration for this game:
 	 * - one human player vs. one computer player
