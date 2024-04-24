@@ -109,6 +109,26 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 		musicPlayer.start(); // Start playing the new random song
 	}
+	public void skipMusic() {
+		  // this method sets up and starts the next song
+		if (musicPlayer != null) {
+			musicPlayer.release();
+		}
+
+		// select a random new song index
+		int randomIndex = random.nextInt(songResources.length);
+		musicPlayer = MediaPlayer.create(this, songResources[randomIndex]);
+
+		// set up the MediaPlayer to listen for completion again
+		musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				playNextRandomSong();  // recursive call to continue to the next random song
+			}
+		});
+
+		musicPlayer.start();  // start playing the new random song
+	}
 
 
 
