@@ -21,9 +21,8 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
 
     // Size and shape variables
-    private float height_SurfaceView;
-    private float width_SurfaceView;
-    private float width, height;
+    private float center_Height;
+    private float center_Width;
     private HexState hexState;
     private final Paint redBackground = new Paint();
     private final Paint blueBackground = new Paint();
@@ -84,18 +83,21 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
+        //
+        //float width, height;
+
         // Calling the parent
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         // Assign width to the width of the surface view
-        width = MeasureSpec.getSize(widthMeasureSpec);
+        center_Width = MeasureSpec.getSize(widthMeasureSpec);
 
         // Assigns height to the height of surface view
-        height = MeasureSpec.getSize(heightMeasureSpec);
+        center_Height = MeasureSpec.getSize(heightMeasureSpec);
 
         // Fine tuning both values to make it centered
-        width_SurfaceView = (width / 2f) - 555f;//555
-        height_SurfaceView = (height / 2f) - 340f;
+        center_Width = (center_Width / 2f) - 555f;//555
+        center_Height = (center_Height / 2f) - 340f;
 
     }//onMeasure
 
@@ -137,26 +139,26 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         for (int i = 0; i < hexState.gridSize; i++) {
 
             // The top border of the hex grid
-            float x = width_SurfaceView + (i * (float) (hexState.hexSize * 1.9f));
+            float x = center_Width + (i * (float) (hexState.hexSize * 1.9f));
             HexTile topBorderTiles =
-                    new HexTile(x, height_SurfaceView - 21, Color.BLUE);
+                    new HexTile(x, center_Height - 21, Color.BLUE);
             topBorderTiles.draw(canvas);
 
             // The right border of the hex grid
-            float x4 = width_SurfaceView + 760 + (i * 37); //780
-            float y2 = height_SurfaceView - 11 + (i * (float) (hexState.hexSize * 1.65f)); //28
+            float x4 = center_Width + 760 + (i * 37); //780
+            float y2 = center_Height - 11 + (i * (float) (hexState.hexSize * 1.65f)); //28
             HexTile rightBorderTiles = new HexTile(x4, y2, Color.RED);
             rightBorderTiles.draw(canvas);
 
             // The bottom border of the hex grid
-            float x2 = width_SurfaceView + 370 + (i * (float) (hexState.hexSize * 1.9f));
+            float x2 = center_Width + 370 + (i * (float) (hexState.hexSize * 1.9f));
             HexTile bottomBorderTiles =
-                    new HexTile(x2, height_SurfaceView + 666, Color.BLUE);
+                    new HexTile(x2, center_Height + 666, Color.BLUE);
             bottomBorderTiles.draw(canvas);
 
             // The left border of the hex grid
-            float x3 = width_SurfaceView - 20 + (i * 37); //20
-            float y = height_SurfaceView + 11 + ((i * (float) (hexState.hexSize) * 1.65f));
+            float x3 = center_Width - 20 + (i * 37); //20
+            float y = center_Height + 11 + ((i * (float) (hexState.hexSize) * 1.65f));
             HexTile leftBorderTiles = new HexTile(x3, y, Color.RED);
             leftBorderTiles.draw(canvas);
 
@@ -170,13 +172,13 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
                 // Copied values from HexState but making x values centered
                 // The x distance of different rows
-                hexState.grid[i][j].setCenterX(width_SurfaceView + (i * 37)
+                hexState.grid[i][j].setCenterX(center_Width + (i * 37)
                         // The x distance between individual tiles in the same row
                         + (float) (j * hexState.hexSize * 1.90));
 
 
                 // The y distance between rows. Greater value = greater distance
-                hexState.grid[i][j].setCenterY(height_SurfaceView
+                hexState.grid[i][j].setCenterY(center_Height
                         + (float) (i * (hexState.hexSize * 1.65f)));
 
                 // To draw the grid in the surface view
