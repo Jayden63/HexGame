@@ -13,8 +13,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.util.Log;
@@ -55,6 +57,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	Button newGameButton;
 //exit game button
 	Button exitGameButton;
+
+	Switch musicSwitch;
 
 	private MediaPlayer sfx;
 
@@ -192,6 +196,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		TextView item2 = (TextView) viewLayout.findViewById(R.id.textView2);
 		this.newGameButton =(Button) viewLayout.findViewById(R.id.newgame_button);
 		this.exitGameButton = (Button) viewLayout.findViewById(R.id.exitgame_button);
+		this.musicSwitch = (Switch) viewLayout.findViewById(R.id.switch2);
 				newGameButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -210,6 +215,17 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 		popDialog.setTitle("Settings");
 		popDialog.setView(viewLayout);
+
+		musicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (!isChecked) {
+					((HexMainActivity) myActivity).pauseMusic();
+				} else {
+					((HexMainActivity) myActivity).playMusic();
+				}
+			}
+		});
 
 		/*SeekBar seek1 = (SeekBar) viewLayout.findViewById(R.id.seekBar);
 
