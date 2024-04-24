@@ -3,7 +3,6 @@ package edu.up.cs301.hex;
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -15,12 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.util.Log;
-
 import java.io.Serializable;
 
 /**
@@ -73,7 +70,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	 * Returns the GUI's top view object
 	 *
 	 * @return
-	 * 		the top object in the GUI's view heirarchy
+	 * 		the top object in the GUI's view hierarchy
 	 */
 	public View getTopView() {
 		return myActivity.findViewById(R.id.top_layout);
@@ -145,7 +142,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	}
 
 	/**
-	 * callback method--our game has been chosen/rechosen to be the GUI,
+	 * callback method--our game has been chosen to be the GUI,
 	 * called from the GUI thread
 	 *
 	 * @param activity
@@ -280,7 +277,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	//code by Chengen
 	//
 	//method for the rules popup
-	//contains the textviews for the rules of the game
+	//contains the text views for the rules of the game
 	//
 	public void ShowRuleBook() {
 		AlertDialog.Builder popDialog = new AlertDialog.Builder(myActivity);

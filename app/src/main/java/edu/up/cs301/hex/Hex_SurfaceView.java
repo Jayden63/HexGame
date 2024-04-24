@@ -13,7 +13,16 @@ import android.graphics.Color;
 import androidx.annotation.NonNull;
 import java.io.Serializable;
 
-
+/**
+ * Hex_SurfaceView displays the hex grid
+ *
+ * @author Cody Gima
+ * @author Jayden Zeng
+ * @author Chengen Li
+ * @author Eduardo Gonon
+ *
+ * @version April 2024
+ */
 public class Hex_SurfaceView extends SurfaceView implements Serializable {
     // serial ID
     public static final long serialVersionUID = 202442385352L;

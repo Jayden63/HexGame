@@ -23,10 +23,10 @@ import edu.up.cs301.GameFramework.actionMessage.GameAction;
 	public static final long serialVersionUID = 202442385301L;
 
 		// The row where the player wants to place the hex tile
-		private int row;
+		private final int row;
 
 		// The column where the player wants to place the hex tile
-		private int col;
+		private final int col;
 
 		/**
 		 * Constructor for the HexMoveAction class.

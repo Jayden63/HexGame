@@ -4,8 +4,6 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
-
-import android.graphics.Color;
 import android.util.Log;
 
 import java.io.Serializable;
@@ -30,7 +28,7 @@ public class HexLocalGame extends LocalGame implements Serializable {
 	public static final long serialVersionUID = 202442384845L;
 
 	// the game's state
-	private HexState gameState;
+	private final HexState gameState;
 
 	/**
 	 * can this player move
@@ -41,14 +39,11 @@ public class HexLocalGame extends LocalGame implements Serializable {
 	 */
 	@Override
 	protected boolean canMove(int playerIdx) {
-		if (gameState.getPlayerTurnID() == playerIdx) {
-			return true;
-		}
-		return false;
+		return gameState.getPlayerTurnID() == playerIdx;
 	}
 
 	/**
-	 * This ctor should be called when a new counter game is started
+	 * This constructor should be called when a new counter game is started
 	 */
 	public HexLocalGame(GameState state) {
 		// initialize the game state, with the counter value starting at 0

@@ -4,11 +4,8 @@ import android.graphics.Color;
 
 import java.io.Serializable;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
-import edu.up.cs301.GameFramework.utilities.Tickable;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
@@ -28,7 +25,7 @@ import edu.up.cs301.GameFramework.utilities.Tickable;
 public class HexComputerPlayer1 extends GameComputerPlayer implements Serializable {
     // serial ID
     public static final long serialVersionUID = 202442385217L;
-    private Random random;
+    private final Random random;
     /**
      * Constructor for objects of class CounterComputerPlayer1
      * 
@@ -54,7 +51,8 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Serializab
 	protected void receiveInfo(GameInfo info) {
         // Check if it's not the computer player's turn
         if (!(info instanceof HexState)) {
-            return; // Ignore the message if it's not the computer player's turn or if the player is not active
+            // Ignore message if it's not AI player's turn or if the player is inactive
+            return;
         }
 
         HexState state = (HexState) info;
