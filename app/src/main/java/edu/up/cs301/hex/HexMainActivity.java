@@ -34,6 +34,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	// to play the music
 	private MediaPlayer musicPlayer;
 
+	MediaPlayer sfx;
+
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +43,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		musicPlayer = MediaPlayer.create(getApplicationContext(), R.raw.lebronmysun);
 		musicPlayer.setLooping(true);
 		musicPlayer.start();
+
+		sfx = MediaPlayer.create(getApplicationContext(), R.raw.bubblepop);
 	}
 
 	/**
