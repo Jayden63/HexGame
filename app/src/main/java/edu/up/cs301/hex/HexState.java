@@ -1,6 +1,7 @@
 package edu.up.cs301.hex;
 
 import android.graphics.Color;
+
 import android.os.Bundle;
 
 import java.io.Serializable;
@@ -36,6 +37,10 @@ public class HexState extends GameState implements Serializable {
 	public static final int RED = Color.RED;
 	public static final int BLUE = Color.BLUE;
 	public static final int EMPTY = Color.WHITE;
+
+
+
+
 
 	Random random;
 
@@ -185,7 +190,11 @@ public class HexState extends GameState implements Serializable {
 		// Update the player turn and color
 		playerTurnID = 1 - playerTurnID; // Toggle between player 0 and player 1
 
-		playerColor = (playerColor == RED) ? BLUE : RED; // Toggle between RED and BLUE
+		playerColor = (playerColor == RED) ? BLUE : RED;
+
+
+
+		// Toggle between RED and BLUE
 
 		return true;
 	}//placeTileAction

@@ -64,6 +64,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 	private MediaPlayer sfx;
 
+
+
 	// variable to keep track if names have been set
 	private boolean namesInitialized = false;
 
@@ -369,6 +371,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 						//sends a HexMoveAction
 						game.sendAction(new HexMoveAction(this, i, j));
+						((HexMainActivity) myActivity).soundEffect();
 
 						return true;
 					}
