@@ -39,7 +39,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	private MediaPlayer musicPlayer;
 
 	// Array of song resources
-	public int[] songResources = {R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself,R.raw.Jamal};
+	public int[] songResources = {R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself,R.raw.jamal};
 	public Random random = new Random();
 
 	public void onCreate(Bundle savedInstanceState) {
