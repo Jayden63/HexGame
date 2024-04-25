@@ -38,6 +38,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 	// to play the music
 	private MediaPlayer musicPlayer;
+	private int lastSongIndex = -1; //keep track of last song played
+
 	// Array of song resources
 	public int[] songResources =
 			{R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself,R.raw.jamal,R.raw.sza};
@@ -85,6 +87,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	}//setupMusicPlayer
 
 
+
 	/**
 	 * playMusic method handles starting and resuming the music in the game
 	 */
@@ -112,10 +115,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		if (musicPlayer != null && musicPlayer.isPlaying()) {
 			musicPlayer.pause();
 		}
-	}//pauseMusic
-
-	// Keep track of last song played
-	private int lastSongIndex = -1;
+	}
 
 
 	/**
@@ -284,6 +284,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	/**
 	 External Citation:
 	 Same as above
+	 *
 	 * This method displays the pop up window from the ad_popup xml
 	 */
 	public void showAdPopup() {

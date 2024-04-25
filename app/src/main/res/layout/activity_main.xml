@@ -67,46 +67,6 @@
                     android:textSize="50dp" />
             </LinearLayout>
 
-            <!--<LinearLayout
-                android:id="@+id/ll_Music"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                android:paddingHorizontal="5sp">-->
-
-            <!--<TextView
-                    android:id="@+id/MUSIC_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:text="Music"
-                    android:textSize="20sp" />
-
-                <SeekBar
-                    android:id="@+id/MUSIC_seekBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/SOUND_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:text="Sound"
-                    android:textSize="20sp" />
-
-                <SeekBar
-                    android:id="@+id/SOUND_seekBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingBottom="10sp" />
-
-            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/ll_Settings"
@@ -153,6 +113,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_Confirm"
             android:layout_width="wrap_content"
@@ -169,15 +130,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:orientation="horizontal">
-
-                <!--<Button
-                    android:id="@+id/confirm_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Undo"
-                    android:textSize="20sp"/>-->
-
 
             </LinearLayout>
         </LinearLayout>

@@ -20,11 +20,12 @@ public class HexState extends GameState implements Serializable {
 	// serial ID
 	public static final long serialVersionUID = 202442384830L;
 
-	public int gridSize;
-	HexTile[][] grid;
-	public float hexSize;
-	private int playerTurnID;
+	HexTile[][] grid; // 2D grid array stores each HexTile
+	public int gridSize; // dimensions of the grid
+	public float hexSize; // size of each hexTile
+	private int playerTurnID; // keeps track of the player's turn
 	private int playerColor;// color of the current hexTile based on who's turn it is
+
 	public static final int RED = Color.RED;
 	public static final int BLUE = Color.BLUE;
 	public static final int EMPTY = Color.WHITE;
@@ -247,6 +248,12 @@ public class HexState extends GameState implements Serializable {
 		return playerTurnID;
 	}
 
+
+	/**
+	 * gets the player color
+	 *
+	 * @return playerColor
+	 */
 	public int getPlayerColor() {
 		return playerColor;
 	}

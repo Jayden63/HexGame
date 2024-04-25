@@ -98,9 +98,10 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		this.playerOneText = myActivity.findViewById(R.id.PLAYER1_textView);
 		this.playerTwoText = myActivity.findViewById(R.id.PLAYER2_textView);
 
+
+
 		//String for the local human player
 		String playerOneName = " You";
-
 		//String for the other player
 		String playerTwoName = " Opponent";
 
