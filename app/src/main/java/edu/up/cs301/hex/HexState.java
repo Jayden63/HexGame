@@ -2,6 +2,8 @@ package edu.up.cs301.hex;
 
 import android.graphics.Color;
 import java.io.Serializable;
+import java.util.Random;
+
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 
 
@@ -31,17 +33,22 @@ public class HexState extends GameState implements Serializable {
 	private int playerColor;// color of the current hexTile based on who's turn it is
 	public static final int RED = Color.RED;
 	public static final int BLUE = Color.BLUE;
-
 	public static final int EMPTY = Color.WHITE;
+
+	Random random;
+
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
 	 *
 	 */
 	public HexState() {
 
+		//randomizes the turn
+		int randomTurn = (int) (Math.random() * 2);
+
 		this.gridSize = 11;
 		this.hexSize = 39;
-		this.playerTurnID = 0;
+		this.playerTurnID = randomTurn;
 		this.playerColor = RED;
 
 		initializeGrid();
@@ -62,7 +69,6 @@ public class HexState extends GameState implements Serializable {
 		this.hexSize = orig.hexSize;
 		this.playerColor = orig.playerColor;
 		this.playerTurnID= orig.playerTurnID;
-
 		//this doesn't work
 		copyGrid(orig.grid);
 	}//HexState
@@ -178,7 +184,9 @@ public class HexState extends GameState implements Serializable {
 
 		// Update the player turn and color
 		playerTurnID = 1 - playerTurnID; // Toggle between player 0 and player 1
-		playerColor = (playerTurnID == 0) ? Color.RED : Color.BLUE;
+
+		playerColor = (playerColor == RED) ? BLUE : RED; // Toggle between RED and BLUE
+
 		return true;
 	}//placeTileAction
 
@@ -254,8 +262,15 @@ public class HexState extends GameState implements Serializable {
 		return playerColor;
 	}
 
-	public void setPlayerColor(int playerColor) {
-		this.playerColor = playerColor;
+	public int setPlayerColor() {
+
+		if (playerTurnID == 0) {
+			return RED;
+		}
+		return BLUE;
 	}
+
+
+
 
 }

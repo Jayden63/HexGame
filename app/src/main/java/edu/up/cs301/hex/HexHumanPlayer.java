@@ -43,14 +43,11 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 	//Whose turn is it / winner notification text view
 	TextView turnTV;
-
 	TextView playerOneText;
 	TextView playerTwoText;
-	TextView playerTurnID_View;
 
 	// the most recent game state, as given to us by the CounterLocalGame
 	private HexState gameState;
-
 	private HexTile tile;
 
 	// the android activity that we are running
@@ -67,10 +64,12 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 	private MediaPlayer sfx;
 
+	// variable to keep track if names have been set
+	private boolean namesInitialized = false;
+
 	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);
 		this.gameState = gameState;
-
 
 	}
 
@@ -102,17 +101,38 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		//declares the turnTV as turnView
 		this.turnTV = (TextView) myActivity.findViewById(R.id.turnView);
 
+		//declares player name text
+		this.playerOneText = myActivity.findViewById(R.id.PLAYER1_textView);
+		this.playerTwoText = myActivity.findViewById(R.id.PLAYER2_textView);
 
-		//Tell the user whose turn it is
-		String turnIdText = "current player ID: " + Integer.toString(gameState.getPlayerTurnID());
-		String turnText = "Red's turn";
+		//String for the local human player
+		String playerOneName = " You";
+
+		//String for the other player
+		String playerTwoName = " Opponent";
+
+		// sets the player names based on which player goes first
+		if (!namesInitialized) {
+			if (gameState.getPlayerTurnID() == 1) {
+				String temp = playerOneName;
+				playerOneName = playerTwoName;
+				playerTwoName = temp;
+			}
+			playerOneText.setText(playerOneName);
+			playerTwoText.setText(playerTwoName);
+			namesInitialized = true;
+		}
+
+
+
+		String turnText = "Red's Turn";
 		turnTV.setTextColor(Color.RED);
 
-		if (this.gameState.getPlayerTurnID() == 1) {
-			turnText = "Blue's turn";
+		if (this.gameState.getPlayerColor() == Color.BLUE) {
+			turnText = "Blue's Turn";
 			turnTV.setTextColor(Color.BLUE);
-
 		}
+
 
 
 
@@ -130,6 +150,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 		//updates the turnTV textView
 		this.turnTV.setText(turnText);
+		//this.playerTurnID_View.setText(turnIdText);
 	}
 
 

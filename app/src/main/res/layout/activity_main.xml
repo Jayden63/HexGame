@@ -35,6 +35,7 @@
                     android:layout_weight="1"
                     android:drawableStart="@drawable/ic_red_hex"
                     android:text=" Player 1 "
+                    android:textStyle="italic"
                     android:textSize="30sp" />
 
                 <TextView
@@ -44,6 +45,7 @@
                     android:layout_weight="1"
                     android:drawableStart="@drawable/ic_blue_hex"
                     android:text=" Player 2  "
+                    android:textStyle="italic"
                     android:textSize="30sp" />
             </LinearLayout>
 
@@ -59,8 +61,9 @@
                     android:id="@+id/turnView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:text=""
+                    android:textStyle="bold|italic"
                     android:textSize="60sp" />
             </LinearLayout>
 
@@ -118,8 +121,8 @@
 
                 <ImageButton
                     android:id="@+id/skip_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_weight="0"
                     android:layout_gravity="center"
                     android:layout_marginRight="20dp"
@@ -129,8 +132,8 @@
 
                 <ImageButton
                     android:id="@+id/settings_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="20dp"
                     android:background="#00000000"
@@ -139,12 +142,12 @@
 
                 <ImageButton
                     android:id="@+id/rules_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:background="#00000000"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_rules_icon" />
+                    android:src="@drawable/ic_rules_icon"/>
 
 
             </LinearLayout>

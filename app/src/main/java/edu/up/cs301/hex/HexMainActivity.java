@@ -8,6 +8,9 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.gameConfiguration.*;
+
+import android.animation.ArgbEvaluator;
+import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import java.util.Random;
@@ -30,6 +33,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 	// the port number that this game will use when playing over the network
 	private static final int PORT_NUMBER = 2234;
+
 
 	// to play the music
 	private MediaPlayer musicPlayer;
