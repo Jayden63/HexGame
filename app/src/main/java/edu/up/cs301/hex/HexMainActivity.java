@@ -39,7 +39,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	private MediaPlayer musicPlayer;
 	private HexState hexState;
 	private MediaPlayer soundEffects;
-	public int soundEffect= R.raw.home_depot_theme;
+	public int soundEffect= R.raw.pop;
 
 
 	// Array of song resources
@@ -77,6 +77,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 			int randomIndex = random.nextInt(songResources.length);
 			musicPlayer = MediaPlayer.create(this, songResources[randomIndex]);
 			musicPlayer.setLooping(true);
+			musicPlayer.setVolume(0.5f, 0.5f);
 			musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 				@Override
 				public void onCompletion(MediaPlayer mp) {
@@ -130,7 +131,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 	public void soundEffect() {
 		// Assuming soundEffect is an int representing a resource ID
-		MediaPlayer soundEffects = MediaPlayer.create(this, R.raw.home_depot_theme); // Example using R.raw.sound_effect
+		MediaPlayer soundEffects = MediaPlayer.create(this, R.raw.pop); // Example using R.raw.sound_effect
+		soundEffects.setVolume(1f,1f);
 		soundEffects.setLooping(false); // Ensure the sound does not loop
 
 		// Set a listener to release the MediaPlayer resources once the sound is complete
