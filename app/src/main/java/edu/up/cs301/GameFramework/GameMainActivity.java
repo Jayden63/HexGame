@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -29,9 +28,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import edu.up.cs301.GameFramework.gameConfiguration.GameConfig;
 import edu.up.cs301.GameFramework.gameConfiguration.GamePlayerType;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
@@ -40,7 +36,6 @@ import edu.up.cs301.GameFramework.utilities.IPCoder;
 import edu.up.cs301.GameFramework.utilities.Logger;
 import edu.up.cs301.GameFramework.utilities.MessageBox;
 import edu.up.cs301.GameFramework.utilities.Saving;
-
 import edu.up.cs301.hex.R;
 
 /**
@@ -85,8 +80,7 @@ public abstract class GameMainActivity extends Activity implements
     // whether the game is in the "configuration" stage, before the actual game
     // has started
     private boolean doingConfiguration = true;
-    private SurfaceView surfaceView;
-    private SurfaceHolder surfaceHolder;
+
 
     /**
      * contains the game configuration this activity will be used to initialize
@@ -253,11 +247,6 @@ public abstract class GameMainActivity extends Activity implements
         // run the thread
         Thread t = new Thread(runner);
         t.start();
-//		try {
-//			// join the thread to that we don't get ahead of it
-//			t.join();
-//		} catch (InterruptedException e) {
-//		}
 
     }//hideSoftKeyboard
 

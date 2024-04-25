@@ -1,7 +1,5 @@
 package edu.up.cs301.hex;
 
-import static java.lang.Math.log;
-
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -9,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
-import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.graphics.Color;
@@ -42,7 +39,6 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     private final Paint gradPaint = new Paint();
     private final ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private float gradientPosition = 0;
-
     public static float scaleFactor = 1.0f;
     private final ScaleGestureDetector scaleGestureDetector;
 
@@ -80,8 +76,8 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         // Let the ScaleGestureDetector inspect all events
         scaleGestureDetector.onTouchEvent(event);
 
+        // Updating the hex grid after a pinch zoom
         updateHexGrid();
-        //updateHexGrid();
         return true;
     }
 
@@ -90,10 +86,18 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
         this.hexState = hexState;
 
-
         invalidate();
-        //TODO:  trigger a redraw event (mystery to solve)
     }
+
+    /**
+     * External Citation
+     * Date: March 2024
+     * Problem: Surface View orientation only works in one mode
+     * Resource:
+     * https://stackoverflow.com/questions/23608236/in-surfaceviews-onmeasure-how-can-i-calculate-the-size-of-current-view
+     * Solution: I used the example code from this post to retrieve
+     * The Surface View dimensions and use it to make the grid centered
+     */
 
 
     /**
@@ -129,6 +133,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         center_Height = (height_SurfaceView / 2f) - 322f;
 
     }//onMeasure
+
 
     /**
      * External Citation
@@ -200,9 +205,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
             float y = center_Height + 11 + ((i * (hexState.hexSize) * 1.65f));
             HexTile leftBorderTiles = new HexTile(x3, y, Color.RED);
             leftBorderTiles.draw(canvas);
-
         }
-
 
         // Draws each tile in the Hex Grid
         // We are using the grid directly from the hexState class
@@ -235,8 +238,10 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
   public void updateHexGrid() {
 
+        // Updating the radius of HexTile according to scaleFactor
         HexTile.radius = HexTile.radius * (scaleFactor);
 
+        // Iterates Hex Grid to individually update each HexTile coordinate
         for (int i = 0; i < hexState.gridSize; i++) {
             for (int j = 0; j < hexState.gridSize; j++) {
                 HexTile tile = hexState.grid[i][j];
@@ -246,7 +251,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
                     float newCenterY = (tile.getCenterY() - (height_SurfaceView / 2))
                             * scaleFactor + (height_SurfaceView / 2);
 
-
+                    // Updating coordinate of each Hex Tile
                     tile.setCenterX(newCenterX);
                     tile.setCenterY(newCenterY);
 
@@ -258,6 +263,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         }
         invalidate();
     }
+
 
     /**
      * startAnimation()
@@ -311,8 +317,6 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
             // Don't let the object get too small or too large
             scaleFactor = Math.max(0.5f, Math.min(scaleFactor, 3.0f));
-
-            //updateHexGrid();
 
             invalidate();
             return true;

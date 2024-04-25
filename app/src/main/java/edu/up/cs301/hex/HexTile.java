@@ -28,25 +28,25 @@ public class HexTile implements Serializable {
     // Radius used for hexTile creation
     public static float radius;
 
-    // Color of the hexgrid
+    // Color of the Hex Grid
     private int color;
 
-    // Constructor for HexTile
+    /**
+     *
+     * Constructor for HexTile
+     * @param centerX // The x coordinate of the HexTile
+     * @param centerY // The y coordinate of the HexTile
+     * @param color // The color of the HexTile
+     */
     public HexTile(float centerX, float centerY, int color) {
 
         // The starting position of the first hexTile
         this.centerX = centerX;
         this.centerY = centerY;
-        this.radius = 42; // Adjust radius as needed
+        radius = 42; // Adjust radius as needed
         this.color = color;
     }
 
-
-    public static void updateCoordinates(HexTile tile) {
-        float scaleFactor = Hex_SurfaceView.scaleFactor;
-        tile.centerX *= scaleFactor;
-        tile.centerY *= scaleFactor;
-    }
 
     /** void draw(Canvas canvas)
      * draws a hexagon when HexTile is called
@@ -114,25 +114,22 @@ public class HexTile implements Serializable {
         return color;
     }
 
+    // Getter method for getting the HexTile x coordinate
     public float getCenterX() {
         return centerX;
     }
 
+    // For getting the HexTile y coordinate
     public float getCenterY() {
         return centerY ;
     }
-    public float getRadius()    {
-        return radius;
-    }
 
-    public void setRadius(float radius)    {
-        HexTile.radius = radius;
-    }
-
+    // For setting the HexTile x coordinate
     public void setCenterX(float centerX)    {
         this.centerX = centerX;
     }
 
+    // For getting the HexTile y coordinate
     public void setCenterY(float centerY) {
         this.centerY = centerY;
     }

@@ -3,6 +3,8 @@ package edu.up.cs301.hex;
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,11 +12,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
 import android.util.Log;
 
 import java.io.Serializable;
@@ -54,10 +54,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 //exit game button
 	Button exitGameButton;
 
+	@SuppressLint("UseSwitchCompatOrMaterialCode")
 	Switch musicSwitch;
-
-
-
 
 	// variable to keep track if names have been set
 	private boolean namesInitialized = false;
@@ -128,10 +126,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			turnTV.setTextColor(Color.BLUE);
 		}
 
-
-
-
-		//this.playerTurnID_View.setText(turnIdText);
 		//Update the surface view
 		this.mySurfaceView.setHexState(this.gameState);
 
@@ -174,22 +168,15 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	 */
 	public void setAsGui(GameMainActivity activity) {
 
-
 		// remember the activity
 		this.myActivity = (HexMainActivity) activity;
-
-
 
 		// loads the layout resource for our GUI
 		activity.setContentView(R.layout.activity_main);
 
 		this.playerOneText = activity.findViewById(R.id.PLAYER1_textView);
 		this.playerTwoText = activity.findViewById(R.id.PLAYER2_textView);
-
-
-
 		this.turnTV = activity.findViewById(R.id.turnView);
-		//this.playerTurnID_View = activity.findViewById(R.id.playerTurnIDView);
 
 		mySurfaceView = myActivity.findViewById(R.id.hex_grid);
 
@@ -197,15 +184,17 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		ImageButton btn2 = (ImageButton) activity.findViewById(R.id.rules_button);
 		ImageButton btn3 = (ImageButton) activity.findViewById(R.id.skip_button);
 
-
 		btn1.setOnClickListener(v -> ShowSettings());
 		btn2.setOnClickListener(v -> ShowRuleBook());
 		btn3.setOnClickListener(view -> ((HexMainActivity) myActivity).playNextRandomSong());
 
 		mySurfaceView.setOnTouchListener(this);
 
-	}
+	}//setAsGui
 
+	/**
+	 * ShowSettings pops up the layout dialog box
+	 */
 	public void ShowSettings() {
 		AlertDialog.Builder popDialog = new AlertDialog.Builder(myActivity);
 		LayoutInflater inflater = (LayoutInflater) myActivity.getLayoutInflater();
@@ -213,8 +202,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		View viewLayout = inflater.inflate(R.layout.activity_dialog,
 				(ViewGroup) myActivity.findViewById(R.id.layout_dialog));
 
-		TextView item1 = (TextView) viewLayout.findViewById(R.id.textView);
-		TextView item2 = (TextView) viewLayout.findViewById(R.id.textView2);
 		this.newGameButton =(Button) viewLayout.findViewById(R.id.newgame_button);
 		this.exitGameButton = (Button) viewLayout.findViewById(R.id.exitgame_button);
 		this.musicSwitch = (Switch) viewLayout.findViewById(R.id.switch2);
@@ -224,7 +211,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 					myActivity.finish();
 					System.exit(0);
 				});
-
 
 
 		popDialog.setTitle("Settings");
@@ -238,26 +224,24 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			}
 		});
 
-
 		popDialog.setPositiveButton("OK",
 				(dialogInterface, i) -> dialogInterface.dismiss());
 		popDialog.create();
 		popDialog.show();
-	}
 
-	//code by Chengen
-	//
-	//method for the rules popup
-	//contains the text views for the rules of the game
-	//
+	}//ShowSettings
+
+	/**
+	 * Code by Chengen
+	 * Method for rules pop up
+	 * Contains the Text Views for the rules of the game
+	 */
 	public void ShowRuleBook() {
 		AlertDialog.Builder popDialog = new AlertDialog.Builder(myActivity);
 		LayoutInflater inflater = (LayoutInflater) myActivity.getLayoutInflater();
 
 		View viewLayout = inflater.inflate(R.layout.activity_rule,
 				(ViewGroup) myActivity.findViewById(R.id.layout_rule));
-
-		TextView item2 = (TextView) viewLayout.findViewById(R.id.rule_text);
 
 		popDialog.setTitle("How To Play");
 		popDialog.setView(viewLayout);
@@ -270,10 +254,17 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	}
 
 
+	/**
+	 * onTouch function is in charge of
+	 *
+	 * @param view The view the touch event has been dispatched to.
+	 * @param event The MotionEvent object containing full information about
+	 *        the event.
+	 * @return true // if a touch has been performed
+	 */
 	@Override
 	public boolean onTouch(View view, MotionEvent event) {
 
-		HexMainActivity activity = new HexMainActivity();
 		// The coordinates registered by the touch
 		float x = event.getX();
 		float y = event.getY();

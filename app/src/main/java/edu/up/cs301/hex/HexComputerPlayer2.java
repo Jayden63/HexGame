@@ -26,8 +26,10 @@ import java.io.Serializable;
 
 
 public class HexComputerPlayer2 extends GameComputerPlayer implements Serializable {
+
 	// serial ID
 	public static final long serialVersionUID = 202442391220L;
+
 
 	/**
 	 * Constructor for objects of class HexComputerPlayer2
@@ -67,10 +69,8 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 					// after making a move, we should return to avoid making further moves
 				}
 			}
-
-
 		}
-	}
+	}//recieveInfo
 
 
 	/**
@@ -101,7 +101,8 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 
 		// If a move was found, return it; otherwise, return null
 		return bestMove;
-	}
+
+	}//findStrategicMove
 
 
 	/**

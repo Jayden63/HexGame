@@ -26,6 +26,8 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Serializab
     // serial ID
     public static final long serialVersionUID = 202442385217L;
     private final Random random;
+
+
     /**
      * Constructor for objects of class CounterComputerPlayer1
      * 
@@ -84,5 +86,5 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Serializab
                 break; // Exit the loop
             }
         }
-    }
+    }//recieveInfo
 }

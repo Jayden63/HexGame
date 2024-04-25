@@ -2,23 +2,19 @@ package edu.up.cs301.hex;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.gameConfiguration.*;
-
-
 import android.app.AlertDialog;
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
-
 import java.util.Random;
+
 
 /**
  * this is the primary activity for Counter game
@@ -48,15 +44,34 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 
 	// Array of song resources
-	public int[] songResources = {R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself,R.raw.jamal,R.raw.sza};
+	public int[] songResources =
+			{R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself,R.raw.jamal,R.raw.sza};
 	public Random random = new Random();
 
+	/**
+	 * onCreate() plays the music and sets up the ad in the game
+	 *
+	 * @param savedInstanceState If the activity is being re-initialized after
+	 *     previously being shut down then this Bundle contains the data it most
+	 *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+	 *
+	 */
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		// initializes the MediaPlayer and plays the music
 		setupMusicPlayer();
 		countDownForAd();
 	}
+
+	/**
+	 * External Citation
+	 * Date: April 2024
+	 * Problem: Didn't know how to add music to the game
+	 * Resource: https://www.youtube.com/watch?v=efY_P8mKUdA
+	 * Solution: I used the YouTube video as a reference for adding music
+	 * to the game
+	 */
 
 	private void setupMusicPlayer() {
 		// Initialize MediaPlayer with a random song
@@ -73,8 +88,13 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		});
 
 		musicPlayer.start(); // Start playing the song
-	}
-	// Method to handle starting or resuming the music
+	}//setupMusicPlayer
+
+
+
+	/**
+	 * playMusic method handles starting and resuming the music in the game
+	 */
 	public void playMusic() {
 		if (musicPlayer == null) {
 			int randomIndex = random.nextInt(songResources.length);
@@ -91,7 +111,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		} else {
 			musicPlayer.start(); // Resume playing if already initialized
 		}
-	}
+	}//playMusic
+
 
 	// Method to pause the music
 	public void pauseMusic() {

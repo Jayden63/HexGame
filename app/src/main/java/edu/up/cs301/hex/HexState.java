@@ -1,12 +1,7 @@
 package edu.up.cs301.hex;
 
 import android.graphics.Color;
-
-import android.os.Bundle;
-
 import java.io.Serializable;
-import java.util.Random;
-
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 
 
@@ -25,10 +20,6 @@ public class HexState extends GameState implements Serializable {
 	// serial ID
 	public static final long serialVersionUID = 202442384830L;
 
-	//private String playerWinner; // To return the name of the player winner
-	//private Player player1; // First player, red
-	//private Player player2; // Second player, blue
-
 	public int gridSize;
 	HexTile[][] grid;
 	public float hexSize;
@@ -38,11 +29,6 @@ public class HexState extends GameState implements Serializable {
 	public static final int BLUE = Color.BLUE;
 	public static final int EMPTY = Color.WHITE;
 
-
-
-
-
-	Random random;
 
 	/**
 	 * constructor, initializing the boolean values from the objects in the parameter
@@ -261,19 +247,8 @@ public class HexState extends GameState implements Serializable {
 		return playerTurnID;
 	}
 
-	public void setPlayerTurnID(int playerTurnID) {
-		this.playerTurnID = playerTurnID;
-	}
-
 	public int getPlayerColor() {
 		return playerColor;
 	}
 
-	public int setPlayerColor() {
-
-		if (playerTurnID == 0) {
-			return RED;
-		}
-		return BLUE;
-	}
 }
