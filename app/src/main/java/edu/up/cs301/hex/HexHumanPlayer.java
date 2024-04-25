@@ -359,7 +359,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 
 		// If the action is a tap
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+		if (event.getAction() == MotionEvent.ACTION_UP) {
 			// Check if touch is inside any hex tile in the grid
 			for (int i = 0; i < gameState.grid.length; i++) {
 				for (int j = 0; j < gameState.grid.length; j++) {

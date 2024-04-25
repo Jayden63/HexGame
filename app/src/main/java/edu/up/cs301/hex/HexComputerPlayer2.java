@@ -135,7 +135,7 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 			int ny = y + dir[1];
 
 			// Plays move if valid move & tile in new coordinate is player color
-			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (playerNum == 1 ?
+			if (state.isValid(nx, ny) && state.getPiece(nx, ny) == (state.getPlayerColor() == HexState.BLUE ?
 					HexState.RED : HexState.BLUE)) {
 				score += 5;
 			}

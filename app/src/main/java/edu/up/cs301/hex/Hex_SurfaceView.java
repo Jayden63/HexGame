@@ -7,11 +7,15 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.graphics.Color;
 import androidx.annotation.NonNull;
 import java.io.Serializable;
+import android.view.ScaleGestureDetector;
+import android.view.MotionEvent;
+
 
 /**
  * Hex_SurfaceView displays the hex grid
@@ -31,19 +35,26 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     // Size and shape variables
     private float center_Height;
     private float center_Width;
+    private float width_SurfaceView, height_SurfaceView;
     private HexState hexState;
     private final Paint gradPaint = new Paint();
     private final ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private float gradientPosition = 0;
 
+    private float scaleFactor = 1.0f;
+    private final ScaleGestureDetector scaleGestureDetector;
 
 
-
+    /**
+     * When the game starts up
+     * @param context // System
+     * @param attrs // Attributes of the surface view
+     */
     public Hex_SurfaceView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
 
-
+        scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener());
         hexState = new HexState();
         //hexState.initializeGrid();
 
@@ -55,9 +66,26 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     }//Hex_SurfaceView
 
 
+
+    /**
+     * onTouchEvent listens for any pinch to zoom actions in the Surface View
+     * In the Surface View
+     * @param event // Our event object
+     * @return true // if the pinch to zoom action is performed
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // Let the ScaleGestureDetector inspect all events
+        scaleGestureDetector.onTouchEvent(event);
+
+        return true;
+    }
+
+
     public void setHexState(HexState hexState) {
 
         this.hexState = hexState;
+
 
         invalidate();
         //TODO:  trigger a redraw event (mystery to solve)
@@ -87,14 +115,14 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         // Assign width to the width of the surface view
-        center_Width = MeasureSpec.getSize(widthMeasureSpec);
+        width_SurfaceView = MeasureSpec.getSize(widthMeasureSpec);
 
         // Assigns height to the height of surface view
-        center_Height = MeasureSpec.getSize(heightMeasureSpec);
+        height_SurfaceView = MeasureSpec.getSize(heightMeasureSpec);
 
         // Fine tuning both values to make it centered
-        center_Width = (center_Width / 2f) - 555f;//555
-        center_Height = (center_Height / 2f) - 340f;
+        center_Width = (width_SurfaceView/ 2f) - 555f;//555
+        center_Height = (height_SurfaceView / 2f) - 322f;
 
     }//onMeasure
 
@@ -112,6 +140,12 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     protected void onDraw(@NonNull Canvas canvas) {
 
         super.onDraw(canvas);
+
+        canvas.save();
+
+        // Scale the canvas from the center according to the zoom gesture
+        canvas.scale(scaleFactor, scaleFactor,
+                width_SurfaceView / 2, height_SurfaceView / 2);
 
         // The revolving colors of the gradient
         int startColor = Color.BLUE;
@@ -191,8 +225,30 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
                 }
             }
         }
+        canvas.restore();
     }//onDraw
 
+
+    /**
+     * Updates the coordinates of the hex values
+     */
+    public void updateHexGrid() {
+        for (int i = 0; i < hexState.gridSize; i++) {
+            for (int j = 0; j < hexState.gridSize; j++) {
+                HexTile tile = hexState.grid[i][j];
+                if (tile != null) {
+                    float newCenterX = (tile.getCenterX() * scaleFactor);
+                    float newCenterY = (tile.getCenterY() * scaleFactor);
+                    tile.setCenterX(newCenterX);
+                    tile.setCenterY(newCenterY);
+
+                    // Update the coordinates in the HexState class
+                    hexState.grid[i][j].setCenterX(newCenterX);
+                    hexState.grid[i][j].setCenterY(newCenterY);
+                }
+            }
+        }
+    }
 
     /**
      * startAnimation()
@@ -222,6 +278,37 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         animator.start();
 
     }//startAnimation
+
+
+    /**
+     * This class is used for zooming in the surface view
+     * The ScaleListener will listen for a pinch to zoom action
+     * Performed by the user
+     */
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+
+        /**
+         * OnScale retrieves the scale of the zoom
+         * How much the user zoomed in the surface view
+         *
+         * @param detector // Our detector object
+         * @return true // if the user pinches to zoom
+         */
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+
+            // Gets the scale of the zoom
+            scaleFactor *= detector.getScaleFactor();
+
+            // Don't let the object get too small or too large
+            scaleFactor = Math.max(0.5f, Math.min(scaleFactor, 3.0f));
+
+            updateHexGrid();
+
+            invalidate();
+            return true;
+        }
+    }//ScaleListener
 }
 
 
