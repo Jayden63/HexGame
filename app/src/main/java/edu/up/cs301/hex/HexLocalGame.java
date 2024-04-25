@@ -9,9 +9,7 @@ import android.util.Log;
 import java.io.Serializable;
 
 /**
- * A class that represents the state of a game. In our counter game, the only
- * relevant piece of information is the value of the game's counter. The
- * CounterState object is therefore very simple.
+ * A class that represents the state of a game. In our hex game
  *
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
@@ -43,10 +41,10 @@ public class HexLocalGame extends LocalGame implements Serializable {
 	}
 
 	/**
-	 * This constructor should be called when a new counter game is started
+	 * This constructor should be called when a new hex game is started
 	 */
 	public HexLocalGame(GameState state) {
-		// initialize the game state, with the counter value starting at 0
+		// initialize the Hext Game State
 		if (! (state instanceof HexState)) {
 			state = new HexState();
 		}

@@ -6,8 +6,8 @@ import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 
 /**
- * A CounterMoveAction is an action that is a "move" the game: either increasing
- * or decreasing the counter value.
+ * A hexMoveAction is an action that is a "move" the game:
+ * a tap in the hex grid
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll

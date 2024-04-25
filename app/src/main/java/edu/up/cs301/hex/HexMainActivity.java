@@ -198,10 +198,10 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 				return new HexComputerPlayer2(name);
 			}});
 
-		// Create a game configuration class for Counter:
+		// Create a game configuration class for Hex:
 		// - player types as given above
 		// - from 1 to 2 players
-		// - name of game is "Counter Game"
+		// - name of game is "Hex Game"
 		// - port number as defined above
 		GameConfig defaultConfig =
 				new GameConfig(playerTypes, 1, 2,
@@ -226,7 +226,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	 * create a local game
 	 * 
 	 * @return
-	 * 		the local game, a counter game
+	 * 		the local game, a hex game
 	 */
 	@Override
 	public LocalGame createLocalGame(GameState state) {

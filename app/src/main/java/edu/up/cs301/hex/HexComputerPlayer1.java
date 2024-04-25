@@ -8,9 +8,7 @@ import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 
 /**
- * A computer-version of a counter-player.  Since this is such a simple game,
- * it just sends "+" and "-" commands with equal probability, at an average
- * rate of one per second. 
+ * A computer-version of a hex-player.
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
@@ -29,7 +27,7 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Serializab
 
 
     /**
-     * Constructor for objects of class CounterComputerPlayer1
+     * Constructor for objects of class hexComputerPlayer1
      * 
      * @param name
      * 		the player's name

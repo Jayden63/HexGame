@@ -42,7 +42,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	TextView playerOneText;
 	TextView playerTwoText;
 
-	// The most recent game state, as given to us by the CounterLocalGame
+	// The most recent game state, as given to us by the HexLocalGame
 	private HexState gameState;
 
 	// The android activity that we are running
@@ -152,7 +152,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	 */
 	@Override
 	public void receiveInfo(GameInfo info) {
-		// ignore the message if it's not a CounterState message
+		// ignore the message if it's not a HexState message
 		if (!(info instanceof HexState)) return;
 
 		// update our state; then update the display
