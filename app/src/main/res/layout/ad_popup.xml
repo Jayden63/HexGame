@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/close_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Close Ad"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:textSize="35dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ad_text"
+        android:layout_width="match_parent"
+        android:src="@drawable/lebonbon"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Thanks for playing our game!"
+        android:textSize="100dp"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="313dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

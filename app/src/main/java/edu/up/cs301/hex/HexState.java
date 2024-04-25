@@ -276,8 +276,4 @@ public class HexState extends GameState implements Serializable {
 		}
 		return BLUE;
 	}
-
-
-
-
 }

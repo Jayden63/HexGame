@@ -59,12 +59,10 @@
                 android:textColor="#FFFFFFFF"
                 android:drawable="@drawable/ic_red_hex"
                 android:text="@string/start_the_game" />
-
             <Button
                 android:id="@+id/saveConfigButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:gravity="center"
                 android:textSize="20dp"
                 android:background="#FF0000"
@@ -74,9 +72,6 @@
 
 
         </LinearLayout>
-
-
-
     </LinearLayout>
 
     <LinearLayout

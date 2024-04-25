@@ -9,10 +9,15 @@ import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.gameConfiguration.*;
 
-import android.animation.ArgbEvaluator;
-import android.graphics.Paint;
+
+import android.app.AlertDialog;
+
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.Button;
+
 import java.util.Random;
 
 /**
@@ -50,9 +55,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		super.onCreate(savedInstanceState);
 		// initializes the MediaPlayer and plays the music
 		setupMusicPlayer();
-
-
-
+		countDownForAd();
 	}
 
 	private void setupMusicPlayer() {
@@ -240,5 +243,52 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 			musicPlayer = null;
 		}
 	}
+	/**
+	 External Citation
+	 Date: 25 April 2024
+	 Problem: Didn't know how to add popup ads in the game
+	 Resource:
+	 https://www.youtube.com/watch?v=snuXdyPPmNg
+	 Solution: Had to use an AlertDialog and a timer
+	 *
+	 * Method tells the pop up to show on the screen and how long until it shows up
+	 */
+	public void countDownForAd() {
+		CountDownTimer countDownTimer = new CountDownTimer(10000, 1000) {
+			@Override
+			public void onTick(long l) {
+				// Do nothing on tick
+			}
 
+			@Override
+			public void onFinish() {
+				showAdPopup();
+			}
+		};
+		countDownTimer.start();
+	}
+
+	/**
+	 External Citation:
+	 Same as above
+	 *
+	 * This method displays the pop up window from the ad_popup xml
+	 */
+	public void showAdPopup() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		View dialogView = getLayoutInflater().inflate(R.layout.ad_popup, null);
+		builder.setView(dialogView);
+
+		AlertDialog adDialog = builder.create();
+		adDialog.show();
+
+		// Find and set up the close button
+		Button closeButton = dialogView.findViewById(R.id.close_ad);
+		closeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				adDialog.dismiss(); // Dismiss the dialog when close button is clicked
+			}
+		});
+	}
 }
