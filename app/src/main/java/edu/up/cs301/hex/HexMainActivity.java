@@ -17,7 +17,7 @@ import java.util.Random;
 
 
 /**
- * this is the primary activity for Counter game
+ * this is the primary activity for Hex Game
  * 
  * @author Andrew M. Nuxoll
  * @author Steven R. Vegdahl
@@ -38,11 +38,6 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 	// to play the music
 	private MediaPlayer musicPlayer;
-	private HexState hexState;
-	private MediaPlayer soundEffects;
-	public int soundEffect= R.raw.pop;
-
-
 	// Array of song resources
 	public int[] songResources =
 			{R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself,R.raw.jamal,R.raw.sza};
@@ -62,7 +57,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		// initializes the MediaPlayer and plays the music
 		setupMusicPlayer();
 		countDownForAd();
-	}
+	}//onCreate
 
 	/**
 	 * External Citation
@@ -73,6 +68,10 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	 * to the game
 	 */
 
+	/**
+	 * setupMusicPlayer sets up the music player
+	 * Which is used when the game starts
+	 */
 	private void setupMusicPlayer() {
 		// Initialize MediaPlayer with a random song
 		int randomIndex = random.nextInt(songResources.length);
@@ -80,16 +79,10 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		musicPlayer.setLooping(false); // Ensure the player does not loop songs
 
 		// Set up listener to play a random song when one finishes
-		musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				playNextRandomSong();
-			}
-		});
+		musicPlayer.setOnCompletionListener(mp -> playNextRandomSong());
 
 		musicPlayer.start(); // Start playing the song
 	}//setupMusicPlayer
-
 
 
 	/**
@@ -101,11 +94,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 			musicPlayer = MediaPlayer.create(this, songResources[randomIndex]);
 			musicPlayer.setLooping(true);
 			musicPlayer.setVolume(0.5f, 0.5f);
-			musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-				@Override
-				public void onCompletion(MediaPlayer mp) {
-					playNextRandomSong(); // Play next random song when current ends
-				}
+			musicPlayer.setOnCompletionListener(mp -> {
+				playNextRandomSong(); // Play next random song when current ends
 			});
 			musicPlayer.start();
 		} else {
@@ -114,14 +104,24 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	}//playMusic
 
 
-	// Method to pause the music
+
+	/**
+	 * 	Method to pause the music
+	 */
 	public void pauseMusic() {
 		if (musicPlayer != null && musicPlayer.isPlaying()) {
 			musicPlayer.pause();
 		}
-	}
+	}//pauseMusic
 
-	private int lastSongIndex = -1;//keep track of last song played
+	// Keep track of last song played
+	private int lastSongIndex = -1;
+
+
+	/**
+	 * playNextRandomSong skips the current song
+	 * and plays a random song found in the music array
+	 */
 	public void playNextRandomSong() {
 		// Release the current MediaPlayer
 		if (musicPlayer != null) {
@@ -142,16 +142,14 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		musicPlayer = MediaPlayer.create(this, songResources[randomIndex]);
 
 		// Set up the MediaPlayer to listen for completion again
-		musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				// Recursive call to change to another random song when current ends
-				playNextRandomSong();
-			}
+		musicPlayer.setOnCompletionListener(mp -> {
+			// Recursive call to change to another random song when current ends
+			playNextRandomSong();
 		});
 
 		musicPlayer.start();  // Start playing the new random song
-	}
+	}//playNextRandomSong
+
 
 	public void soundEffect() {
 		// Assuming soundEffect is an int representing a resource ID
@@ -160,21 +158,11 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		soundEffects.setLooping(false); // Ensure the sound does not loop
 
 		// Set a listener to release the MediaPlayer resources once the sound is complete
-		soundEffects.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				mp.release(); // Release the MediaPlayer resources
-			}
-		});
+		// Release the MediaPlayer resources
+		soundEffects.setOnCompletionListener(MediaPlayer::release);
 
 		soundEffects.start(); // Start playing the sound effect
-	}
-
-
-
-
-
-
+	}//soundEffects
 
 
 	/**
@@ -233,7 +221,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		return defaultConfig;
 	}//createDefaultConfig
 
-	// BY Monday.
+
 	/**
 	 * create a local game
 	 * 
@@ -243,10 +231,11 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	@Override
 	public LocalGame createLocalGame(GameState state) {
 		if (state == null)
-			//hexstate parameters originally was zero since it took in int as a param but now we removed it
+			// Hex State parameters originally was zero since it took in int as a param but now we removed it
 			state = new HexState();
 		return new HexLocalGame(state);
-	}
+	}//createLocalGame
+
 
 	/**
 	 External Citation
@@ -263,7 +252,9 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 			musicPlayer.release();
 			musicPlayer = null;
 		}
-	}
+	}//onDestroy
+
+
 	/**
 	 External Citation
 	 Date: 25 April 2024
@@ -287,12 +278,12 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 			}
 		};
 		countDownTimer.start();
-	}
+	}//countDownForAd
+
 
 	/**
 	 External Citation:
 	 Same as above
-	 *
 	 * This method displays the pop up window from the ad_popup xml
 	 */
 	public void showAdPopup() {
@@ -311,5 +302,5 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 				adDialog.dismiss(); // Dismiss the dialog when close button is clicked
 			}
 		});
-	}
+	}//showAdPopup
 }

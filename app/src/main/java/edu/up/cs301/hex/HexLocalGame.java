@@ -55,7 +55,6 @@ public class HexLocalGame extends LocalGame implements Serializable {
 	}
 
 
-
 	/**
 	 * The only type of GameAction that should be sent is HexMoveAction
 	 */
@@ -76,7 +75,6 @@ public class HexLocalGame extends LocalGame implements Serializable {
 	}//makeMove
 
 
-
 	/**
 	 * send the updated state to a given player
 	 */
@@ -87,7 +85,6 @@ public class HexLocalGame extends LocalGame implements Serializable {
 		p.sendInfo(new HexState(this.gameState));
 
 	}//sendUpdatedSate
-
 
 
 	/**
@@ -111,8 +108,5 @@ public class HexLocalGame extends LocalGame implements Serializable {
 		}
 
 		return null;
-
-
-	}
-
-}// class CounterLocalGame
+	}//checkIfGameOver
+}

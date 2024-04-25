@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -40,7 +38,6 @@ import edu.up.cs301.hex.R;
 
 /**
  * class GameMainActivity
- *
  * is the main activity for the game framework. To create a new game, create a
  * sub-class of this class that implements its abstract methods below.
  *

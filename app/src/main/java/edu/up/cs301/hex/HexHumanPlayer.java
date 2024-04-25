@@ -42,16 +42,16 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	TextView playerOneText;
 	TextView playerTwoText;
 
-	// the most recent game state, as given to us by the CounterLocalGame
+	// The most recent game state, as given to us by the CounterLocalGame
 	private HexState gameState;
 
-	// the android activity that we are running
+	// The android activity that we are running
 	private GameMainActivity myActivity;
 	private Hex_SurfaceView mySurfaceView;
 
-	//settings buttons
+	// Settings buttons
 	Button newGameButton;
-//exit game button
+    // Exit game button
 	Button exitGameButton;
 
 	@SuppressLint("UseSwitchCompatOrMaterialCode")
@@ -159,6 +159,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		updateDisplay();
 	}
 
+
 	/**
 	 * callback method--our game has been chosen to be the GUI,
 	 * called from the GUI thread
@@ -191,6 +192,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		mySurfaceView.setOnTouchListener(this);
 
 	}//setAsGui
+
 
 	/**
 	 * ShowSettings pops up the layout dialog box
