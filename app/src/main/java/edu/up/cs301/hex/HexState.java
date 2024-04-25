@@ -94,7 +94,6 @@ public class HexState extends GameState implements Serializable {
 				// Same values found in Hex_SurfaceView
 				float x = (i * 37) + (j * (float) (hexSize * 1.90));
 				float y = ((float) (i * hexSize * 1.65));
-
 				grid[i][j] = new HexTile(x, y, EMPTY);  // Ensuring no HexTile is null
 			}
 		}

@@ -26,7 +26,7 @@ public class HexTile implements Serializable {
     private float centerX, centerY;
 
     // Radius used for hexTile creation
-    private float radius;
+    public static float radius;
 
     // Color of the hexgrid
     private int color;
@@ -42,6 +42,11 @@ public class HexTile implements Serializable {
     }
 
 
+    public static void updateCoordinates(HexTile tile) {
+        float scaleFactor = Hex_SurfaceView.scaleFactor;
+        tile.centerX *= scaleFactor;
+        tile.centerY *= scaleFactor;
+    }
 
     /** void draw(Canvas canvas)
      * draws a hexagon when HexTile is called
@@ -116,6 +121,14 @@ public class HexTile implements Serializable {
     public float getCenterY() {
         return centerY ;
     }
+    public float getRadius()    {
+        return radius;
+    }
+
+    public void setRadius(float radius)    {
+        HexTile.radius = radius;
+    }
+
     public void setCenterX(float centerX)    {
         this.centerX = centerX;
     }

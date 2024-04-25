@@ -1,14 +1,10 @@
 package edu.up.cs301.hex;
 
-import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
-
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,7 +44,6 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 	// the most recent game state, as given to us by the CounterLocalGame
 	private HexState gameState;
-	private HexTile tile;
 
 	// the android activity that we are running
 	private GameMainActivity myActivity;
@@ -58,11 +53,9 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	Button newGameButton;
 //exit game button
 	Button exitGameButton;
-	Button skipButton;
 
 	Switch musicSwitch;
 
-	private MediaPlayer sfx;
 
 
 
@@ -205,24 +198,9 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		ImageButton btn3 = (ImageButton) activity.findViewById(R.id.skip_button);
 
 
-		btn1.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ShowSettings();
-			}
-		});
-		btn2.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ShowRuleBook();
-			}
-		});
-		btn3.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				((HexMainActivity) myActivity).playNextRandomSong();
-			}
-		});
+		btn1.setOnClickListener(v -> ShowSettings());
+		btn2.setOnClickListener(v -> ShowRuleBook());
+		btn3.setOnClickListener(view -> ((HexMainActivity) myActivity).playNextRandomSong());
 
 		mySurfaceView.setOnTouchListener(this);
 
@@ -241,18 +219,10 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		this.exitGameButton = (Button) viewLayout.findViewById(R.id.exitgame_button);
 		this.musicSwitch = (Switch) viewLayout.findViewById(R.id.switch2);
 
-				newGameButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-			myActivity.restartGame();
-			}
-		});
-				exitGameButton.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						myActivity.finish();
-						System.exit(0);
-					}
+				newGameButton.setOnClickListener(v -> myActivity.restartGame());
+				exitGameButton.setOnClickListener(view -> {
+					myActivity.finish();
+					System.exit(0);
 				});
 
 
@@ -260,63 +230,17 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		popDialog.setTitle("Settings");
 		popDialog.setView(viewLayout);
 
-		musicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (!isChecked) {
-					((HexMainActivity) myActivity).pauseMusic();
-				} else {
-					((HexMainActivity) myActivity).playMusic();
-				}
+		musicSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			if (!isChecked) {
+				((HexMainActivity) myActivity).pauseMusic();
+			} else {
+				((HexMainActivity) myActivity).playMusic();
 			}
 		});
 
-		/*SeekBar seek1 = (SeekBar) viewLayout.findViewById(R.id.seekBar);
-
-		seek1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-				//tv.setText("Value of :" + progress);
-				item1.setText("SFX Volume: " + progress);
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-
-			}
-		});
-
-		SeekBar seek2 = (SeekBar) viewLayout.findViewById(R.id.seekBar2);
-		seek2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-				//tv.setText("Value of :" + progress);
-				item2.setText("Music Volume: " + progress);
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-
-			}
-		});*/
 
 		popDialog.setPositiveButton("OK",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						dialogInterface.dismiss();
-					}
-				});
+				(dialogInterface, i) -> dialogInterface.dismiss());
 		popDialog.create();
 		popDialog.show();
 	}
@@ -340,12 +264,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 
 
 		popDialog.setPositiveButton("OK",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						dialogInterface.dismiss();
-					}
-				});
+				(dialogInterface, i) -> dialogInterface.dismiss());
 		popDialog.create();
 		popDialog.show();
 	}

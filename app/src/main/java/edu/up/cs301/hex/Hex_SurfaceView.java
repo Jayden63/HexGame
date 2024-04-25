@@ -1,5 +1,7 @@
 package edu.up.cs301.hex;
 
+import static java.lang.Math.log;
+
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -35,13 +37,13 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     // Size and shape variables
     private float center_Height;
     private float center_Width;
-    private float width_SurfaceView, height_SurfaceView;
+    public static float width_SurfaceView, height_SurfaceView;
     private HexState hexState;
     private final Paint gradPaint = new Paint();
     private final ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private float gradientPosition = 0;
 
-    private float scaleFactor = 1.0f;
+    public static float scaleFactor = 1.0f;
     private final ScaleGestureDetector scaleGestureDetector;
 
 
@@ -78,6 +80,8 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
         // Let the ScaleGestureDetector inspect all events
         scaleGestureDetector.onTouchEvent(event);
 
+        updateHexGrid();
+        //updateHexGrid();
         return true;
     }
 
@@ -229,16 +233,20 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     }//onDraw
 
 
-    /**
-     * Updates the coordinates of the hex values
-     */
-    public void updateHexGrid() {
+  public void updateHexGrid() {
+
+        HexTile.radius = HexTile.radius * (scaleFactor);
+
         for (int i = 0; i < hexState.gridSize; i++) {
             for (int j = 0; j < hexState.gridSize; j++) {
                 HexTile tile = hexState.grid[i][j];
                 if (tile != null) {
-                    float newCenterX = (tile.getCenterX() * scaleFactor);
-                    float newCenterY = (tile.getCenterY() * scaleFactor);
+                    float newCenterX = (tile.getCenterX() - (width_SurfaceView / 2))
+                            * scaleFactor + (width_SurfaceView / 2);
+                    float newCenterY = (tile.getCenterY() - (height_SurfaceView / 2))
+                            * scaleFactor + (height_SurfaceView / 2);
+
+
                     tile.setCenterX(newCenterX);
                     tile.setCenterY(newCenterY);
 
@@ -248,6 +256,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
                 }
             }
         }
+        invalidate();
     }
 
     /**
@@ -303,7 +312,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
             // Don't let the object get too small or too large
             scaleFactor = Math.max(0.5f, Math.min(scaleFactor, 3.0f));
 
-            updateHexGrid();
+            //updateHexGrid();
 
             invalidate();
             return true;
