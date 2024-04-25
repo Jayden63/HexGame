@@ -36,7 +36,7 @@
                     android:drawableStart="@drawable/ic_red_hex"
                     android:text=" Player 1 "
                     android:textStyle="italic"
-                    android:textSize="30sp" />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:id="@+id/PLAYER2_textView"
@@ -46,7 +46,7 @@
                     android:drawableStart="@drawable/ic_blue_hex"
                     android:text=" Player 2  "
                     android:textStyle="italic"
-                    android:textSize="30sp" />
+                    android:textSize="25sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -64,7 +64,7 @@
                     android:gravity="center_horizontal"
                     android:text=""
                     android:textStyle="bold|italic"
-                    android:textSize="60sp" />
+                    android:textSize="50dp" />
             </LinearLayout>
 
             <!--<LinearLayout
