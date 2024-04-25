@@ -1,6 +1,8 @@
 package edu.up.cs301.hex;
 
 import android.graphics.Color;
+import android.os.Bundle;
+
 import java.io.Serializable;
 import java.util.Random;
 
@@ -52,6 +54,7 @@ public class HexState extends GameState implements Serializable {
 		this.playerColor = RED;
 
 		initializeGrid();
+
 	}
 
 
@@ -74,7 +77,6 @@ public class HexState extends GameState implements Serializable {
 	}//HexState
 
 
-
 	/**
 	 * sets the coordinates for each new HexTile
 	 */
@@ -94,7 +96,6 @@ public class HexState extends GameState implements Serializable {
 	}//initializeGrid
 
 
-
 	/**
 	 * sets the coordinates for each new HexTile
 	 */
@@ -108,7 +109,6 @@ public class HexState extends GameState implements Serializable {
 			}
 		}
 	}//copyGrid
-
 
 
 	/**
@@ -189,7 +189,6 @@ public class HexState extends GameState implements Serializable {
 
 		return true;
 	}//placeTileAction
-
 
 
 	/**Checks if the matching color tiles are connected in any way

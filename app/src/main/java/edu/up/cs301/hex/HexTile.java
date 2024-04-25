@@ -50,6 +50,7 @@ public class HexTile implements Serializable {
      */
     public void draw(Canvas canvas) {
 
+
         // Paint Object for HexTile
         Paint paint = new Paint();
         Paint borderPaint = new Paint();
@@ -59,8 +60,6 @@ public class HexTile implements Serializable {
 
         // The border color of the HexTile
         borderPaint.setColor(Color.BLACK);
-
-
         paint.setStyle(Paint.Style.FILL);
 
         // Outlines the perimeter of the hexTile
@@ -124,7 +123,6 @@ public class HexTile implements Serializable {
     public void setCenterY(float centerY) {
         this.centerY = centerY;
     }
-
 
 
     /** isTouched(float x, float y)
