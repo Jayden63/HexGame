@@ -212,6 +212,12 @@ public class HexState extends GameState implements Serializable {
 		visited[row][col] = true;
 
 		// Offsets for neighboring cells in a hexagonal grid
+		// top: [0, -1]
+		// down: [0, 1]
+		// right: [1, 0]
+		// left: [-1, 0]
+		// top right: [1, -1]
+		// bottom left: [-1, 1]
 		int[] dx = {-1, 1, 0, 0, 1, -1};
 		int[] dy = {0, -1, -1, 1, 0, 1};
 
