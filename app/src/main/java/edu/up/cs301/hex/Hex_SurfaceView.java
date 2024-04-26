@@ -282,7 +282,11 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     }
 
 
-
+    /**
+     * updateHexGrid()
+     *
+     * updates the x and y of each hexTile based according to scaleFactor
+     */
     public void updateHexGrid() {
 
         // Updating the radius of HexTile according to scaleFactor
