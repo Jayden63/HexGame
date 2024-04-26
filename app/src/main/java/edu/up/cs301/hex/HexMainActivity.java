@@ -28,6 +28,40 @@ import java.util.Random;
  *
  * @version March 2024
  */
+
+/**
+ * Main Activity Class for Hex Game
+ *
+ * Status Report:
+ * - The game is built using the specified game framework, and sticking to the initial design and requirements outlined.
+ * - Current implementation supports all defined rules of play. The game maintains the core gameplay mechanics of Hex.
+ *
+ * - Known Bugs:
+ *    + Currently,none
+ *    + We have fixed previous bugs like the CheckIfGameOver and our ComputerPlayer not working
+ *
+ * - Features/Enhancements:
+ *    + Smart AI implemented, provides a harder experience for players than the Dumb AI.
+ *    + The GUI is designed to be user-friendly and operates effectively across devices.
+ *    + Game supports network play, allowing multiplayer sessions over network connections.
+ *    + Code adheres to the CS301 coding standard and is well documented
+ *
+ * - Additional features not initially required but implemented to enhance gameplay:
+ *    + Game supports both portrait and landscape modes
+ *    + The game includes custom sound effects
+ *    + Incorporates complex gestures like zoom in and out
+ *    + A custom startup screen and “how to play” guide are implemented
+ *    + Music for the game,
+ *    + music switch to turn off the music
+ *    + skip music button
+ *    + Pop up ads
+ *    +How to play rulebook dialog
+ *    +Color changing Background
+ * All features and issues are documented to ensure clarity and transparency in grading.
+ */
+
+
+
 public class HexMainActivity extends GameMainActivity implements Serializable {
 	// serial ID
 	public static final long serialVersionUID = 202442385127L;
