@@ -23,8 +23,10 @@ public class HexState extends GameState implements Serializable {
 	HexTile[][] grid; // 2D grid array stores each HexTile
 	public int gridSize; // dimensions of the grid
 	public float hexSize; // size of each hexTile
+
 	private int playerTurnID; // keeps track of the player's turn
 	private int playerColor;// color of the current hexTile based on who's turn it is
+
 
 	public static final int RED = Color.RED;
 	public static final int BLUE = Color.BLUE;
@@ -45,6 +47,7 @@ public class HexState extends GameState implements Serializable {
 		this.playerTurnID = randomTurn;
 		this.playerColor = RED;
 
+		//initializes the hexagon coordinates
 		initializeGrid();
 
 	}
@@ -64,7 +67,8 @@ public class HexState extends GameState implements Serializable {
 		this.hexSize = orig.hexSize;
 		this.playerColor = orig.playerColor;
 		this.playerTurnID= orig.playerTurnID;
-		//this doesn't work
+
+
 		copyGrid(orig.grid);
 	}//HexState
 
@@ -89,6 +93,9 @@ public class HexState extends GameState implements Serializable {
 
 	/**
 	 * sets the coordinates for each new HexTile
+	 *
+	 * a copy constructor version of initializeGrid()
+	 *
 	 */
 	public void copyGrid(HexTile[][] orig) {
 
@@ -176,11 +183,7 @@ public class HexState extends GameState implements Serializable {
 		// Update the player turn and color
 		playerTurnID = 1 - playerTurnID; // Toggle between player 0 and player 1
 
-		playerColor = (playerColor == RED) ? BLUE : RED;
-
-
-
-		// Toggle between RED and BLUE
+		playerColor = (playerColor == RED) ? BLUE : RED; // Toggle between RED and BLUE
 
 		return true;
 	}//placeTileAction

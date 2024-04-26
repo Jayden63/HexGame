@@ -31,11 +31,12 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     public static final long serialVersionUID = 202442385352L;
 
 
+    private HexState hexState;
+
     // Size and shape variables
     private float center_Height;
     private float center_Width;
     public static float width_SurfaceView, height_SurfaceView;
-    private HexState hexState;
     private final Paint gradPaint = new Paint();
     private final ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private float gradientPosition = 0;
@@ -82,10 +83,17 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     }
 
 
+    /**
+     * setHexState()
+     * sets/updates the state of the game
+     *
+     * @param hexState
+     */
     public void setHexState(HexState hexState) {
 
         this.hexState = hexState;
 
+        //redraws the board
         invalidate();
     }
 
@@ -147,14 +155,31 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
-
         super.onDraw(canvas);
 
         canvas.save();
 
-        // Scale the canvas from the center according to the zoom gesture
-        canvas.scale(scaleFactor, scaleFactor,
-                width_SurfaceView / 2, height_SurfaceView / 2);
+        //draws the background
+        drawGradiant(canvas);
+
+        //draws the red and blue borders
+        drawBorders(canvas);
+
+        //draws the Hex game grid
+        drawGrid(canvas);
+
+
+    }//onDraw
+
+    /**
+     * drawGradiant()
+     *
+     * draws the background of the SurfaceView
+     * with changing color gradiant
+     *
+     * @param canvas
+     */
+    public void drawGradiant(Canvas canvas) {
 
         // The revolving colors of the gradient
         int startColor = Color.BLUE;
@@ -176,8 +201,56 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
         // Draws the gradient in the surface view
         canvas.drawPaint(gradPaint);
+    }
 
 
+    /**
+     * drawGrid()
+     *
+     * This method draws the white empty grid with all the HexTiles
+     *
+     * @param canvas
+     */
+    public void drawGrid(Canvas canvas) {
+
+        // Draws each tile in the Hex Grid
+        // We are using the grid directly from the hexState class
+        for (int i = 0; i < hexState.gridSize; i++) {
+            for (int j = 0; j < hexState.gridSize; j++) {
+
+                // Copied values from HexState but making x values centered
+                // The x distance of different rows
+                hexState.grid[i][j].setCenterX(center_Width + (i * 37)
+                        // The x distance between individual tiles in the same row
+                        + (float) (j * hexState.hexSize * 1.90));
+
+
+                // The y distance between rows. Greater value = greater distance
+                hexState.grid[i][j].setCenterY(center_Height
+                        + (i * (hexState.hexSize * 1.65f)));
+
+                // To draw the grid in the surface view
+                HexTile tile = hexState.grid[i][j];
+
+                if (tile != null) {  // Null check to avoid NullPointerException
+                    // Drawing the grid in the canvas
+                    tile.draw(canvas);
+                }
+            }
+        }
+        canvas.restore();
+    }
+
+
+    /**
+     * drawBorders()
+     *
+     * draws the red and blue borders for the hex grid
+     * lets the players know which sides they need to connect their tiles
+     *
+     * @param canvas
+     */
+    public void drawBorders(Canvas canvas) {
         // To draw the hexTile borders of the hex grid
         // Always in the center regardless of orientation
         for (int i = 0; i < hexState.gridSize; i++) {
@@ -206,37 +279,11 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
             HexTile leftBorderTiles = new HexTile(x3, y, Color.RED);
             leftBorderTiles.draw(canvas);
         }
-
-        // Draws each tile in the Hex Grid
-        // We are using the grid directly from the hexState class
-        for (int i = 0; i < hexState.gridSize; i++) {
-            for (int j = 0; j < hexState.gridSize; j++) {
-
-                // Copied values from HexState but making x values centered
-                // The x distance of different rows
-                hexState.grid[i][j].setCenterX(center_Width + (i * 37)
-                        // The x distance between individual tiles in the same row
-                        + (float) (j * hexState.hexSize * 1.90));
+    }
 
 
-                // The y distance between rows. Greater value = greater distance
-                hexState.grid[i][j].setCenterY(center_Height
-                        + (i * (hexState.hexSize * 1.65f)));
 
-                // To draw the grid in the surface view
-                HexTile tile = hexState.grid[i][j];
-
-                if (tile != null) {  // Null check to avoid NullPointerException
-                    // Drawing the grid in the canvas
-                    tile.draw(canvas);
-                }
-            }
-        }
-        canvas.restore();
-    }//onDraw
-
-
-  public void updateHexGrid() {
+    public void updateHexGrid() {
 
         // Updating the radius of HexTile according to scaleFactor
         HexTile.radius = HexTile.radius * (scaleFactor);

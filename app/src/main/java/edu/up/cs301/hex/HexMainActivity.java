@@ -38,12 +38,14 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 
 	// to play the music
 	private MediaPlayer musicPlayer;
-	private int lastSongIndex = -1; //keep track of last song played
+
 
 	// Array of song resources
 	public int[] songResources =
 			{R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself,R.raw.jamal,R.raw.sza};
 	public Random random = new Random();
+
+	private int lastSongIndex = -1; //keep track of last song played
 
 	/**
 	 * onCreate() plays the music and sets up the ad in the game
