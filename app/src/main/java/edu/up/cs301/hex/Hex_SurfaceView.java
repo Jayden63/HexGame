@@ -55,7 +55,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
         scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener());
         hexState = new HexState();
-        //hexState.initializeGrid();
+       // hexState.initializeGrid();
 
         // Starts the dynamic gradient background
         startAnimation();
@@ -159,6 +159,10 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
         canvas.save();
 
+        //scales the board based on zoom
+        canvas.scale(scaleFactor, scaleFactor,
+                width_SurfaceView / 2, height_SurfaceView / 2);
+
         //draws the background
         drawGradiant(canvas);
 
@@ -167,6 +171,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
         //draws the Hex game grid
         drawGrid(canvas);
+
 
 
     }//onDraw
