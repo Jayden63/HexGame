@@ -79,6 +79,7 @@ public class HexState extends GameState implements Serializable {
 	public void initializeGrid() {
 
 		grid = new HexTile[gridSize][gridSize];
+
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
 
@@ -93,7 +94,6 @@ public class HexState extends GameState implements Serializable {
 
 	/**
 	 * sets the coordinates for each new HexTile
-	 *
 	 * a copy constructor version of initializeGrid()
 	 *
 	 */
@@ -103,7 +103,8 @@ public class HexState extends GameState implements Serializable {
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
 				// Copying HexTile into the grid
-				grid[i][j] = new HexTile(orig[i][j].getCenterX(), orig[i][j].getCenterY(), orig[i][j].getColor());// Ensuring no HexTile is null
+				grid[i][j] = new HexTile(orig[i][j].getCenterX(), orig[i][j].getCenterY(),
+						orig[i][j].getColor());// Ensuring no HexTile is null
 			}
 		}
 	}//copyGrid
@@ -117,8 +118,10 @@ public class HexState extends GameState implements Serializable {
 	public boolean blueWins() {
 		//loops through up and down the grid board
 		for (int col = 0; col < grid.length; col++) {
-			//checks if there is a blue tile on each index of the columns and checks if they are connected
-			if (grid[0][col].getColor() == Color.BLUE && isConnected(0, col, new boolean[grid.length][grid.length], BLUE)) {
+			//checks if there is a blue tile on each index of the columns
+			// and checks if they are connected
+			if (grid[0][col].getColor() == Color.BLUE &&
+					isConnected(0, col, new boolean[grid.length][grid.length], BLUE)) {
 				return true;
 			}
 		}
@@ -137,7 +140,9 @@ public class HexState extends GameState implements Serializable {
 		for (int row = 0; row < grid.length; row++) {
 
 			//checks if there is red tile on each index of the rows and checks if they are connected
-			if (grid[row][0].getColor() == Color.RED && isConnected(row, 0, new boolean[grid.length][grid.length], RED)) {
+			if (grid[row][0].getColor() == Color.RED && isConnected(row, 0,
+					new boolean[grid.length][grid.length], RED)) {
+
 				return true;
 			}
 		}
@@ -227,7 +232,9 @@ public class HexState extends GameState implements Serializable {
 			int newCol = col + dy[i];
 
 			// Check if the neighboring cell is within bounds and belongs to the same player
-			if (isValid(newRow, newCol) && grid[newRow][newCol].getColor() == playerColor && !visited[newRow][newCol]) {
+			if (isValid(newRow, newCol) && grid[newRow][newCol].getColor() == playerColor
+					&& !visited[newRow][newCol]) {
+				//recursion
 				if (isConnected(newRow, newCol, visited, playerColor)) {
 					return true;
 				}
