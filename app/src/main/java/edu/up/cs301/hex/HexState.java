@@ -45,7 +45,7 @@ public class HexState extends GameState implements Serializable {
 		this.gridSize = 11;
 		this.hexSize = 39;
 		this.playerTurnID = randomTurn;
-		this.playerColor = RED;
+		this.playerColor = RED; // red always goes first
 
 		//initializes the hexagon coordinates
 		initializeGrid();
@@ -163,7 +163,13 @@ public class HexState extends GameState implements Serializable {
 	}
 
 
-
+	/**
+	 * checks if move is legal
+	 *
+	 * @param row
+	 * @param col
+	 * @return true // if hexTile isn't occupied and is within bounds
+	 */
 	public boolean isLegalMove(int row, int col) {
 		// Check if the specified row and column are within the bounds of the grid
 		if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) {
@@ -174,7 +180,15 @@ public class HexState extends GameState implements Serializable {
 	}//isLegalMove
 
 
-
+	/**
+	 * placeTileAction()
+	 * checks for a player action
+	 * changes the playerColor and switches turn
+	 *
+	 * @param row
+	 * @param col
+	 * @return true // if a player places a hexTile
+	 */
 	public boolean placeTileAction(int row, int col) {
 
 		// Check if the move is legal
@@ -244,7 +258,13 @@ public class HexState extends GameState implements Serializable {
 	}//isConnected
 
 
-
+	/**
+	 * getPiece method for the smart computer player
+	 *
+	 * @param row
+	 * @param col
+	 * @return the color of the hexTile that's placed
+	 */
 	public int getPiece(int row, int col) {
 		if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) {
 			// coordinates are out of bounds, return a value to indicate this

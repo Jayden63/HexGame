@@ -51,12 +51,12 @@ import java.util.Random;
  *    + The game includes custom sound effects
  *    + Incorporates complex gestures like zoom in and out
  *    + A custom startup screen and “how to play” guide are implemented
- *    + Music for the game,
+ *    + Music for the game, and sound effects for each tile placement
  *    + music switch to turn off the music
  *    + skip music button
  *    + Pop up ads
- *    +How to play rulebook dialog
- *    +Color changing Background
+ *    + How to play rulebook dialog
+ *    + Color changing Background
  * All features and issues are documented to ensure clarity and transparency in grading.
  */
 

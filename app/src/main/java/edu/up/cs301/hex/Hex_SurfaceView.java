@@ -10,7 +10,6 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.graphics.Color;
-import androidx.annotation.NonNull;
 import java.io.Serializable;
 import android.view.ScaleGestureDetector;
 import android.view.MotionEvent;
@@ -55,7 +54,6 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
 
         scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener());
         hexState = new HexState();
-       // hexState.initializeGrid();
 
         // Starts the dynamic gradient background
         startAnimation();
@@ -154,7 +152,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
      */
 
     @Override
-    protected void onDraw(@NonNull Canvas canvas) {
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         canvas.save();
