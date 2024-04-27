@@ -1,4 +1,4 @@
-This app is a group project android game built using Java in Android Studio for our CS301 course at University of Portland
+This is a group project android game built using Java in Android Studio for our CS301 course at University of Portland
 
 
 ## Game Logo
