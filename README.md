@@ -3,5 +3,8 @@ This app is a group project android game built using Java in Android Studio for 
 
 ## Game Logo
 
-<img src="https://github.com/Jayden63/HexGame/blob/main/app/src/main/ic_launcher-playstore.png" width=500>
+<p align="center">
+<img src="https://github.com/Jayden63/HexGame/blob/main/app/src/main/ic_launcher-playstore.png" width=300>
+</p>
+
 
