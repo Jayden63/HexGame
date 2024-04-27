@@ -63,8 +63,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	/**
 	 * HexHumanPlayer constructor
 	 *
-	 * @param name
-	 * @param gameState
+	 * @param name // The human player name
+	 * @param gameState // Reference to the state of the game
 	 */
 	public HexHumanPlayer(String name, HexState gameState) {
 		super(name);

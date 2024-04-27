@@ -178,7 +178,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
      * drawGradiant() animates the background of the SurfaceView
      * with a dynamic gradiant background
      *
-     * @param canvas
+     * @param canvas // Our surface view
      */
     public void drawGradiant(Canvas canvas) {
 
@@ -202,7 +202,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
     /**
      * drawGrid method draws the white empty grid with all the HexTiles
      *
-     * @param canvas
+     * @param canvas // The surface view
      */
     public void drawGrid(Canvas canvas) {
 
@@ -237,7 +237,7 @@ public class Hex_SurfaceView extends SurfaceView implements Serializable {
      * drawBorders draws the red and blue borders of the hex grid
      * Lets the players know which sides they need to connect their tiles
      *
-     * @param canvas
+     * @param canvas // The surface view
      */
     public void drawBorders(Canvas canvas) {
 

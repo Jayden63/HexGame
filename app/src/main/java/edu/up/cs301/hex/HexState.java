@@ -133,7 +133,7 @@ public class HexState extends GameState implements Serializable {
 	/**
 	 * checks if red wins
 	 *
-	 * @return redWins // if the red player wins
+	 * @return redWins // If the red player wins
 	 */
 	public boolean redWins() {
 		//loops through left and right of the grid board
@@ -156,7 +156,7 @@ public class HexState extends GameState implements Serializable {
 	 *
 	 * @param row // The row in the hex grid
 	 * @param col // The column in the hex grid
-	 * @return true // if the move is a valid play
+	 * @return true // If the move is a valid play
 	 */
 	public boolean isValid(int row, int col) {
 		return row >= 0 && row < grid.length && col >= 0 && col < grid.length;
@@ -167,9 +167,9 @@ public class HexState extends GameState implements Serializable {
 	/**
 	 * checks if move is legal
 	 *
-	 * @param row
-	 * @param col
-	 * @return true // if hexTile isn't occupied and is within bounds
+	 * @param row // The HexTile's row position
+	 * @param col // The HexTile's column position
+	 * @return true // If hexTile isn't occupied and is within bounds
 	 */
 	public boolean isLegalMove(int row, int col) {
 		// Check if the specified row and column are within the bounds of the grid
@@ -186,9 +186,9 @@ public class HexState extends GameState implements Serializable {
 	 * checks for a player action
 	 * changes the playerColor and switches turn
 	 *
-	 * @param row
-	 * @param col
-	 * @return true // if a player places a hexTile
+	 * @param row // The hexTile's row position
+	 * @param col // The hexTile's columns position
+	 * @return true // If a player places a hexTile
 	 */
 	public boolean placeTileAction(int row, int col) {
 
@@ -265,8 +265,8 @@ public class HexState extends GameState implements Serializable {
 	/**
 	 * getPiece method for the smart computer player
 	 *
-	 * @param row
-	 * @param col
+	 * @param row // The HexTile's row position
+	 * @param col // The HexTile's column position
 	 * @return the color of the hexTile that's placed
 	 */
 	public int getPiece(int row, int col) {
@@ -280,7 +280,7 @@ public class HexState extends GameState implements Serializable {
 
 
 	/**
-	 * gets the player turn's ID
+	 * Gets the player turn's ID
 	 *
 	 * @return playerTurnID // the id the player
 	 */
@@ -290,7 +290,7 @@ public class HexState extends GameState implements Serializable {
 
 
 	/**
-	 * gets the player color
+	 * Gets the player color
 	 *
 	 * @return playerColor
 	 */
