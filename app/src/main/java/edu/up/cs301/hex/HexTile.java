@@ -55,7 +55,6 @@ public class HexTile implements Serializable {
      */
     public void draw(Canvas canvas) {
 
-
         // Paint Object for HexTile
         Paint paint = new Paint();
         Paint borderPaint = new Paint();

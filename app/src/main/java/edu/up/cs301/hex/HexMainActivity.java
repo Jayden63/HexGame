@@ -69,7 +69,6 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	// the port number that this game will use when playing over the network
 	private static final int PORT_NUMBER = 2234;
 
-
 	// to play the music
 	private MediaPlayer musicPlayer;
 

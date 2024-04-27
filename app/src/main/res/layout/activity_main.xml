@@ -57,6 +57,7 @@
                 android:layout_weight="5"
                 android:orientation="horizontal">
 
+                <!--shows which color's turn it is-->
                 <TextView
                     android:id="@+id/turnView"
                     android:layout_width="match_parent"
@@ -79,6 +80,7 @@
                 android:paddingHorizontal="15sp">
 
 
+                <!--skip music button-->
                 <ImageButton
                     android:id="@+id/skip_button"
                     android:layout_width="45dp"
@@ -90,6 +92,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_skip" />
 
+                <!--settings button-->
                 <ImageButton
                     android:id="@+id/settings_button"
                     android:layout_width="45dp"
@@ -100,6 +103,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_settings_icon" />
 
+                <!--rules pop up button-->
                 <ImageButton
                     android:id="@+id/rules_button"
                     android:layout_width="45dp"
@@ -122,8 +126,7 @@
             android:paddingHorizontal="15sp"
             android:orientation="horizontal"
             android:gravity="bottom"
-            android:layout_gravity="right"
-            >
+            android:layout_gravity="right">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -141,7 +144,7 @@
             android:layout_weight="10"
             android:orientation="horizontal">
 
-
+            <!--main game SurfaceView-->
             <edu.up.cs301.hex.Hex_SurfaceView
                 android:id="@+id/hex_grid"
                 android:layout_width="match_parent"
