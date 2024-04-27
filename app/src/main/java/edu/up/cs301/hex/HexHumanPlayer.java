@@ -49,7 +49,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	private GameMainActivity myActivity;
 	private Hex_SurfaceView mySurfaceView;
 
-	// variable to keep track if names have been set
+	// Variable to keep track if names have been set
 	private boolean namesInitialized = false;
 
 	// Settings buttons
@@ -71,6 +71,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		this.gameState = gameState;
 
 	}
+
 
 	/**
 	 * Returns the GUI's top view object
@@ -97,20 +98,19 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			return;
 		}
 
-		//declares the turnTV as turnView
+		// Declares the turnTV as turnView
 		this.turnTV = (TextView) myActivity.findViewById(R.id.turnView);
 
-		//declares player name text
+		// Declares player name text
 		this.playerOneText = myActivity.findViewById(R.id.PLAYER1_textView);
 		this.playerTwoText = myActivity.findViewById(R.id.PLAYER2_textView);
 
 
-		//String for the local human player
+		// To display player names
 		String playerOneName = " You";
-		//String for the other player
 		String playerTwoName = " Opponent";
 
-		// sets the player names based on which player goes first
+		// Sets the player names based on which player goes first
 		if (!namesInitialized) {
 			if (this.gameState.getPlayerTurnID() == 1) {
 				String temp = playerOneName;
@@ -123,8 +123,8 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		}
 
 
-		//updates the turn view based on the last player's move
-		//red always goes first regardless if it's AI or human player's turn
+		// Updates the turn view based on the last player's move
+		// Red always goes first regardless if it's AI or human player's turn
 		String turnText = "Red's Turn";
 		turnTV.setTextColor(Color.RED);
 
@@ -133,16 +133,16 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			turnTV.setTextColor(Color.BLUE);
 		}
 
-		//Update the surface view
+		// Update the surface view
 		this.mySurfaceView.setHexState(this.gameState);
 
-		//if player has won, change text to game over
+		// If player has won, change text to game over
 		if (gameState.blueWins() || gameState.redWins()) {
 			turnText = "GAME OVER";
 			turnTV.setTextColor(Color.BLACK);
 		}
 
-		//updates the turnTV textView
+		// Updates the turnTV textView
 		this.turnTV.setText(turnText);
 
 
@@ -157,10 +157,10 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	 */
 	@Override
 	public void receiveInfo(GameInfo info) {
-		// ignore the message if it's not a HexState message
+		// Ignore the message if it's not a HexState message
 		if (!(info instanceof HexState)) return;
 
-		// update our state; then update the display
+		// Update our state; then update the display
 		this.gameState = (HexState)info;
 		updateDisplay();
 	}
@@ -175,10 +175,10 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 	 */
 	public void setAsGui(GameMainActivity activity) {
 
-		// remember the activity
+		// Remember the activity
 		this.myActivity = (HexMainActivity) activity;
 
-		// loads the layout resource for our GUI
+		// Loads the layout resource for our GUI
 		activity.setContentView(R.layout.activity_main);
 
 		this.playerOneText = activity.findViewById(R.id.PLAYER1_textView);
@@ -214,25 +214,25 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		this.exitGameButton = (Button) viewLayout.findViewById(R.id.exitgame_button);
 		this.musicSwitch = (Switch) viewLayout.findViewById(R.id.switch2);
 
-		//setOnClickListener to each button
+		// TetOnClickListener to each button
 		newGameButton.setOnClickListener(v -> myActivity.restartGame());
 		exitGameButton.setOnClickListener(view -> {
 			myActivity.finish();
 			System.exit(0);
 			});
 
-		//title for the settings popup
+		// Title for the settings popup
 		popDialog.setTitle("Settings");
 		popDialog.setView(viewLayout);
 
-		//creates the music switch
+		// Creates the music switch
 		createMusicSwitch();
 
-		//ok button for closing the popup
+		// Ok button for closing the popup
 		popDialog.setPositiveButton("OK",
 				(dialogInterface, i) -> dialogInterface.dismiss());
 
-		//create the popup
+		// Create the popup
 		popDialog.create();
 		popDialog.show();
 
@@ -250,18 +250,19 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 		View viewLayout = inflater.inflate(R.layout.activity_rule,
 				(ViewGroup) myActivity.findViewById(R.id.layout_rule));
 
-		//sets the title of the popup page
+		// Sets the title of the popup page
 		popDialog.setTitle("How To Play");
 		popDialog.setView(viewLayout);
 
-		//ok button for closing the popup
+		// Ok button for closing the popup
 		popDialog.setPositiveButton("OK",
 				(dialogInterface, i) -> dialogInterface.dismiss());
 
-		//create the popup
+		// Create the popup
 		popDialog.create();
 		popDialog.show();
-	}
+
+	}//showRuleBook
 
 	/**
 	 * createMusicSwitch()
@@ -277,7 +278,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 				((HexMainActivity) myActivity).playMusic();
 			}
 		});
-	}
+	}//createMusicSwitch
 
 	/**
 	 * onTouch function is in charge of
@@ -301,7 +302,7 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			for (int i = 0; i < gameState.grid.length; i++) {
 				for (int j = 0; j < gameState.grid.length; j++) {
 
-					//checks if the tapped location is within a hexTile
+					// Checks if the tapped location is within a hexTile
 					if (gameState.grid[i][j].isTouched(x, y)) {
 
 						//sends a HexMoveAction
@@ -315,9 +316,5 @@ public class HexHumanPlayer extends GameHumanPlayer implements View.OnTouchListe
 			}
 		}
 		return false;
-
-	}
-
-
-
+	}//onTouch
 }

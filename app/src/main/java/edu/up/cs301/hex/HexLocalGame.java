@@ -22,10 +22,10 @@ import java.io.Serializable;
  */
 public class HexLocalGame extends LocalGame implements Serializable {
 
-	// serial ID
+	// Serial ID
 	public static final long serialVersionUID = 202442384845L;
 
-	// the game's state
+	// The game's state
 	private final HexState gameState;
 
 	/**
@@ -39,6 +39,7 @@ public class HexLocalGame extends LocalGame implements Serializable {
 	protected boolean canMove(int playerIdx) {
 		return gameState.getPlayerTurnID() == playerIdx;
 	}
+
 
 	/**
 	 * This constructor should be called when a new hex game is started
@@ -78,8 +79,8 @@ public class HexLocalGame extends LocalGame implements Serializable {
 	 */
 	@Override
 	protected void sendUpdatedStateTo(GamePlayer p) {
-		// this is a perfect-information game, so we'll make a
-		// complete copy of the state to send to the player
+		// This is a perfect-information game, so we'll make a
+		// Complete copy of the state to send to the player
 		p.sendInfo(new HexState(this.gameState));
 
 	}//sendUpdatedSate

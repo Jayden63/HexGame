@@ -57,15 +57,15 @@ public class HexComputerPlayer2 extends GameComputerPlayer implements Serializab
 			// Find the best strategic move
 			int[] move = findStrategicMove(state);
 			if (move != null) {
-				// check again to make sure the tile is still empty before making the move
+				// Check again to make sure the tile is still empty before making the move
 				if (state.grid[move[0]][move[1]].getColor() == Color.WHITE) {
-					// send a move action to the game
+					// Send a move action to the game
 					game.sendAction(new HexMoveAction(this, move[0], move[1]));
-					// after making a move, we should return to avoid making further moves
+					// After making a move, we should return to avoid making further moves
 				}
 			}
 		}
-	}//recieveInfo
+	}//receiveInfo
 
 
 	/**

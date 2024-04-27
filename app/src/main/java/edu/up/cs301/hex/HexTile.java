@@ -31,6 +31,7 @@ public class HexTile implements Serializable {
     // Color of the Hex Grid
     private int color;
 
+
     /**
      *
      * Constructor for HexTile
@@ -43,9 +44,10 @@ public class HexTile implements Serializable {
         // The starting position of the first hexTile
         this.centerX = centerX;
         this.centerY = centerY;
-        radius = 42; // Adjust radius as needed
+        radius = 42;
         this.color = color;
     }
+
 
 
     /** void draw(Canvas canvas)
@@ -59,17 +61,12 @@ public class HexTile implements Serializable {
         Paint paint = new Paint();
         Paint borderPaint = new Paint();
 
-        // Setting colors for hexTile
         paint.setColor(color);
 
-        // The border color of the HexTile
+        // The border characteristics of the HexTile
         borderPaint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.FILL);
-
-        // Outlines the perimeter of the hexTile
         borderPaint.setStyle(Paint.Style.STROKE);
-
-        // For a solid visible border
         borderPaint.setStrokeWidth(1);
 
         // Path will determine the path of the HexTile
@@ -90,13 +87,9 @@ public class HexTile implements Serializable {
             path.lineTo(x, y);
         }
 
-        // Closing the path
         path.close();
 
-        // Colors the border HexTiles
         canvas.drawPath(path, borderPaint);
-
-        // Colors the grid HexTiles
         canvas.drawPath(path, paint);
 
     }//draw
@@ -132,6 +125,7 @@ public class HexTile implements Serializable {
     public void setCenterY(float centerY) {
         this.centerY = centerY;
     }
+
 
 
     /** isTouched(float x, float y)

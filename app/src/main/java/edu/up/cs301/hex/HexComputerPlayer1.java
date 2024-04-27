@@ -21,6 +21,7 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
  */
 
 public class HexComputerPlayer1 extends GameComputerPlayer implements Serializable {
+
     // serial ID
     public static final long serialVersionUID = 202442385217L;
     private final Random random;
@@ -34,13 +35,12 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Serializab
      */
     public HexComputerPlayer1(String name) {
         // invoke superclass constructor
-
         super(name);
-
         random = new Random();
+    }//HexComputerPlayer1
 
-    }
-    
+
+
     /**
      * callback method--game's state has changed
      * 
@@ -57,9 +57,9 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Serializab
 
         HexState state = (HexState) info;
 
-        // Check if it's the computer player's turn
+        // Check if it's the computer player's turn & ignore
         if (state.getPlayerTurnID() != playerNum) {
-            return; // It's not this player's turn, so ignore
+            return;
         }
 
         // Get the board size
@@ -84,5 +84,5 @@ public class HexComputerPlayer1 extends GameComputerPlayer implements Serializab
                 break; // Exit the loop
             }
         }
-    }//recieveInfo
+    }//receiveInfo
 }

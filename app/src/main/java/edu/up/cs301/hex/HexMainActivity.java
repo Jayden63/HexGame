@@ -56,7 +56,7 @@ import java.util.Random;
  *    + skip music button
  *    + Pop up ads
  *    + How to play rulebook dialog
- *    + Color changing Background
+ *    + Color changing animation background
  * All features and issues are documented to ensure clarity and transparency in grading.
  */
 
@@ -72,13 +72,13 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	// to play the music
 	private MediaPlayer musicPlayer;
 
-
-	// Array of song resources
+	// Array of songs
 	public int[] songResources =
 			{R.raw.lebronmysun, R.raw.home_depot_theme,R.raw.lift_urself,R.raw.jamal,R.raw.sza};
 	public Random random = new Random();
 
-	private int lastSongIndex = -1; //keep track of last song played
+	private int lastSongIndex = -1; // keeps track of last song played
+
 
 	/**
 	 * onCreate() plays the music and sets up the ad in the game
@@ -95,6 +95,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		setupMusicPlayer();
 		countDownForAd();
 	}//onCreate
+
 
 	/**
 	 * External Citation
@@ -118,9 +119,8 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		// Set up listener to play a random song when one finishes
 		musicPlayer.setOnCompletionListener(mp -> playNextRandomSong());
 
-		musicPlayer.start(); // Start playing the song
+		musicPlayer.start();
 	}//setupMusicPlayer
-
 
 
 	/**
@@ -142,7 +142,6 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 	}//playMusic
 
 
-
 	/**
 	 * 	Method to pause the music
 	 */
@@ -150,7 +149,7 @@ public class HexMainActivity extends GameMainActivity implements Serializable {
 		if (musicPlayer != null && musicPlayer.isPlaying()) {
 			musicPlayer.pause();
 		}
-	}
+	}//pauseMusic
 
 
 	/**

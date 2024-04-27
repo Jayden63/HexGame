@@ -23,23 +23,20 @@ public class HexState extends GameState implements Serializable {
 	HexTile[][] grid; // 2D grid array stores each HexTile
 	public int gridSize; // dimensions of the grid
 	public float hexSize; // size of each hexTile
-
 	private int playerTurnID; // keeps track of the player's turn
 	private int playerColor;// color of the current hexTile based on who's turn it is
-
-
 	public static final int RED = Color.RED;
 	public static final int BLUE = Color.BLUE;
 	public static final int EMPTY = Color.WHITE;
 
 
 	/**
-	 * constructor, initializing the boolean values from the objects in the parameter
+	 * Constructor, initializing the boolean values from the objects in the parameter
 	 *
 	 */
 	public HexState() {
 
-		//randomizes the turn
+		// Randomizes the turn
 		int randomTurn = (int) (Math.random() * 2);
 
 		this.gridSize = 11;
@@ -47,7 +44,7 @@ public class HexState extends GameState implements Serializable {
 		this.playerTurnID = randomTurn;
 		this.playerColor = RED; // red always goes first
 
-		//initializes the hexagon coordinates
+		// Initializes the hexagon coordinates
 		initializeGrid();
 
 	}
@@ -55,7 +52,7 @@ public class HexState extends GameState implements Serializable {
 
 
 	/**
-	 * copy constructor; makes a copy of the original object
+	 * Copy constructor; makes a copy of the original object
 	 * Implementing a copy constructor that makes a deep copy of HexState
 	 * A pointer to our original HexState
 	 *
@@ -73,8 +70,9 @@ public class HexState extends GameState implements Serializable {
 	}//HexState
 
 
+
 	/**
-	 * sets the coordinates for each new HexTile
+	 * Sets the coordinates for each new HexTile
 	 */
 	public void initializeGrid() {
 
@@ -86,15 +84,16 @@ public class HexState extends GameState implements Serializable {
 				// Same values found in Hex_SurfaceView
 				float x = (i * 37) + (j * (float) (hexSize * 1.90));
 				float y = ((float) (i * hexSize * 1.65));
-				grid[i][j] = new HexTile(x, y, EMPTY);  // Ensuring no HexTile is null
+				grid[i][j] = new HexTile(x, y, EMPTY); // Ensuring no HexTile is null
 			}
 		}
 	}//initializeGrid
 
 
+
 	/**
-	 * sets the coordinates for each new HexTile
-	 * a copy constructor version of initializeGrid()
+	 * Sets the coordinates for each new HexTile
+	 * A copy constructor version of initializeGrid()
 	 *
 	 */
 	public void copyGrid(HexTile[][] orig) {
@@ -104,16 +103,17 @@ public class HexState extends GameState implements Serializable {
 			for (int j = 0; j < gridSize; j++) {
 				// Copying HexTile into the grid
 				grid[i][j] = new HexTile(orig[i][j].getCenterX(), orig[i][j].getCenterY(),
-						orig[i][j].getColor());// Ensuring no HexTile is null
+						orig[i][j].getColor()); // Ensuring no HexTile is null
 			}
 		}
 	}//copyGrid
 
 
+
 	/**
 	 * Checks if blue wins
 	 *
-	 * @return blueWins // if the blue player wins
+	 * @return blueWins // If the blue player wins
 	 */
 	public boolean blueWins() {
 		//loops through up and down the grid board
@@ -155,12 +155,13 @@ public class HexState extends GameState implements Serializable {
 	 * checks if the tile being placed is within the bounds of hex board
 	 *
 	 * @param row // The row in the hex grid
-	 * @param col // the column in the hex grid
+	 * @param col // The column in the hex grid
 	 * @return true // if the move is a valid play
 	 */
 	public boolean isValid(int row, int col) {
 		return row >= 0 && row < grid.length && col >= 0 && col < grid.length;
 	}
+
 
 
 	/**
@@ -208,7 +209,9 @@ public class HexState extends GameState implements Serializable {
 	}//placeTileAction
 
 
-	/**Checks if the matching color tiles are connected in any way
+
+	/**
+	 * Checks if the matching color tiles are connected in any way
 	 *
 	 * @param row // row of the hex board
 	 * @param col // col of the hex board
@@ -256,6 +259,7 @@ public class HexState extends GameState implements Serializable {
 		}
 		return false;
 	}//isConnected
+
 
 
 	/**
